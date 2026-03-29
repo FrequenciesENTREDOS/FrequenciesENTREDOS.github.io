@@ -46,44 +46,62 @@
       overflow-x: hidden;
     }
 
+    a {
+      text-decoration: none;
+    }
+
+    section {
+      scroll-margin-top: 100px;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      pointer-events: none;
+    }
+
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.2rem 3rem;
+      padding: 1.1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(180deg, rgba(5, 5, 8, 0.95) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(5, 5, 8, 0.96) 0%, rgba(5, 5, 8, 0.78) 60%, transparent 100%);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       color: var(--gold);
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      text-shadow: 0 0 20px var(--gold-glow);
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 18px rgba(201, 168, 76, 0.25);
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.4rem;
       list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, opacity 0.3s ease;
     }
 
     .nav-links a:hover {
@@ -98,9 +116,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 6rem 2rem 4rem;
-      z-index: 1;
+      padding: 7rem 1.5rem 4rem;
       overflow: hidden;
+      z-index: 1;
     }
 
     .hero::before {
@@ -108,14 +126,15 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(0, 201, 177, 0.12), transparent 60%),
-        radial-gradient(circle at 70% 30%, rgba(201, 168, 76, 0.08), transparent 60%);
-      z-index: -1;
+        radial-gradient(circle at center, rgba(0, 201, 177, 0.11), transparent 58%),
+        radial-gradient(circle at 72% 28%, rgba(201, 168, 76, 0.09), transparent 52%),
+        radial-gradient(circle at 30% 75%, rgba(0, 201, 177, 0.05), transparent 48%);
+      z-index: -2;
     }
 
     .hero-eyebrow {
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--teal);
@@ -124,51 +143,50 @@
 
     .hero-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: clamp(3rem, 8vw, 6.6rem);
+      line-height: 1.05;
       color: var(--vellum);
-      text-shadow: 0 0 60px rgba(201, 168, 76, 0.3);
-      margin-bottom: 0.3em;
+      text-shadow: 0 0 60px rgba(201, 168, 76, 0.28);
+      margin-bottom: 0.4em;
     }
 
     .hero-sub {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-size: clamp(1rem, 2.3vw, 1.28rem);
       font-style: italic;
       color: var(--text-dim);
-      max-width: 600px;
-      margin: 1.5rem auto 3rem;
+      max-width: 720px;
+      margin: 1rem auto 2.4rem;
     }
 
     .hero-actions {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .btn-primary,
     .btn-secondary {
+      display: inline-block;
+      padding: 0.95rem 1.8rem;
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.9em 2.5em;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      border-radius: 4px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
     .btn-primary {
-      color: var(--void);
       background: var(--gold);
-      box-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+      color: #050508;
+      box-shadow: 0 0 28px rgba(201, 168, 76, 0.22);
     }
 
     .btn-secondary {
       color: var(--teal);
-      background: transparent;
       border: 1px solid var(--border-teal);
+      background: rgba(0, 201, 177, 0.03);
     }
 
     .btn-primary:hover,
@@ -176,67 +194,104 @@
       transform: translateY(-2px);
     }
 
-    .section-wrap {
+    .section-shell {
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    .section-kicker {
+      text-align: center;
+      color: var(--teal);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-size: 0.78rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.1rem, 5vw, 3rem);
+      color: var(--vellum);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-sub {
+      max-width: 760px;
+      margin: 0 auto 3rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+
+    .books-section {
+      padding: 8rem 1.25rem;
+      background: var(--deep);
+      position: relative;
+      z-index: 1;
     }
 
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
     }
 
     .book-card {
       position: relative;
-      background: var(--panel);
+      background: linear-gradient(180deg, rgba(19, 19, 31, 0.98), rgba(12, 12, 18, 0.98));
       border: 1px solid var(--border);
       overflow: hidden;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
     .book-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
+      border-color: rgba(201, 168, 76, 0.38);
+    }
+
+    .featured-book {
+      grid-column: span 2;
     }
 
     .book-cover {
       overflow: hidden;
+      background: #0d0d14;
     }
 
     .book-cover img {
+      display: block;
       width: 100%;
       height: auto;
-      display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.45s ease;
     }
 
     .book-card:hover .book-cover img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .book-info {
-      padding: 1.5rem;
+      padding: 1.4rem;
     }
 
     .book-meta {
       color: var(--teal);
       font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     .book-title {
       font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       color: var(--vellum);
       margin-bottom: 0.5rem;
+      line-height: 1.35;
     }
 
     .book-desc {
-      font-size: 0.95rem;
       color: var(--text-dim);
+      font-size: 0.95rem;
       line-height: 1.6;
     }
 
@@ -244,54 +299,118 @@
       display: inline-block;
       margin-top: 1rem;
       color: var(--gold);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(201, 168, 76, 0.6);
+      text-shadow: 0 0 12px rgba(201, 168, 76, 0.55);
+    }
+
+    .tarenis-section {
+      padding: 8rem 1.25rem;
+      background: var(--surface);
+    }
+
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .character-card {
+      background: rgba(19, 19, 31, 0.78);
+      border: 1px solid rgba(0, 201, 177, 0.12);
+      padding: 1.6rem;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.01);
+    }
+
+    .character-name {
+      color: var(--teal);
+      font-family: 'Cinzel', serif;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .character-desc {
+      color: var(--text-dim);
+      font-size: 0.98rem;
+    }
+
+    .codex-note {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .music-section {
+      padding: 8rem 1.25rem;
+      background: var(--void);
+    }
+
+    .music-cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 1rem 1.6rem;
+      border: 1px solid var(--border-teal);
+      color: var(--teal);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .music-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(0, 201, 177, 0.12);
     }
 
     footer {
-      padding: 4rem 3rem;
+      padding: 4rem 1.25rem;
       text-align: center;
       border-top: 1px solid var(--border);
+      color: var(--text-dim);
     }
 
-    #particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      pointer-events: none;
+    footer p:first-child {
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .featured-book {
+        grid-column: span 1;
+      }
     }
 
     @media (max-width: 768px) {
       nav {
-        padding: 1rem 1.25rem;
+        padding: 0.95rem 1rem;
+        align-items: flex-start;
       }
 
       .nav-logo {
-        font-size: 1rem;
+        font-size: 0.96rem;
+        margin-right: 0.75rem;
       }
 
       .nav-links {
-        gap: 0.8rem;
-        flex-wrap: wrap;
-        justify-content: flex-end;
+        gap: 0.7rem;
+        max-width: 70%;
       }
 
       .nav-links a {
-        font-size: 0.62rem;
-        letter-spacing: 0.12em;
+        font-size: 0.6rem;
+        letter-spacing: 0.11em;
       }
 
       .hero {
-        padding: 8rem 1.5rem 4rem;
+        padding-top: 8.5rem;
       }
 
       .hero-actions {
-        gap: 1rem;
+        width: 100%;
       }
 
       .btn-primary,
@@ -300,11 +419,17 @@
         max-width: 320px;
         text-align: center;
       }
+
+      .books-section,
+      .tarenis-section,
+      .music-section {
+        padding-top: 6.5rem;
+        padding-bottom: 6.5rem;
+      }
     }
   </style>
 </head>
 <body>
-
   <canvas id="particles"></canvas>
 
   <nav>
@@ -330,18 +455,14 @@
     </div>
   </section>
 
-  <section id="books" style="padding:8rem 3rem; background:var(--deep);">
-    <div class="section-wrap">
-      <p style="text-align:center; color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1rem;">
-        The Fireline Universe
-      </p>
-      <h2 style="text-align:center; font-family:'Cinzel Decorative',serif; font-size:3rem; color:var(--vellum); margin-bottom:4rem;">
-        The Books
-      </h2>
+  <section id="books" class="books-section">
+    <div class="section-shell">
+      <p class="section-kicker">The Fireline Universe</p>
+      <h2 class="section-title">The Books</h2>
 
       <div class="books-grid">
 
-        <div class="book-card">
+        <div class="book-card featured-book">
           <div class="book-cover">
             <img src="image.jpg" alt="Tarenis cover">
           </div>
@@ -359,7 +480,7 @@
 
         <div class="book-card">
           <div class="book-cover">
-            <img src="images/fireline-zero-day.jpg" alt="Fireline Zero-Day cover">
+            <img src="image (1).jpg" alt="Fireline Zero-Day cover">
           </div>
           <div class="book-info">
             <p class="book-meta">The Fireline Trilogy • Book 5</p>
@@ -370,7 +491,7 @@
 
         <div class="book-card">
           <div class="book-cover">
-            <img src="images/fireline-432.jpg" alt="The Fireline 432 Hz Covenant cover">
+            <img src="image (2).jpg" alt="The Fireline 432 Hz Covenant cover">
           </div>
           <div class="book-info">
             <p class="book-meta">The Fireline Trilogy</p>
@@ -380,7 +501,7 @@
 
         <div class="book-card">
           <div class="book-cover">
-            <img src="images/fireline-0hz.jpg" alt="The Fireline 0 Hz Covenant cover">
+            <img src="image (3).jpg" alt="The Fireline 0 Hz Covenant cover">
           </div>
           <div class="book-info">
             <p class="book-meta">The Fireline Trilogy</p>
@@ -390,7 +511,7 @@
 
         <div class="book-card">
           <div class="book-cover">
-            <img src="images/lattice-protocol.jpg" alt="The Lattice Protocol cover">
+            <img src="image (4).jpg" alt="The Lattice Protocol cover">
           </div>
           <div class="book-info">
             <p class="book-meta">The Fireline Trilogy • Book 4</p>
@@ -401,7 +522,7 @@
 
         <div class="book-card">
           <div class="book-cover">
-            <img src="images/ghost-garden.jpg" alt="The Ghost Garden cover">
+            <img src="image (5).jpg" alt="The Ghost Garden cover">
           </div>
           <div class="book-info">
             <p class="book-meta">Protocol 432</p>
@@ -414,60 +535,52 @@
     </div>
   </section>
 
-  <section id="tarenis" style="padding:8rem 3rem; background:var(--surface);">
-    <div style="max-width:1100px; margin:0 auto; text-align:center;">
-      <h2 style="font-family:'Cinzel Decorative',serif; font-size:3rem; color:var(--vellum); margin-bottom:2rem;">
-        Tarenis — Book One
-      </h2>
-      <p style="max-width:700px; margin:0 auto 4rem; color:var(--text-dim);">
+  <section id="tarenis" class="tarenis-section">
+    <div class="section-shell">
+      <h2 class="section-title">Tarenis — Book One</h2>
+      <p class="section-sub">
         The ancient frequency grid of Atlantis is waking. Three people hold the key.
       </p>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:3rem; margin-top:3rem;">
-
-        <div style="text-align:center;">
-          <h3 style="color:var(--teal);">Lira Voss</h3>
-          <p style="color:var(--text-dim);">
+      <div class="characters-grid">
+        <div class="character-card">
+          <h3 class="character-name">Lira Voss</h3>
+          <p class="character-desc">
             The intuitive born in the Interior. She reads the living frequency grid like breathing.
             Her connection to the planet’s hidden operating system makes her the heart of the awakening.
           </p>
         </div>
 
-        <div style="text-align:center;">
-          <h3 style="color:var(--teal);">Kai Resonance</h3>
-          <p style="color:var(--text-dim);">
+        <div class="character-card">
+          <h3 class="character-name">Kai Resonance</h3>
+          <p class="character-desc">
             The sound engineer sustaining the 432 Hz tone for eight months. His music became the signal
             that first stirred the grid. He carries the overlap between the old world and the new.
           </p>
         </div>
 
-        <div style="text-align:center;">
-          <h3 style="color:var(--teal);">Elias</h3>
-          <p style="color:var(--text-dim);">
+        <div class="character-card">
+          <h3 class="character-name">Elias</h3>
+          <p class="character-desc">
             The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived
             in his mind since childhood. He is the key that unlocks the ancient notation.
           </p>
         </div>
-
       </div>
 
-      <p style="margin-top:4rem; font-style:italic; color:var(--text-dim);">
+      <p class="codex-note">
         Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.
       </p>
     </div>
   </section>
 
-  <section id="music" style="padding:8rem 3rem;">
-    <div style="max-width:800px; margin:0 auto; text-align:center;">
-      <h2 style="font-family:'Cinzel Decorative',serif; font-size:2.8rem; color:var(--vellum);">
-        Entre Dos Music
-      </h2>
-      <p style="color:var(--text-dim); margin:2rem 0;">
+  <section id="music" class="music-section">
+    <div class="section-shell" style="text-align:center;">
+      <h2 class="section-title">Entre Dos Music</h2>
+      <p class="section-sub">
         The emotional frequencies that connect the books and the music. The soundtrack to the awakening.
       </p>
-      <a href="https://youtube.com/@entredosmusic?si=rmH_4LHWloDFSIq1"
-         target="_blank"
-         style="color:var(--teal); text-decoration:none; font-family:'Cinzel',serif; letter-spacing:0.1em;">
+      <a class="music-cta" href="https://youtube.com/@entredosmusic?si=rmH_4LHWloDFSIq1" target="_blank">
         Visit the YouTube Channel →
       </a>
     </div>
@@ -475,9 +588,7 @@
 
   <footer>
     <p>© Entre Dos Universe — All rights reserved</p>
-    <p style="margin-top:1rem; color:var(--text-dim); font-size:0.9rem;">
-      Frequency: 432 Hz ✦ Signal: Active
-    </p>
+    <p style="margin-top:1rem; font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
   </footer>
 
   <script>
@@ -498,8 +609,8 @@
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         r: Math.random() * 1.8 + 0.2,
-        dx: (Math.random() - 0.5) * 0.25,
-        dy: (Math.random() - 0.5) * 0.25
+        dx: (Math.random() - 0.5) * 0.22,
+        dy: (Math.random() - 0.5) * 0.22
       });
     }
 
@@ -515,7 +626,7 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 201, 177, 0.45)";
+        ctx.fillStyle = "rgba(0, 201, 177, 0.42)";
         ctx.fill();
       }
 
@@ -524,6 +635,5 @@
 
     animateParticles();
   </script>
-
 </body>
 </html>
