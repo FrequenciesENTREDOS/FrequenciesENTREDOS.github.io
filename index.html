@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Entre Dos Universe</title>
+  <meta name="description" content="Where frequencies become stories. Explore the Fireline Universe, Tarenis, and the music of Entre Dos." />
+  <meta name="theme-color" content="#050508" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -19,37 +22,147 @@
     a { text-decoration:none; }
     section { scroll-margin-top:100px; }
     #particles { position:fixed; inset:0; width:100%; height:100%; z-index:-3; pointer-events:none; }
- 
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(5,5,8,0.96) 0%,rgba(5,5,8,0.78) 60%,transparent 100%); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-    .nav-logo { font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold); letter-spacing:0.08em; text-shadow:0 0 18px rgba(201,168,76,0.25); white-space:nowrap; }
-    .nav-links { display:flex; gap:1.4rem; list-style:none; flex-wrap:wrap; justify-content:flex-end; }
-    .nav-links a { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-dim); transition:color 0.3s; }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity:0; transform:translateY(32px);
+      transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:0.12s; }
+    .reveal-delay-2 { transition-delay:0.24s; }
+    .reveal-delay-3 { transition-delay:0.36s; }
+    .reveal-delay-4 { transition-delay:0.48s; }
+    .reveal-delay-5 { transition-delay:0.6s; }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center;
+      background:linear-gradient(180deg,rgba(5,5,8,0.96) 0%,rgba(5,5,8,0.78) 60%,transparent 100%);
+      backdrop-filter:blur(10px); border-bottom:1px solid var(--border);
+    }
+    .nav-logo {
+      font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold);
+      letter-spacing:0.08em; text-shadow:0 0 18px rgba(201,168,76,0.25); white-space:nowrap;
+    }
+    .nav-links {
+      display:flex; gap:1.4rem; list-style:none; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .nav-links a {
+      font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.16em;
+      text-transform:uppercase; color:var(--text-dim); transition:color 0.3s;
+      position:relative;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
+      background:var(--teal); transition:width 0.3s ease;
+    }
     .nav-links a:hover { color:var(--teal); }
- 
-    .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:7rem 1.5rem 4rem; overflow:hidden; z-index:1; }
+    .nav-links a:hover::after { width:100%; }
+
+    /* Hamburger */
+    .nav-toggle {
+      display:none; background:none; border:none; cursor:pointer;
+      width:28px; height:20px; position:relative; z-index:101;
+    }
+    .nav-toggle span {
+      display:block; width:100%; height:2px; background:var(--gold);
+      position:absolute; left:0; transition:all 0.3s ease;
+    }
+    .nav-toggle span:nth-child(1) { top:0; }
+    .nav-toggle span:nth-child(2) { top:9px; }
+    .nav-toggle span:nth-child(3) { top:18px; }
+    .nav-toggle.active span:nth-child(1) { top:9px; transform:rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity:0; }
+    .nav-toggle.active span:nth-child(3) { top:9px; transform:rotate(-45deg); }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding:7rem 1.5rem 4rem; overflow:hidden; z-index:1;
+    }
     .hero-video-wrap { position:absolute; inset:0; z-index:-2; overflow:hidden; }
     .hero-video-wrap video { width:100%; height:100%; object-fit:cover; opacity:0.45; }
-    .hero-video-wrap .fallback { display:none; position:absolute; inset:0; background:url('4z6th.jpg') center/cover no-repeat; opacity:0.35; }
-    .hero-overlay { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(5,5,8,0.6) 0%,rgba(5,5,8,0.3) 50%,rgba(5,5,8,0.8) 100%); }
-    .hero-eyebrow { font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; text-shadow:0 0 20px rgba(0,201,177,0.6); }
-    .hero-title { font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,8vw,6.6rem); line-height:1.05; color:var(--vellum); text-shadow:0 0 60px rgba(201,168,76,0.4),0 2px 20px rgba(0,0,0,0.9); margin-bottom:0.4em; }
-    .hero-sub { font-size:clamp(1rem,2.3vw,1.28rem); font-style:italic; color:var(--text-dim); max-width:720px; margin:1rem auto 2.4rem; text-shadow:0 1px 8px rgba(0,0,0,0.9); }
-    .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
- 
-    .btn-primary,.btn-secondary { display:inline-block; padding:0.95rem 1.8rem; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; border-radius:4px; transition:transform 0.25s,box-shadow 0.25s; }
+    .hero-video-wrap .fallback {
+      display:none; position:absolute; inset:0;
+      background:url('4z6th.jpg') center/cover no-repeat; opacity:0.35;
+    }
+    .hero-overlay {
+      position:absolute; inset:0; z-index:-1;
+      background:linear-gradient(180deg,rgba(5,5,8,0.6) 0%,rgba(5,5,8,0.3) 50%,rgba(5,5,8,0.8) 100%);
+    }
+    .hero-eyebrow {
+      font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.3em;
+      text-transform:uppercase; color:var(--teal); margin-bottom:1rem;
+      text-shadow:0 0 20px rgba(0,201,177,0.6);
+      animation:fadeInDown 1s ease 0.2s both;
+    }
+    .hero-title {
+      font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,8vw,6.6rem);
+      line-height:1.05; color:var(--vellum);
+      text-shadow:0 0 60px rgba(201,168,76,0.4),0 2px 20px rgba(0,0,0,0.9);
+      margin-bottom:0.4em;
+      animation:fadeInUp 1.2s ease 0.4s both;
+    }
+    .hero-sub {
+      font-size:clamp(1rem,2.3vw,1.28rem); font-style:italic; color:var(--text-dim);
+      max-width:720px; margin:1rem auto 2.4rem;
+      text-shadow:0 1px 8px rgba(0,0,0,0.9);
+      animation:fadeInUp 1s ease 0.7s both;
+    }
+    .hero-actions {
+      display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;
+      animation:fadeInUp 1s ease 0.9s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity:0; transform:translateY(-20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary,.btn-secondary {
+      display:inline-block; padding:0.95rem 1.8rem; font-family:'Cinzel',serif;
+      font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
+      border-radius:4px; transition:transform 0.25s,box-shadow 0.25s;
+    }
     .btn-primary { background:var(--gold); color:#050508; box-shadow:0 0 28px rgba(201,168,76,0.22); }
     .btn-secondary { color:var(--teal); border:1px solid var(--border-teal); background:rgba(0,201,177,0.03); }
     .btn-primary:hover,.btn-secondary:hover { transform:translateY(-2px); }
- 
+    .btn-primary:hover { box-shadow:0 4px 36px rgba(201,168,76,0.35); }
+    .btn-secondary:hover { box-shadow:0 4px 24px rgba(0,201,177,0.12); }
+
+    /* ── SECTION COMMON ── */
     .section-shell { max-width:1200px; margin:0 auto; }
-    .section-kicker { text-align:center; color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:1rem; font-size:0.78rem; }
-    .section-title { text-align:center; font-family:'Cinzel Decorative',serif; font-size:clamp(2.1rem,5vw,3rem); color:var(--vellum); margin-bottom:1.2rem; }
+    .section-kicker {
+      text-align:center; color:var(--teal); font-family:'Cinzel',serif;
+      letter-spacing:0.28em; text-transform:uppercase; margin-bottom:1rem; font-size:0.78rem;
+    }
+    .section-title {
+      text-align:center; font-family:'Cinzel Decorative',serif;
+      font-size:clamp(2.1rem,5vw,3rem); color:var(--vellum); margin-bottom:1.2rem;
+    }
     .section-sub { max-width:760px; margin:0 auto 3rem; text-align:center; color:var(--text-dim); }
- 
+
+    /* ── BOOKS ── */
     .books-section { padding:8rem 1.25rem; background:var(--deep); position:relative; z-index:1; }
     .books-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.6rem; }
-    .book-card { position:relative; background:linear-gradient(180deg,rgba(19,19,31,0.98),rgba(12,12,18,0.98)); border:1px solid var(--border); overflow:hidden; transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s; }
-    .book-card:hover { transform:translateY(-8px); box-shadow:0 18px 42px rgba(0,0,0,0.35); border-color:rgba(201,168,76,0.38); }
+    .book-card {
+      position:relative; background:linear-gradient(180deg,rgba(19,19,31,0.98),rgba(12,12,18,0.98));
+      border:1px solid var(--border); overflow:hidden;
+      transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
+    }
+    .book-card:hover {
+      transform:translateY(-8px);
+      box-shadow:0 18px 42px rgba(0,0,0,0.35);
+      border-color:rgba(201,168,76,0.38);
+    }
     .featured-book { grid-column:span 2; }
     .book-cover { overflow:hidden; background:#0d0d14; }
     .book-cover img { display:block; width:100%; height:auto; transition:transform 0.45s; }
@@ -58,78 +171,183 @@
     .book-meta { color:var(--teal); font-size:0.8rem; margin-bottom:0.45rem; }
     .book-title { font-family:'Cinzel',serif; font-size:1.08rem; color:var(--vellum); margin-bottom:0.5rem; line-height:1.35; }
     .book-desc { color:var(--text-dim); font-size:0.95rem; line-height:1.6; }
-    .book-status { display:inline-block; margin-top:1rem; color:var(--gold); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; text-shadow:0 0 12px rgba(201,168,76,0.55); }
-    .book-notify { display:inline-block; margin-top:1rem; padding:0.6em 1.2em; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.3s,box-shadow 0.3s; }
-    .book-notify:hover { background:rgba(0,201,177,0.08); box-shadow:0 0 20px rgba(0,201,177,0.15); }
- 
+    .book-notify {
+      display:inline-block; margin-top:1rem; padding:0.6em 1.2em;
+      border:1px solid var(--border-teal); color:var(--teal);
+      font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.14em;
+      text-transform:uppercase; text-decoration:none;
+      transition:background 0.3s,box-shadow 0.3s,transform 0.25s;
+    }
+    .book-notify:hover {
+      background:rgba(0,201,177,0.08);
+      box-shadow:0 0 20px rgba(0,201,177,0.15);
+      transform:translateY(-2px);
+    }
+    .book-request {
+      display:inline-block; margin-top:1rem; padding:0.6em 1.2em;
+      border:1px solid var(--border); color:var(--gold);
+      font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.14em;
+      text-transform:uppercase; text-decoration:none;
+      transition:background 0.3s,box-shadow 0.3s,transform 0.25s;
+      text-shadow:0 0 12px rgba(201,168,76,0.3);
+    }
+    .book-request:hover {
+      background:rgba(201,168,76,0.06);
+      box-shadow:0 0 20px rgba(201,168,76,0.18);
+      transform:translateY(-2px);
+    }
+
+    /* ── TARENIS ── */
     .tarenis-section { padding:8rem 1.25rem; background:var(--surface); position:relative; overflow:hidden; }
     .spire-wrap { width:100%; max-height:520px; overflow:hidden; margin-bottom:4rem; position:relative; }
-    .spire-wrap img { width:100%; height:520px; object-fit:cover; object-position:center top; display:block; filter:brightness(0.85); }
-    .spire-wrap::after { content:''; position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(transparent,var(--surface)); }
-    .ritual-wrap { width:100%; max-height:480px; overflow:hidden; margin:3rem 0; position:relative; border:1px solid var(--border-teal); }
+    .spire-wrap img {
+      width:100%; height:520px; object-fit:cover; object-position:center top;
+      display:block; filter:brightness(0.85);
+    }
+    .spire-wrap::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:120px;
+      background:linear-gradient(transparent,var(--surface));
+    }
+    .ritual-wrap {
+      width:100%; max-height:480px; overflow:hidden; margin:3rem 0;
+      position:relative; border:1px solid var(--border-teal);
+    }
     .ritual-wrap img { width:100%; height:480px; object-fit:cover; object-position:center; display:block; }
-    .ritual-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:80px; background:linear-gradient(var(--surface),transparent); z-index:1; }
-    .ritual-wrap::after { content:''; position:absolute; bottom:0; left:0; right:0; height:80px; background:linear-gradient(transparent,var(--surface)); z-index:1; }
+    .ritual-wrap::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:80px;
+      background:linear-gradient(var(--surface),transparent); z-index:1;
+    }
+    .ritual-wrap::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:80px;
+      background:linear-gradient(transparent,var(--surface)); z-index:1;
+    }
     .characters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-top:3rem; }
-    .character-card { background:rgba(19,19,31,0.78); border:1px solid rgba(0,201,177,0.12); padding:1.6rem; text-align:center; transition:border-color 0.3s,transform 0.3s; }
-    .character-card:hover { border-color:rgba(0,201,177,0.35); transform:translateY(-4px); }
+    .character-card {
+      background:rgba(19,19,31,0.78); border:1px solid rgba(0,201,177,0.12);
+      padding:1.6rem; text-align:center;
+      transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+    }
+    .character-card:hover {
+      border-color:rgba(0,201,177,0.35); transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(0,201,177,0.06);
+    }
     .character-name { color:var(--teal); font-family:'Cinzel',serif; margin-bottom:0.75rem; font-size:1rem; }
     .character-desc { color:var(--text-dim); font-size:0.98rem; }
     .orion-panel { margin-top:4rem; position:relative; overflow:hidden; border:1px solid rgba(0,201,177,0.15); }
     .orion-panel img { width:100%; height:360px; object-fit:cover; object-position:center; display:block; filter:brightness(0.7); }
-    .orion-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; background:rgba(5,5,8,0.45); }
-    .orion-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--teal); margin-bottom:0.8rem; }
-    .orion-title { font-family:'Cinzel Decorative',serif; font-size:clamp(1.5rem,4vw,2.5rem); color:var(--vellum); margin-bottom:1rem; }
+    .orion-overlay {
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding:2rem; background:rgba(5,5,8,0.45);
+    }
+    .orion-label {
+      font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em;
+      text-transform:uppercase; color:var(--teal); margin-bottom:0.8rem;
+    }
+    .orion-title {
+      font-family:'Cinzel Decorative',serif; font-size:clamp(1.5rem,4vw,2.5rem);
+      color:var(--vellum); margin-bottom:1rem;
+    }
     .orion-desc { color:var(--text-dim); font-style:italic; max-width:560px; font-size:1rem; }
     .codex-note { margin-top:3rem; text-align:center; color:var(--text-dim); font-style:italic; }
- 
+
+    /* ── FIBONACCI ── */
     .fibonacci-section { padding:6rem 1.25rem; background:var(--deep); display:flex; flex-direction:column; align-items:center; }
-    .fibonacci-wrap { width:min(420px,90vw); opacity:0.75; transition:opacity 0.4s; cursor:default; }
+    .fibonacci-wrap { width:min(420px,90vw); opacity:0.75; transition:opacity 0.6s; cursor:default; }
     .fibonacci-wrap:hover { opacity:1; }
     .fibonacci-wrap img { width:100%; height:auto; display:block; }
- 
+
+    /* ── MUSIC ── */
     .music-section { padding:8rem 1.25rem; background:var(--void); }
-    .music-cta { display:inline-block; margin-top:1rem; padding:1rem 1.6rem; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.16em; text-transform:uppercase; font-size:0.72rem; transition:transform 0.25s,box-shadow 0.25s; }
+    .music-cta {
+      display:inline-block; margin-top:1rem; padding:1rem 1.6rem;
+      border:1px solid var(--border-teal); color:var(--teal);
+      font-family:'Cinzel',serif; letter-spacing:0.16em;
+      text-transform:uppercase; font-size:0.72rem;
+      transition:transform 0.25s,box-shadow 0.25s;
+    }
     .music-cta:hover { transform:translateY(-2px); box-shadow:0 0 24px rgba(0,201,177,0.12); }
- 
+
+    /* ── HOW TO LISTEN ── */
     .listen-section { padding:8rem 1.25rem; background:var(--surface); text-align:center; }
     .listen-inner { max-width:700px; margin:0 auto; }
     .listen-text { font-size:1.15rem; color:var(--text-dim); font-style:italic; line-height:2; margin-bottom:3rem; }
     .listen-text strong { color:var(--vellum); font-style:normal; font-weight:500; }
     .listen-hints { display:flex; flex-direction:column; gap:1.2rem; margin-bottom:3rem; }
-    .listen-hint { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-dim); padding:1rem; border:1px solid var(--border); transition:border-color 0.3s,color 0.3s; }
-    .listen-hint:hover { border-color:var(--gold-dim); color:var(--gold); }
+    .listen-hint {
+      font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.25em;
+      text-transform:uppercase; color:var(--text-dim); padding:1rem;
+      border:1px solid var(--border);
+      transition:border-color 0.3s,color 0.3s,background 0.3s;
+    }
+    .listen-hint:hover { border-color:var(--gold-dim); color:var(--gold); background:rgba(201,168,76,0.03); }
     .listen-number { color:var(--teal); margin-right:0.8rem; }
-    .qr-placeholder { display:inline-flex; flex-direction:column; align-items:center; gap:0.8rem; margin-top:2rem; padding:2rem; border:1px solid var(--border); color:var(--text-dim); font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; }
-    .qr-box { width:120px; height:120px; background:var(--panel); border:1px solid var(--border-teal); display:flex; align-items:center; justify-content:center; color:var(--teal-dim); font-size:0.6rem; letter-spacing:0.1em; text-align:center; line-height:1.8; }
- 
+    .qr-placeholder {
+      display:inline-flex; flex-direction:column; align-items:center;
+      gap:0.8rem; margin-top:2rem; padding:2rem;
+      border:1px solid var(--border); color:var(--text-dim);
+      font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;
+    }
+    .qr-box {
+      width:120px; height:120px; background:var(--panel); border:1px solid var(--border-teal);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--teal-dim); font-size:0.6rem; letter-spacing:0.1em;
+      text-align:center; line-height:1.8;
+    }
+
+    /* ── FOOTER ── */
     footer { padding:4rem 1.25rem; text-align:center; border-top:1px solid var(--border); color:var(--text-dim); }
     footer p:first-child { color:var(--text); }
- 
-    @media (max-width:900px) { .featured-book { grid-column:span 1; } }
+    .footer-divider {
+      width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:1.2rem auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      .featured-book { grid-column:span 1; }
+      .spire-wrap img { height:400px; }
+      .ritual-wrap img { height:380px; }
+    }
     @media (max-width:768px) {
       .hero-video-wrap video { display:none; }
       .hero-video-wrap .fallback { display:block; }
-      .featured-book { grid-column:span 1; }
-      nav { padding:0.95rem 1rem; align-items:flex-start; }
-      .nav-logo { font-size:0.96rem; }
-      .nav-links { gap:0.7rem; max-width:70%; }
-      .nav-links a { font-size:0.6rem; }
-      .hero { padding-top:8.5rem; }
-      .hero-actions { width:100%; }
+      nav { padding:0.95rem 1.2rem; }
+      .nav-toggle { display:block; }
+      .nav-links {
+        position:fixed; top:0; right:0; width:min(280px,75vw); height:100vh;
+        background:rgba(5,5,8,0.97); backdrop-filter:blur(16px);
+        flex-direction:column; justify-content:center; align-items:center;
+        gap:2rem; padding:2rem;
+        transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);
+        border-left:1px solid var(--border);
+      }
+      .nav-links.open { transform:translateX(0); }
+      .nav-links a { font-size:0.82rem; letter-spacing:0.2em; }
+      .hero { padding-top:7rem; min-height:100svh; }
+      .hero-actions { width:100%; flex-direction:column; align-items:center; gap:0.8rem; }
       .btn-primary,.btn-secondary { width:100%; max-width:320px; text-align:center; }
-      .spire-wrap img { height:300px; }
-      .ritual-wrap img { height:300px; }
-      .orion-panel img { height:260px; }
+      .spire-wrap img { height:280px; }
+      .ritual-wrap img { height:280px; }
+      .orion-panel img { height:240px; }
+      .books-section, .tarenis-section, .music-section, .listen-section { padding:5rem 1rem; }
+      .fibonacci-section { padding:4rem 1rem; }
+    }
+    @media (max-width:380px) {
+      .hero-title { font-size:2.5rem; }
+      .nav-logo { font-size:0.88rem; }
     }
   </style>
 </head>
 <body>
- 
+
 <canvas id="particles"></canvas>
- 
+
 <nav>
   <a href="#" class="nav-logo">Entre Dos</a>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="#books">Books</a></li>
     <li><a href="#tarenis">Tarenis</a></li>
@@ -137,7 +355,7 @@
     <li><a href="#music">Music</a></li>
   </ul>
 </nav>
- 
+
 <section class="hero">
   <div class="hero-video-wrap">
     <video autoplay muted loop playsinline>
@@ -154,15 +372,15 @@
     <a href="#tarenis" class="btn-secondary">Enter the Codex</a>
   </div>
 </section>
- 
+
 <section id="books" class="books-section">
   <div class="section-shell">
-    <p class="section-kicker">The Fireline Universe</p>
-    <h2 class="section-title">The Books</h2>
+    <p class="section-kicker reveal">The Fireline Universe</p>
+    <h2 class="section-title reveal reveal-delay-1">The Books</h2>
     <div class="books-grid">
- 
-      <div class="book-card featured-book">
-        <div class="book-cover"><img src="image.jpg" alt="Tarenis cover"></div>
+
+      <div class="book-card featured-book reveal reveal-delay-2">
+        <div class="book-cover"><img src="image.jpg" alt="Tarenis cover" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">Sci-Fi Conspiracy Thriller • Book One</p>
           <h3 class="book-title">Tarenis</h3>
@@ -170,86 +388,86 @@
           <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book One&body=Please notify me when Tarenis: Book One is available." class="book-notify">✦ Notify Me When Available</a>
         </div>
       </div>
- 
-      <div class="book-card">
-        <div class="book-cover"><img src="image (2).jpg" alt="The Fireline 432 Hz Covenant"></div>
+
+      <div class="book-card reveal reveal-delay-1">
+        <div class="book-cover"><img src="image (2).jpg" alt="The Fireline 432 Hz Covenant" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">The Fireline Trilogy • Book One</p>
           <h3 class="book-title">THE FIRELINE<br>The 432 Hz Covenant</h3>
           <p class="book-desc">Something is wrong with the world. Most people just can't hear it. But a hidden frequency has begun to surface — and the people who notice it don't see reality the same way again. Tune in. You may not be able to tune back out.</p>
-          <span class="book-status">Available Now</span>
+          <a href="mailto:oderaycortega@gmail.com?subject=Book Request — THE FIRELINE: The 432 Hz Covenant&body=I'd like to request a copy of THE FIRELINE: The 432 Hz Covenant." class="book-request">✦ Request a Copy</a>
         </div>
       </div>
- 
-      <div class="book-card">
-        <div class="book-cover"><img src="image (1).jpg" alt="Fireline Zero-Day"></div>
+
+      <div class="book-card reveal reveal-delay-2">
+        <div class="book-cover"><img src="image (1).jpg" alt="Fireline Zero-Day" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">The Fireline Trilogy • Book 5</p>
           <h3 class="book-title">FIRELINE ZERO-DAY</h3>
           <p class="book-desc">The system resets every day. So no one remembers. Until one moment slips through. When a routine night shift exposes a glitch that shouldn't exist, everything the system has been hiding begins to surface. This isn't a failure. It's the beginning.</p>
-          <span class="book-status">Available Now</span>
+          <a href="mailto:oderaycortega@gmail.com?subject=Book Request — FIRELINE ZERO-DAY&body=I'd like to request a copy of FIRELINE ZERO-DAY." class="book-request">✦ Request a Copy</a>
         </div>
       </div>
- 
-      <div class="book-card">
-        <div class="book-cover"><img src="image (5).jpg" alt="The Ghost Garden"></div>
+
+      <div class="book-card reveal reveal-delay-3">
+        <div class="book-cover"><img src="image (5).jpg" alt="The Ghost Garden" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">Protocol 432</p>
           <h3 class="book-title">THE GHOST GARDEN</h3>
           <p class="book-desc">The world you see isn't the real one. It's just the version you're allowed to see. When the illusion starts to flicker, a hidden layer of reality begins to bleed through — one that doesn't follow the rules. Some doors don't open. They reveal themselves.</p>
-          <span class="book-status">Available Now</span>
+          <a href="mailto:oderaycortega@gmail.com?subject=Book Request — THE GHOST GARDEN: Protocol 432&body=I'd like to request a copy of THE GHOST GARDEN: Protocol 432." class="book-request">✦ Request a Copy</a>
         </div>
       </div>
- 
-      <div class="book-card">
-        <div class="book-cover"><img src="image (4).jpg" alt="The Lattice Protocol"></div>
+
+      <div class="book-card reveal reveal-delay-4">
+        <div class="book-cover"><img src="image (4).jpg" alt="The Lattice Protocol" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">The Fireline Trilogy • Book 4</p>
           <h3 class="book-title">THE LATTICE PROTOCOL</h3>
           <p class="book-desc">There is something beneath the system. And it's waking up. As the cracks spread, a deeper network — older, quieter, impossible to control — begins to surface through the people themselves. You don't escape the system. You outgrow it.</p>
-          <span class="book-status">Available Now</span>
+          <a href="mailto:oderaycortega@gmail.com?subject=Book Request — THE LATTICE PROTOCOL&body=I'd like to request a copy of THE LATTICE PROTOCOL." class="book-request">✦ Request a Copy</a>
         </div>
       </div>
- 
-      <div class="book-card">
-        <div class="book-cover"><img src="image (3).jpg" alt="The Fireline 0 Hz Covenant"></div>
+
+      <div class="book-card reveal reveal-delay-5">
+        <div class="book-cover"><img src="image (3).jpg" alt="The Fireline 0 Hz Covenant" loading="lazy"></div>
         <div class="book-info">
           <p class="book-meta">The Fireline Trilogy</p>
           <h3 class="book-title">THE FIRELINE<br>The 0 Hz Covenant</h3>
           <p class="book-desc">Time was designed to keep you in place. Memory was designed to keep you compliant. But something survived the reset. Now a hidden space is emerging — outside the system's control, where the rules no longer apply. And neither do you.</p>
-          <span class="book-status">Available Now</span>
+          <a href="mailto:oderaycortega@gmail.com?subject=Book Request — THE FIRELINE: The 0 Hz Covenant&body=I'd like to request a copy of THE FIRELINE: The 0 Hz Covenant." class="book-request">✦ Request a Copy</a>
         </div>
       </div>
- 
+
     </div>
   </div>
 </section>
- 
+
 <section id="tarenis" class="tarenis-section">
-  <div class="spire-wrap">
+  <div class="spire-wrap reveal">
     <img src="image-4.jpg" alt="The Northern Polar Gate Spire">
   </div>
   <div class="section-shell">
-    <h2 class="section-title">Tarenis — Book One</h2>
-    <p class="section-sub">The ancient frequency grid has been silent for twelve thousand years.<br>It is silent no longer.</p>
+    <h2 class="section-title reveal">Tarenis — Book One</h2>
+    <p class="section-sub reveal reveal-delay-1">The ancient frequency grid has been silent for twelve thousand years.<br>It is silent no longer.</p>
     <div class="characters-grid">
-      <div class="character-card">
+      <div class="character-card reveal reveal-delay-1">
         <h3 class="character-name">Lira Voss</h3>
         <p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p>
       </div>
-      <div class="character-card">
+      <div class="character-card reveal reveal-delay-2">
         <h3 class="character-name">Kai Resonance</h3>
         <p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p>
       </div>
-      <div class="character-card">
+      <div class="character-card reveal reveal-delay-3">
         <h3 class="character-name">Elias</h3>
         <p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p>
       </div>
     </div>
-    <div class="ritual-wrap">
+    <div class="ritual-wrap reveal">
       <img src="image-6.jpg" alt="The Ritual at the Northern Polar Gate">
     </div>
-    <div class="orion-panel">
+    <div class="orion-panel reveal">
       <img src="image-5.jpg" alt="AetherForge ORION Operations Center">
       <div class="orion-overlay">
         <p class="orion-label">AetherForge — ORION System</p>
@@ -257,21 +475,21 @@
         <p class="orion-desc">The corporation that has spent millennia making sure no one ever wakes up.</p>
       </div>
     </div>
-    <p class="codex-note" style="margin-top:3rem;">Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.</p>
+    <p class="codex-note reveal" style="margin-top:3rem;">Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.</p>
   </div>
 </section>
- 
+
 <section class="fibonacci-section">
-  <div class="fibonacci-wrap">
+  <div class="fibonacci-wrap reveal">
     <img src="image-7.jpg" alt="">
   </div>
 </section>
- 
+
 <section id="listen" class="listen-section">
   <div class="listen-inner">
-    <p class="section-kicker">For Those Who Are Paying Attention</p>
-    <h2 class="section-title">How to Listen</h2>
-    <div class="listen-text">
+    <p class="section-kicker reveal">For Those Who Are Paying Attention</p>
+    <h2 class="section-title reveal reveal-delay-1">How to Listen</h2>
+    <div class="listen-text reveal reveal-delay-2">
       <p><strong>The Codex was never meant to be read.</strong></p>
       <p>It was meant to be decoded.</p><br>
       <p>If you are here, you have already begun.</p><br>
@@ -281,49 +499,96 @@
       <p>You already know more than you think.</p>
     </div>
     <div class="listen-hints">
-      <div class="listen-hint"><span class="listen-number">—</span>Look closely at every page. Not everything is decoration.</div>
-      <div class="listen-hint"><span class="listen-number">—</span>The grid was mapped before the territory existed.</div>
-      <div class="listen-hint"><span class="listen-number">—</span>The sequence was never arbitrary. Nature wrote it first.</div>
-      <div class="listen-hint"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
+      <div class="listen-hint reveal reveal-delay-1"><span class="listen-number">—</span>Look closely at every page. Not everything is decoration.</div>
+      <div class="listen-hint reveal reveal-delay-2"><span class="listen-number">—</span>The grid was mapped before the territory existed.</div>
+      <div class="listen-hint reveal reveal-delay-3"><span class="listen-number">—</span>The sequence was never arbitrary. Nature wrote it first.</div>
+      <div class="listen-hint reveal reveal-delay-4"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
     </div>
-    <div class="qr-placeholder">
+    <div class="qr-placeholder reveal">
       <div class="qr-box">QR CODE<br>COMING SOON</div>
       <span>Scan to enter the Archive</span>
     </div>
   </div>
 </section>
- 
+
 <section id="music" class="music-section">
   <div class="section-shell" style="text-align:center;">
-    <h2 class="section-title">Entre Dos Music</h2>
-    <p class="section-sub">The emotional frequencies that connect the books and the music.<br>The soundtrack to the awakening.</p>
-    <a class="music-cta" href="https://youtube.com/@entredosmusic?si=rmH_4LHWloDFSIq1" target="_blank">Visit the YouTube Channel →</a>
+    <h2 class="section-title reveal">Entre Dos Music</h2>
+    <p class="section-sub reveal reveal-delay-1">The emotional frequencies that connect the books and the music.<br>The soundtrack to the awakening.</p>
+    <a class="music-cta reveal reveal-delay-2" href="https://youtube.com/@entredosmusic?si=rmH_4LHWloDFSIq1" target="_blank" rel="noopener">Visit the YouTube Channel →</a>
   </div>
 </section>
- 
+
 <footer>
   <p>© Entre Dos Universe — All rights reserved</p>
-  <p style="margin-top:1rem;font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
+  <div class="footer-divider"></div>
+  <p style="font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
 </footer>
- 
+
 <script>
+  // ── HAMBURGER MENU ──
+  const toggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ── PARTICLES (adaptive count) ──
   const canvas = document.getElementById("particles");
   const ctx = canvas.getContext("2d");
   function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
+
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 28 : 60;
   const particles = [];
-  for (let i = 0; i < 60; i++) {
-    particles.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.8+0.2, dx:(Math.random()-0.5)*0.22, dy:(Math.random()-0.5)*0.22, gold:Math.random()>0.7 });
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.8 + 0.2,
+      dx: (Math.random() - 0.5) * 0.22,
+      dy: (Math.random() - 0.5) * 0.22,
+      gold: Math.random() > 0.7
+    });
   }
+
+  let animating = true;
+  document.addEventListener('visibilitychange', () => {
+    animating = !document.hidden;
+    if (animating) animateParticles();
+  });
+
   function animateParticles() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if (!animating) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const p of particles) {
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<0||p.x>canvas.width) p.dx*=-1;
-      if(p.y<0||p.y>canvas.height) p.dy*=-1;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.gold?"rgba(201,168,76,0.35)":"rgba(0,201,177,0.42)";
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.gold ? "rgba(201,168,76,0.35)" : "rgba(0,201,177,0.42)";
       ctx.fill();
     }
     requestAnimationFrame(animateParticles);
