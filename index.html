@@ -138,17 +138,11 @@
     .terminal-progress { margin-top:1rem; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); }
     .terminal-progress span { color:var(--teal); }
 
-    /* ── CODENAME MODAL ── */
-    .codename-overlay { position:fixed; inset:0; background:rgba(5,5,8,0.92); z-index:200; display:flex; justify-content:center; align-items:center; backdrop-filter:blur(8px); }
-    .codename-overlay.hidden { display:none; }
-    .codename-box { background:var(--panel); border:1px solid var(--border-teal); padding:3rem 2.5rem; max-width:420px; width:90%; text-align:center; }
-    .codename-box h3 { font-family:'Cinzel Decorative',serif; color:var(--vellum); font-size:1.6rem; margin-bottom:0.8rem; }
-    .codename-box p { color:var(--text-dim); font-size:0.95rem; margin-bottom:1.5rem; font-style:italic; }
-    .codename-input { width:100%; background:var(--void); border:1px solid var(--border); color:var(--vellum); font-family:'EB Garamond',Georgia,serif; font-size:1.1rem; padding:0.8rem 1rem; text-align:center; outline:none; margin-bottom:1rem; }
-    .codename-input::placeholder { color:var(--text-dim); opacity:0.4; }
-    .codename-input:focus { border-color:var(--teal); }
-    .codename-submit { display:inline-block; padding:0.7em 1.8em; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; background:transparent; cursor:pointer; transition:background 0.3s,box-shadow 0.3s; }
-    .codename-submit:hover { background:rgba(0,201,177,0.08); box-shadow:0 0 20px rgba(0,201,177,0.15); }
+    /* ── CODENAME INLINE ── */
+    .codename-inline { background:rgba(5,5,8,0.9); border:1px solid var(--border-teal); padding:1.5rem; margin-bottom:0; }
+    .codename-inline-header { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal-dim); margin-bottom:0.5rem; }
+    .codename-inline-sub { color:var(--text-dim); font-size:0.9rem; font-style:italic; margin-bottom:1rem; }
+    .codename-inline-hint { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); opacity:0.5; margin-top:0.8rem; }
 
     /* ── HIDDEN UNLOCK PAGE ── */
     .unlock-overlay { position:fixed; inset:0; background:rgba(5,5,8,0.96); z-index:200; overflow-y:auto; backdrop-filter:blur(12px); }
@@ -253,16 +247,7 @@
 
 <canvas id="particles"></canvas>
 
-<!-- ══ CODENAME MODAL ══ -->
-<div class="codename-overlay hidden" id="codenameModal">
-  <div class="codename-box">
-    <h3>Choose Your Codename</h3>
-    <p>No account. No email. Just a name the Signal Board will remember.</p>
-    <input type="text" class="codename-input" id="codenameInput" placeholder="Enter codename..." maxlength="24" autocomplete="off" />
-    <br>
-    <button class="codename-submit" id="codenameSubmit">Enter the Signal</button>
-  </div>
-</div>
+
 
 <!-- ══ HIDDEN UNLOCK PAGE ══ -->
 <div class="unlock-overlay hidden" id="unlockOverlay">
@@ -377,10 +362,21 @@
       <div class="listen-hint reveal reveal-delay-4"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
     </div>
 
-    <!-- THE GAME TERMINAL -->
+    <!-- CODENAME + GAME TERMINAL -->
     <div class="terminal-wrap reveal">
-      <div class="terminal">
-        <div class="terminal-header">⌁ Signal Receiver — Active</div>
+      <!-- Codename entry (shows when no codename set) -->
+      <div class="codename-inline" id="codenameInline">
+        <div class="codename-inline-header">⌁ Identify Yourself</div>
+        <p class="codename-inline-sub">No account. No email. Just a name the Signal Board will remember.</p>
+        <div class="terminal-input-wrap">
+          <span class="terminal-prompt">›</span>
+          <input type="text" class="terminal-input" id="codenameInput" placeholder="choose a codename..." maxlength="24" autocomplete="off" />
+        </div>
+        <div class="codename-inline-hint">Press Enter to begin</div>
+      </div>
+      <!-- Terminal (shows after codename is set) -->
+      <div class="terminal" id="terminalBox" style="display:none;">
+        <div class="terminal-header">⌁ Signal Receiver — Active &nbsp;|&nbsp; <span id="codenameDisplay" style="color:var(--teal);"></span></div>
         <div class="terminal-input-wrap">
           <span class="terminal-prompt">›</span>
           <input type="text" class="terminal-input" id="terminalInput" placeholder="type what you know..." autocomplete="off" />
@@ -492,30 +488,34 @@ const TOTAL_CLUES = Object.keys(TRIGGERS).length;
 let codename = localStorage.getItem('edu_codename') || '';
 let found = JSON.parse(localStorage.getItem('edu_found') || '[]');
 
-// ══════════ CODENAME SYSTEM ══════════
-const modal = document.getElementById('codenameModal');
+// ══════════ CODENAME SYSTEM (INLINE) ══════════
+const codenameInline = document.getElementById('codenameInline');
 const codenameInput = document.getElementById('codenameInput');
-const codenameSubmit = document.getElementById('codenameSubmit');
+const terminalBox = document.getElementById('terminalBox');
+const codenameDisplay = document.getElementById('codenameDisplay');
 
 function checkCodename() {
-  if (!codename) {
-    modal.classList.remove('hidden');
-  } else {
-    modal.classList.add('hidden');
+  if (codename) {
+    codenameInline.style.display = 'none';
+    terminalBox.style.display = 'block';
+    codenameDisplay.textContent = codename;
     updateProgress();
     syncToFirebase();
   }
 }
 
-codenameSubmit.addEventListener('click', submitCodename);
-codenameInput.addEventListener('keydown', e => { if (e.key === 'Enter') submitCodename(); });
+codenameInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitCodename();
+});
 
 function submitCodename() {
   const val = codenameInput.value.trim().replace(/[^a-zA-Z0-9_\-]/g, '');
   if (val.length < 2) return;
   codename = val;
   localStorage.setItem('edu_codename', codename);
-  modal.classList.add('hidden');
+  codenameInline.style.display = 'none';
+  terminalBox.style.display = 'block';
+  codenameDisplay.textContent = codename;
   updateProgress();
   syncToFirebase();
 }
@@ -535,7 +535,8 @@ function processInput() {
   if (!raw) return;
 
   if (!codename) {
-    modal.classList.remove('hidden');
+    terminalResponse.textContent = 'Choose a codename first.';
+    terminalResponse.className = 'terminal-response visible error';
     return;
   }
 
@@ -635,7 +636,6 @@ commentInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendComme
 function sendComment() {
   const text = commentInput.value.trim();
   if (!text || !codename) {
-    if (!codename) modal.classList.remove('hidden');
     return;
   }
   commentInput.value = '';
