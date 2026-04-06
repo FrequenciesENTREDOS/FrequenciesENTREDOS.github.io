@@ -33,6 +33,16 @@
     .reveal-delay-2 { transition-delay:0.24s; }
     .reveal-delay-3 { transition-delay:0.36s; }
 
+    /* ── SOUND TOGGLE ── */
+    #globalMute { 
+      position:fixed; bottom:20px; right:20px; z-index:1000; 
+      background:rgba(5,5,8,0.8); border:1px solid var(--teal); 
+      color:var(--teal); padding:10px 15px; cursor:pointer; 
+      font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+    }
+    #globalMute:hover { background: var(--teal); color: var(--void); }
+    
     /* ── NAV ── */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(5,5,8,0.96) 0%,rgba(5,5,8,0.78) 60%,transparent 100%); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
     .nav-logo { font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold); letter-spacing:0.08em; text-shadow:0 0 18px rgba(201,168,76,0.25); white-space:nowrap; }
@@ -129,6 +139,7 @@
 </head>
 <body>
 
+<button id="globalMute">SOUND: OFF</button>
 <canvas id="particles"></canvas>
 
 <nav>
@@ -261,6 +272,23 @@
 </footer>
 
 <script>
+  // --- SOUND TOGGLE LOGIC ---
+const muteBtn = document.getElementById('globalMute');
+const allVideos = document.querySelectorAll('video');
+let isMuted = true;
+
+muteBtn.addEventListener('click', () => {
+  isMuted = !isMuted; // Toggle the mute state
+  allVideos.forEach(vid => {
+    vid.muted = isMuted; // Apply state to every video on the page
+  });
+  
+  // Update button appearance
+  muteBtn.innerText = isMuted ? "SOUND: OFF" : "SOUND: ON";
+  muteBtn.style.borderColor = isMuted ? "var(--teal)" : "var(--gold)";
+  muteBtn.style.color = isMuted ? "var(--teal)" : "var(--gold)";
+  });
+  
   // Navigation Toggle
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
