@@ -21,10 +21,8 @@
     html { scroll-behavior:smooth; }
     body { background:var(--void); color:var(--text); font-family:'EB Garamond',Georgia,serif; font-size:18px; line-height:1.7; overflow-x:hidden; }
     a { text-decoration:none; }
-    section { scroll-margin-top:100px; }
-    #particles { position:fixed; inset:0; width:100%; height:100%; z-index:-3; pointer-events:none; }
+    #particles { position:fixed; inset:0; z-index:-3; pointer-events:none; }
 
-    /* Reveal */
     .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
     .reveal.visible { opacity:1; transform:translateY(0); }
     .reveal-delay-1 { transition-delay:0.1s; }
@@ -32,8 +30,8 @@
     .reveal-delay-3 { transition-delay:0.3s; }
 
     /* NAV */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:rgba(5,5,8,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-    .nav-logo { font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold); letter-spacing:0.08em; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(5,5,8,0.96),rgba(5,5,8,0.78)); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold); letter-spacing:0.08em; text-shadow:0 0 18px rgba(201,168,76,0.25); }
     .nav-links { display:flex; gap:1.4rem; list-style:none; }
     .nav-links a { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-dim); transition:color 0.3s; }
     .nav-links a:hover { color:var(--teal); }
@@ -49,41 +47,44 @@
     /* HERO */
     .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:7rem 1.5rem 4rem; overflow:hidden; }
     .hero-video-wrap { position:absolute; inset:0; z-index:-2; overflow:hidden; }
-    .hero-video-wrap video { width:100%; height:100%; object-fit:cover; opacity:0.55; }
-    .hero-overlay { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(5,5,8,0.5) 0%,rgba(5,5,8,0.8) 100%); }
-    .hero-title { font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,8vw,6.6rem); line-height:1.05; color:var(--vellum); text-shadow:0 0 50px rgba(201,168,76,0.3); margin-bottom:0.4em; }
-    .hero-sub { font-size:clamp(1rem,2.3vw,1.25rem); font-style:italic; color:var(--text-dim); max-width:720px; margin:1rem auto 2rem; }
+    .hero-video-wrap video { width:100%; height:100%; object-fit:cover; opacity:0.5; }
+    .hero-overlay { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(5,5,8,0.6) 0%,rgba(5,5,8,0.8) 100%); }
+    .hero-eyebrow { font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; text-shadow:0 0 20px rgba(0,201,177,0.6); }
+    .hero-title { font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,8vw,6.6rem); line-height:1.05; color:var(--vellum); text-shadow:0 0 60px rgba(201,168,76,0.4); margin-bottom:0.4em; }
+    .hero-sub { font-size:clamp(1rem,2.3vw,1.28rem); font-style:italic; color:var(--text-dim); max-width:720px; margin:1rem auto 2.4rem; }
     .btn { display:inline-block; padding:0.95rem 1.8rem; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; border-radius:4px; transition:transform 0.25s,box-shadow 0.25s; }
     .btn-primary { background:var(--gold); color:#050508; box-shadow:0 0 28px rgba(201,168,76,0.22); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 4px 36px rgba(201,168,76,0.35); }
+    .btn-secondary { color:var(--teal); border:1px solid var(--border-teal); background:rgba(0,201,177,0.03); }
+    .btn-primary:hover, .btn-secondary:hover { transform:translateY(-2px); }
 
-    /* SECTIONS */
-    .section-shell { max-width:1200px; margin:0 auto; padding:0 1.25rem; }
+    /* COMMON */
+    .section-shell { max-width:1200px; margin:0 auto; }
     .section-title { text-align:center; font-family:'Cinzel Decorative',serif; font-size:clamp(2.1rem,5vw,3rem); color:var(--vellum); margin-bottom:1.2rem; }
 
     /* TARENIS */
     .tarenis-section { padding:8rem 1.25rem; background:var(--surface); }
-    .tarenis-feature { display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--panel); border:1px solid var(--border-teal); overflow:hidden; margin-bottom:5rem; }
+    .tarenis-feature { display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--panel); border:1px solid var(--border-teal); overflow:hidden; margin-bottom:5rem; transition:box-shadow 0.4s; }
+    .tarenis-feature:hover { box-shadow:0 20px 60px rgba(0,201,177,0.1); }
     .tarenis-feature-cover img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
     .tarenis-feature:hover .tarenis-feature-cover img { transform:scale(1.03); }
     .tarenis-feature-info { padding:3rem 2.5rem; display:flex; flex-direction:column; justify-content:center; }
-    .tarenis-feature-info h3 { font-family:'Cinzel Decorative',serif; font-size:2.5rem; color:var(--vellum); margin-bottom:1rem; }
+    .tarenis-feature-info h3 { font-family:'Cinzel Decorative',serif; font-size:2.6rem; color:var(--vellum); margin-bottom:1rem; }
 
-    /* CHARACTER HEADSHOTS - FIXED */
+    /* CHARACTERS - IMPROVED CIRCULAR FIT */
     .characters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-top:4rem; }
     .character-card { background:rgba(19,19,31,0.78); border:1px solid var(--border-teal); padding:2rem 1.5rem; text-align:center; transition:0.4s; }
-    .character-card:hover { border-color:var(--teal); transform:translateY(-6px); }
+    .character-card:hover { border-color:var(--teal); transform:translateY(-6px); box-shadow:0 12px 32px rgba(0,201,177,0.08); }
     .character-img-container { 
-      width:120px; height:120px; margin:0 auto 1.5rem; 
-      border-radius:50%; border:3px solid var(--teal-dim); 
-      overflow:hidden; background:var(--void); 
+      width: 130px; height: 130px; margin: 0 auto 1.5rem; 
+      border-radius: 50%; border: 3px solid var(--teal-dim); 
+      overflow: hidden; background: var(--void); 
     }
     .character-img { 
-      width:100%; height:100%; object-fit:cover; 
-      object-position:center; display:block; 
-      transition:transform 0.5s ease; 
+      width: 100%; height: 100%; object-fit: cover; 
+      object-position: center top; /* helps keep faces visible */
+      display: block; transition: transform 0.5s ease; 
     }
-    .character-card:hover .character-img { transform:scale(1.08); }
+    .character-card:hover .character-img { transform: scale(1.08); }
     .character-name { color:var(--teal); font-family:'Cinzel',serif; margin-bottom:0.8rem; font-size:1.1rem; text-transform:uppercase; letter-spacing:0.05em; }
     .character-desc { color:var(--text-dim); font-size:0.97rem; line-height:1.6; }
 
@@ -91,7 +92,7 @@
     .video-interact { position:relative; width:100%; max-width:900px; margin:4rem auto; border:1px solid var(--border-teal); cursor:pointer; overflow:hidden; }
     .video-interact video { width:100%; display:block; }
     .sound-badge { position:absolute; bottom:20px; right:20px; background:rgba(0,0,0,0.75); color:var(--teal); padding:8px 18px; font-family:'Cinzel',serif; font-size:0.72rem; border:1px solid var(--teal); border-radius:30px; transition:0.3s; }
-    .video-interact:hover .sound-badge { background:var(--teal); color:var(--void); border-color:var(--teal); }
+    .video-interact:hover .sound-badge { background:var(--teal); color:var(--void); }
 
     /* ARCHIVE */
     .archive-section { padding:8rem 1.25rem; background:var(--deep); }
@@ -105,39 +106,40 @@
     .archive-title { font-family:'Cinzel',serif; color:var(--vellum); margin-bottom:0.6rem; font-size:1.1rem; }
     .archive-desc { font-size:0.9rem; color:var(--text-dim); line-height:1.6; }
 
-    /* TERMINAL */
-    .terminal-section { padding:8rem 1.25rem; text-align:center; background:var(--surface); }
+    /* LISTEN / TERMINAL */
+    .listen-section { padding:8rem 1.25rem; background:var(--surface); text-align:center; }
     .terminal-box { max-width:560px; margin:3rem auto; background:#0a0a12; border:1px solid var(--teal-dim); padding:2.5rem; text-align:left; }
     .terminal-header { font-family:'Cinzel',serif; font-size:0.65rem; color:var(--teal-dim); margin-bottom:1.5rem; letter-spacing:0.25em; text-transform:uppercase; }
-    .terminal-line { display:flex; gap:12px; align-items:center; }
     .terminal-input { background:transparent; border:none; outline:none; color:var(--vellum); font-family:monospace; font-size:1.15rem; width:100%; caret-color:var(--teal); }
 
-    /* UNLOCK OVERLAY - FIXED WITH 3 IMAGES */
+    /* UNLOCK - 3 IMAGES */
     .unlock-overlay { position:fixed; inset:0; background:rgba(5,5,8,0.97); z-index:200; display:none; align-items:center; justify-content:center; overflow-y:auto; backdrop-filter:blur(12px); }
     .unlock-overlay.active { display:flex; }
-    .unlock-content { max-width:820px; width:100%; padding:2rem 1.5rem; text-align:center; }
-    .unlock-content h2 { font-family:'Cinzel Decorative',serif; color:var(--teal); font-size:2.6rem; margin-bottom:1.5rem; }
+    .unlock-content { max-width:860px; width:100%; padding:2rem 1.5rem; text-align:center; }
+    .unlock-content h2 { font-family:'Cinzel Decorative',serif; color:var(--teal); font-size:2.8rem; margin-bottom:1rem; }
     .unlock-grid { display:grid; gap:1.8rem; margin:2rem 0; }
     .unlock-img-wrap img { width:100%; max-height:380px; object-fit:contain; border:1px solid var(--border); display:block; margin:0 auto; }
     .unlock-img-label { font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal-dim); margin-top:0.8rem; }
-    .unlock-close { display:inline-block; margin-top:2rem; padding:0.9em 2em; border:1px solid var(--gold); color:var(--gold); font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; background:transparent; cursor:pointer; transition:0.3s; }
+    .unlock-close { display:inline-block; margin-top:2rem; padding:0.9em 2.2em; border:1px solid var(--gold); color:var(--gold); font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; background:transparent; cursor:pointer; transition:0.3s; }
     .unlock-close:hover { background:var(--gold); color:var(--void); }
 
-    /* FOOTER */
-    footer { padding:4rem 1.25rem; text-align:center; border-top:1px solid var(--border); color:var(--text-dim); font-size:0.9rem; }
+    /* MUSIC */
+    .music-section { padding:8rem 1.25rem; background:var(--void); text-align:center; }
+    .music-cta { display:inline-block; padding:1rem 1.8rem; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.16em; text-transform:uppercase; font-size:0.72rem; transition:0.3s; }
+    .music-cta:hover { transform:translateY(-2px); box-shadow:0 0 24px rgba(0,201,177,0.15); }
 
-    /* RESPONSIVE */
+    /* FOOTER */
+    footer { padding:4rem 1.25rem; text-align:center; border-top:1px solid var(--border); color:var(--text-dim); }
+
     @media (max-width:900px) {
       .tarenis-feature { grid-template-columns:1fr; }
-      .tarenis-feature-info { padding:2.5rem 1.8rem; }
     }
     @media (max-width:768px) {
       .nav-toggle { display:block; }
-      .nav-links { position:fixed; top:0; right:0; width:min(280px,80vw); height:100vh; background:rgba(5,5,8,0.97); backdrop-filter:blur(16px); flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.22,1,0.36,1); border-left:1px solid var(--border); }
+      .nav-links { position:fixed; top:0; right:0; width:min(290px,80vw); height:100vh; background:rgba(5,5,8,0.97); backdrop-filter:blur(16px); flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.22,1,0.36,1); border-left:1px solid var(--border); }
       .nav-links.open { transform:translateX(0); }
-      .hero { padding-top:6rem; }
-      .btn { width:100%; max-width:320px; text-align:center; }
-      .characters-grid { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+      .hero-actions { flex-direction:column; gap:1rem; width:100%; }
+      .btn { width:100%; max-width:340px; }
       .unlock-grid { grid-template-columns:1fr; }
     }
   </style>
@@ -148,8 +150,8 @@
 <!-- UNLOCK OVERLAY -->
 <div class="unlock-overlay" id="gateOverlay">
   <div class="unlock-content">
-    <h2>Gate Opened</h2>
-    <p style="font-style:italic; color:var(--text-dim); margin-bottom:2rem;">The signal is clear now. You are in the Interior.</p>
+    <h2>You Found It</h2>
+    <p style="font-style:italic; color:var(--text-dim); margin-bottom:2rem;">The signal opened the gate. You are through.</p>
     
     <div class="unlock-grid">
       <div class="unlock-img-wrap">
@@ -171,11 +173,12 @@
 </div>
 
 <nav>
-  <div class="nav-logo">Entre Dos</div>
+  <a href="#" class="nav-logo">Entre Dos</a>
   <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   <ul class="nav-links">
     <li><a href="#tarenis">Tarenis</a></li>
     <li><a href="#listen">Decode</a></li>
+    <li><a href="#music">Music</a></li>
     <li><a href="#archive">Universe</a></li>
   </ul>
 </nav>
@@ -185,9 +188,13 @@
     <video autoplay muted loop playsinline><source src="Haven_Bay.mp4" type="video/mp4"></video>
   </div>
   <div class="hero-overlay"></div>
+  <p class="hero-eyebrow reveal">Welcome to the</p>
   <h1 class="hero-title reveal">ENTRE DOS<br>UNIVERSE</h1>
-  <p class="hero-sub reveal">Where frequencies become stories.<br>The Codex awaits the curious.</p>
-  <a href="#tarenis" class="btn btn-primary reveal">Begin the Awakening</a>
+  <p class="hero-sub reveal">Where frequencies become stories.<br>Where the Codex waits to be decoded.</p>
+  <div class="hero-actions reveal">
+    <a href="#tarenis" class="btn btn-primary">Enter Tarenis</a>
+    <a href="#listen" class="btn btn-secondary">Decode the Signal</a>
+  </div>
 </section>
 
 <section id="tarenis" class="tarenis-section">
@@ -195,10 +202,10 @@
     <div class="tarenis-feature reveal">
       <div class="tarenis-feature-cover"><img src="image.jpg" alt="Tarenis Cover" loading="lazy"></div>
       <div class="tarenis-feature-info">
-        <p class="archive-meta" style="color:var(--teal)">Coming Soon • Book One</p>
+        <p style="color:var(--teal); margin-bottom:0.8rem;">Sci-Fi Conspiracy Thriller • Book One</p>
         <h3>Tarenis</h3>
-        <p>The ancient frequency grid is waking. A sound engineer, an intuitive from the Interior, and a quiet cartographer must unite before the old powers silence the signal forever.</p>
-        <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis" class="btn" style="border:1px solid var(--teal); color:var(--teal); margin-top:1.5rem;">Notify Me</a>
+        <p>The ancient frequency grid is waking. A sound engineer, an intuitive from the Interior, and a quiet cartographer must come together before the old powers silence the signal forever.</p>
+        <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book One" class="btn btn-secondary" style="margin-top:1.8rem;">Notify Me When Available</a>
       </div>
     </div>
 
@@ -232,19 +239,27 @@
   </div>
 </section>
 
-<section id="listen" class="terminal-section">
+<section id="listen" class="listen-section">
   <div class="section-shell">
     <h2 class="section-title reveal">How to Listen</h2>
-    <p class="hero-sub reveal" style="max-width:680px; margin:0 auto 2rem;">Start with what the book gave you. Then listen for what the world is saying.</p>
+    <p class="hero-sub reveal" style="max-width:700px; margin:0 auto 3rem;">Start with what the book gave you. Then listen for what the world is saying. The sequence was always there.</p>
     
     <div class="terminal-box reveal">
       <div class="terminal-header">⌁ SIGNAL RECEIVER — ACTIVE</div>
-      <div class="terminal-line">
-        <span style="color:var(--teal)">›</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <span style="color:var(--teal); font-size:1.3rem;">›</span>
         <input type="text" class="terminal-input" id="gateInput" placeholder="type what you know..." autocomplete="off">
       </div>
-      <p id="gateFeedback" style="margin-top:20px; min-height:1.4em; font-size:0.95rem;"></p>
+      <p id="gateFeedback" style="margin-top:20px; min-height:1.5em; color:var(--red);"></p>
     </div>
+  </div>
+</section>
+
+<section id="music" class="music-section">
+  <div class="section-shell">
+    <h2 class="section-title reveal">Entre Dos Music</h2>
+    <p class="hero-sub reveal" style="max-width:700px; margin:0 auto 2rem;">The emotional frequencies that connect the books and the music.<br>The soundtrack to the awakening.</p>
+    <a href="https://www.youtube.com/playlist?list=PLk4Sp4lD-uQPyIEDCHGlqHwKHJKSrOS--" target="_blank" class="music-cta reveal">The Echo Archive →</a>
   </div>
 </section>
 
@@ -252,7 +267,6 @@
   <div class="section-shell">
     <h2 class="section-title reveal">The Archive Grid</h2>
     <div class="archive-grid">
-      <!-- Your archive cards remain as in Code2 -->
       <div class="archive-card reveal">
         <div class="archive-media"><img src="image (2).jpg" alt="The Fireline 432 Hz Covenant"></div>
         <div class="archive-info">
@@ -261,13 +275,45 @@
           <p class="archive-desc">A hidden frequency has begun to surface. Those who hear it never see reality the same way again.</p>
         </div>
       </div>
-      <!-- Repeat the other 4 cards as in your Code2 (I kept them short for brevity - copy them back if needed) -->
+      <div class="archive-card reveal reveal-delay-1">
+        <div class="archive-media"><img src="image (3).jpg" alt="The Fireline 0 Hz Covenant"></div>
+        <div class="archive-info">
+          <p class="archive-meta">The Fireline • Book 2</p>
+          <h3 class="archive-title">THE FIRELINE<br>0 Hz Covenant</h3>
+          <p class="archive-desc">Time and memory were designed to keep you compliant. Something survived the reset.</p>
+        </div>
+      </div>
+      <div class="archive-card reveal reveal-delay-2">
+        <div class="archive-media"><img src="image (5).jpg" alt="The Ghost Garden"></div>
+        <div class="archive-info">
+          <p class="archive-meta">Protocol 432</p>
+          <h3 class="archive-title">THE GHOST GARDEN</h3>
+          <p class="archive-desc">When the illusion flickers, a hidden layer of reality begins to bleed through.</p>
+        </div>
+      </div>
+      <div class="archive-card reveal reveal-delay-3">
+        <div class="archive-media"><img src="image (4).jpg" alt="The Lattice Protocol"></div>
+        <div class="archive-info">
+          <p class="archive-meta">The Fireline • Book 4</p>
+          <h3 class="archive-title">THE LATTICE PROTOCOL</h3>
+          <p class="archive-desc">There is something beneath the system. And it's waking up.</p>
+        </div>
+      </div>
+      <div class="archive-card reveal reveal-delay-3">
+        <div class="archive-media"><img src="image (1).jpg" alt="Fireline Zero-Day"></div>
+        <div class="archive-info">
+          <p class="archive-meta">The Fireline • Book 5</p>
+          <h3 class="archive-title">FIRELINE ZERO-DAY</h3>
+          <p class="archive-desc">The system resets every day. Until one moment slips through.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© Entre Dos Universe — Frequency: 432 Hz ✦ Signal: Active</p>
+  <p>© Entre Dos Universe — All rights reserved</p>
+  <p style="margin-top:1rem; font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
 </footer>
 
 <script>
@@ -275,100 +321,93 @@
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 let particles = [];
-function resize() {
+function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 function initParticles() {
   particles = [];
-  const count = window.innerWidth < 768 ? 35 : 65;
-  for(let i = 0; i < count; i++) {
+  const count = window.innerWidth < 768 ? 35 : 70;
+  for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       r: Math.random() * 1.8 + 0.3,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25
     });
   }
 }
-function animate() {
+function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for(let p of particles) {
+  for (let p of particles) {
     p.x += p.dx; p.y += p.dy;
-    if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(0,201,177,0.35)";
+    ctx.fillStyle = "rgba(0,201,177,0.38)";
     ctx.fill();
   }
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateParticles);
 }
-window.addEventListener('resize', () => { resize(); initParticles(); });
-resize(); initParticles(); animate();
+window.addEventListener("resize", () => { resizeCanvas(); initParticles(); });
+resizeCanvas(); initParticles(); animateParticles();
 
-// Reveal
+// Scroll Reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add('visible');
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Mobile Nav
-const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('active');
-  navLinks.classList.toggle('open');
+const toggleBtn = document.querySelector('.nav-toggle');
+const navLinksContainer = document.querySelector('.nav-links');
+toggleBtn.addEventListener('click', () => {
+  toggleBtn.classList.toggle('active');
+  navLinksContainer.classList.toggle('open');
 });
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    toggle.classList.remove('active');
-    navLinks.classList.remove('open');
+navLinksContainer.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggleBtn.classList.remove('active');
+    navLinksContainer.classList.remove('open');
   });
 });
 
-// Video Toggle
+// Video Sound Toggle
 function toggleAudio(el) {
   const video = el.querySelector('video');
   const badge = el.querySelector('.sound-badge');
   video.muted = !video.muted;
-  if(video.muted) {
-    badge.textContent = "✦ CLICK FOR SOUND";
-    badge.style.background = "rgba(0,0,0,0.75)";
-    badge.style.color = "var(--teal)";
-  } else {
-    badge.textContent = "🔊 SOUND ACTIVE";
-    badge.style.background = "var(--teal)";
-    badge.style.color = "var(--void)";
-  }
+  badge.textContent = video.muted ? "✦ CLICK FOR SOUND" : "🔊 SOUND ACTIVE";
+  badge.style.background = video.muted ? "rgba(0,0,0,0.75)" : "var(--teal)";
+  badge.style.color = video.muted ? "var(--teal)" : "var(--void)";
 }
 
-// Terminal + Unlock
-const gateInput = document.getElementById('gateInput');
-const gateFeedback = document.getElementById('gateFeedback');
-const gateOverlay = document.getElementById('gateOverlay');
+// Terminal Unlock
+const input = document.getElementById('gateInput');
+const feedback = document.getElementById('gateFeedback');
+const overlay = document.getElementById('gateOverlay');
 
-gateInput.addEventListener('keypress', (e) => {
-  if(e.key === 'Enter') {
-    const val = gateInput.value.trim().toLowerCase();
-    gateInput.value = '';
-    if(val === 'the signal opens the gate') {
-      gateOverlay.classList.add('active');
+input.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    const value = input.value.trim().toLowerCase();
+    input.value = '';
+    if (value === 'the signal opens the gate') {
+      overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
-      gateFeedback.textContent = '';
+      feedback.textContent = '';
     } else {
-      gateFeedback.textContent = "SIGNAL INTERRUPTED. SEQUENCE INCORRECT.";
-      gateFeedback.style.color = "var(--red)";
-      setTimeout(() => { gateFeedback.textContent = ''; }, 2500);
+      feedback.textContent = "SIGNAL INTERRUPTED. SEQUENCE INCORRECT.";
+      setTimeout(() => feedback.textContent = '', 2200);
     }
   }
 });
 
 function closeGate() {
-  gateOverlay.classList.remove('active');
+  overlay.classList.remove('active');
   document.body.style.overflow = 'auto';
 }
 </script>
