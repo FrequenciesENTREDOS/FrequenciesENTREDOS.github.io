@@ -326,13 +326,43 @@
       <div class="character-card reveal reveal-delay-3"><img src="Elias .jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12);"><h3 class="character-name">Elias</h3><p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p></div>
     </div>
     <div class="orion-panel reveal">
-      <img src="image-5.jpg" alt="AetherForge ORION Operations Center">
-      <div class="orion-overlay">
-        <p class="orion-label">AetherForge — ORION System</p>
-        <h3 class="orion-title">They mapped the world<br>to own the frequency.</h3>
-        <p class="orion-desc">The corporation that has spent millennia making sure no one ever wakes up.</p>
-      </div>
+  <video class="universe-video" autoplay loop muted playsinline style="width:100%; height:480px; object-fit:cover; filter:brightness(0.7);">
+    <source src="HEAVENBAYWATER.mp4" type="video/mp4">
+  </video>
+  <div class="orion-overlay">
+    <p class="orion-label">AetherForge — ORION System</p>
+    <h3 class="orion-title">They mapped the world<br>to own the frequency.</h3>
+    <p class="orion-desc">The corporation that has spent millennia making sure no one ever wakes up.</p>
+  </div>
+</div>
+
+<div class="reveal" style="max-width:520px; margin: 0 auto 2rem; border:1px solid var(--red); position:relative;">
+  <video class="universe-video" autoplay loop muted playsinline style="width:100%; display:block;">
+    <source src="orionsignal.mp4" type="video/mp4">
+  </video>
+  <p style="font-family:monospace; font-size:0.6rem; color:var(--red); padding:0.5rem; text-align:center; letter-spacing:2px; background:rgba(0,0,0,0.6); position:absolute; bottom:0; width:100%;">ORION INTERCEPT — ACTIVE</p>
+</div>
+
+<div class="unlock-overlay hidden" id="unlockOverlay">
+  <div class="unlock-content">
+    <h2>You Found It</h2>
+    <p class="unlock-sub">The signal opened the gate. You are through.</p>
+    
+    <div class="unlock-img-wrap">
+      <video class="universe-video" autoplay loop muted playsinline style="width:100%; max-width:650px; border:1px solid var(--teal);">
+        <source src="worldmapvoice.mp4" type="video/mp4">
+      </video>
+      <p class="unlock-img-label">Tarenis Global Grid — Resonance Network [DECODED]</p>
     </div>
+
+    <div class="unlock-img-wrap">
+      <img src="INTERNAL_MEMORANDUM.jpg" alt="AetherForge Internal Memorandum">
+      <p class="unlock-img-label">Intercepted AetherForge Document — Classified</p>
+    </div>
+
+    <button class="unlock-close" id="unlockClose">Return to the Surface</button>
+  </div>
+</div>
   
   </div>
 </section>
@@ -706,6 +736,72 @@ animateParticles();
 
 // ══════════ INIT ══════════
 checkCodename();
-</script>
+<script>
+  // 1. AUDIO ENGINE
+  const muteBtn = document.getElementById('globalMute');
+  const allVideos = document.querySelectorAll('video');
+
+  muteBtn.addEventListener('click', () => {
+    const isMuted = allVideos[0].muted;
+    allVideos.forEach(v => v.muted = !isMuted);
+    muteBtn.innerText = isMuted ? "SOUND: ON" : "SOUND: OFF";
+    muteBtn.style.color = isMuted ? "var(--gold)" : "var(--teal)";
+    muteBtn.style.borderColor = isMuted ? "var(--gold)" : "var(--teal)";
+  });
+
+  // 2. TERMINAL & CODENAME LOGIC
+  const codenameInput = document.getElementById('codenameInput');
+  const terminalInput = document.getElementById('terminalInput');
+  const codenameInline = document.getElementById('codenameInline');
+  const terminalBox = document.getElementById('terminalBox');
+  const codenameDisplay = document.getElementById('codenameDisplay');
+  const unlockOverlay = document.getElementById('unlockOverlay');
+  
+  let userCodename = localStorage.getItem('userCodename');
+
+  function initTerminal() {
+    if (userCodename) {
+      codenameInline.style.display = 'none';
+      terminalBox.style.display = 'block';
+      codenameDisplay.innerText = userCodename;
+    }
+  }
+  initTerminal();
+
+  codenameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && codenameInput.value.trim() !== '') {
+      userCodename = codenameInput.value.trim();
+      localStorage.setItem('userCodename', userCodename);
+      initTerminal();
+    }
+  });
+
+  terminalInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const val = terminalInput.value.toLowerCase().trim();
+      // The secret phrase to open the gate
+      if (val === 'the signal opens the gate' || val === 'tarenis') {
+        unlockOverlay.classList.remove('hidden');
+        terminalInput.value = '';
+      } else {
+        document.getElementById('terminalResponse').innerText = "Signal Rejected. Frequency Mismatch.";
+        document.getElementById('terminalResponse').classList.add('visible', 'error');
+      }
+    }
+  });
+
+  document.getElementById('unlockClose').addEventListener('click', () => {
+    unlockOverlay.classList.add('hidden');
+  });
+
+  // 3. REVEAL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>  
 </body>
 </html>
