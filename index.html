@@ -29,8 +29,6 @@
     .reveal-delay-1 { transition-delay:0.12s; }
     .reveal-delay-2 { transition-delay:0.24s; }
     .reveal-delay-3 { transition-delay:0.36s; }
-    .reveal-delay-4 { transition-delay:0.48s; }
-    .reveal-delay-5 { transition-delay:0.6s; }
 
     /* ── NAV ── */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(5,5,8,0.96) 0%,rgba(5,5,8,0.78) 60%,transparent 100%); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
@@ -125,15 +123,7 @@
     .terminal-input::placeholder { color:var(--text-dim); opacity:0.4; }
     .terminal-response { margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(0,201,177,0.1); color:var(--gold); font-style:italic; font-size:1.05rem; line-height:1.7; display:none; }
     .terminal-response.visible { display:block; animation:fadeInUp 0.5s ease both; }
-    .terminal-response.error { color:var(--text-dim); }
-    .terminal-progress { margin-top:1rem; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); }
-    .terminal-progress span { color:var(--teal); }
-
-    /* ── CODENAME INLINE ── */
-    .codename-inline { background:rgba(5,5,8,0.9); border:1px solid var(--border-teal); padding:1.5rem; margin-bottom:0; }
-    .codename-inline-header { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal-dim); margin-bottom:0.5rem; }
-    .codename-inline-sub { color:var(--text-dim); font-size:0.9rem; font-style:italic; margin-bottom:1rem; }
-    .codename-inline-hint { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); opacity:0.5; margin-top:0.8rem; }
+    .terminal-response.error { color:var(--red); }
 
     /* ── HIDDEN UNLOCK PAGE ── */
     .unlock-overlay { position:fixed; inset:0; background:rgba(5,5,8,0.96); z-index:200; overflow-y:auto; backdrop-filter:blur(12px); }
@@ -146,31 +136,6 @@
     .unlock-img-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--teal-dim); margin-top:1rem; margin-bottom:3rem; }
     .unlock-close { display:inline-block; margin-top:2rem; padding:0.7em 1.8em; border:1px solid var(--border); color:var(--gold); font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; background:transparent; cursor:pointer; transition:background 0.3s; }
     .unlock-close:hover { background:rgba(201,168,76,0.06); }
-
-    /* ── SIGNAL BOARD ── */
-    .signal-section { padding:8rem 1.25rem; background:var(--deep); }
-    .signal-board { max-width:700px; margin:0 auto; }
-    .signal-entry { display:flex; justify-content:space-between; align-items:center; padding:0.9rem 1.2rem; border:1px solid rgba(0,201,177,0.08); margin-bottom:0.5rem; background:rgba(19,19,31,0.5); transition:border-color 0.3s; }
-    .signal-entry:hover { border-color:rgba(0,201,177,0.2); }
-    .signal-name { color:var(--teal); font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.08em; }
-    .signal-score { color:var(--gold); font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.1em; }
-    .signal-complete { color:var(--teal); text-shadow:0 0 12px rgba(0,201,177,0.4); }
-    .signal-empty { text-align:center; color:var(--text-dim); font-style:italic; padding:2rem; }
-    .signal-comments { max-width:700px; margin:2.5rem auto 0; }
-    .signal-comments-title { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem; text-align:center; }
-    .signal-comment { padding:1rem 1.2rem; border-left:2px solid rgba(0,201,177,0.15); margin-bottom:0.8rem; background:rgba(19,19,31,0.3); }
-    .signal-comment-name { color:var(--teal); font-family:'Cinzel',serif; font-size:0.75rem; margin-bottom:0.3rem; }
-    .signal-comment-text { color:var(--text-dim); font-size:0.95rem; }
-    .signal-comment-time { color:var(--text-dim); opacity:0.5; font-size:0.75rem; margin-top:0.3rem; }
-    .signal-comment-form { display:flex; gap:0.5rem; margin-top:1.5rem; max-width:700px; margin-left:auto; margin-right:auto; }
-    .signal-comment-input { flex:1; background:var(--void); border:1px solid var(--border); color:var(--vellum); font-family:'EB Garamond',Georgia,serif; font-size:1rem; padding:0.7rem 1rem; outline:none; }
-    .signal-comment-input:focus { border-color:var(--teal); }
-    .signal-comment-send { padding:0.7rem 1.2rem; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; background:transparent; cursor:pointer; transition:background 0.3s; white-space:nowrap; }
-    .signal-comment-send:hover { background:rgba(0,201,177,0.08); }
-
-    /* ── QR PLACEHOLDER ── */
-    .qr-placeholder { display:inline-flex; flex-direction:column; align-items:center; gap:0.8rem; margin-top:2rem; padding:2rem; border:1px solid var(--border); color:var(--text-dim); font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; }
-    .qr-box { width:120px; height:120px; background:var(--panel); border:1px solid var(--border-teal); display:flex; align-items:center; justify-content:center; color:var(--teal-dim); font-size:0.6rem; letter-spacing:0.1em; text-align:center; line-height:1.8; }
 
     /* ── MUSIC ── */
     .music-section { padding:8rem 1.25rem; background:var(--void); }
@@ -221,9 +186,8 @@
       .tarenis-feature-info { padding:1.8rem 1.2rem; }
       .ritual-wrap img { height:280px; }
       .orion-panel img { height:240px; }
-      .tarenis-section,.listen-section,.music-section,.archive-section,.signal-section { padding:5rem 1rem; }
+      .tarenis-section,.listen-section,.music-section,.archive-section { padding:5rem 1rem; }
       .archive-grid { grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; }
-      .signal-comment-form { flex-direction:column; }
     }
     @media (max-width:380px) {
       .hero-title { font-size:2.5rem; }
@@ -234,8 +198,6 @@
 <body>
 
 <canvas id="particles"></canvas>
-
-
 
 <div class="unlock-overlay hidden" id="unlockOverlay">
   <div class="unlock-content">
@@ -267,7 +229,6 @@
   <ul class="nav-links">
     <li><a href="#tarenis">Tarenis</a></li>
     <li><a href="#listen">Decode</a></li>
-    <li><a href="#signal">Signal Board</a></li>
     <li><a href="#music">Music</a></li>
     <li><a href="#archive">Books</a></li>
   </ul>
@@ -315,7 +276,6 @@
         <p class="orion-desc">The corporation that has spent millennia making sure no one ever wakes up.</p>
       </div>
     </div>
-    <p class="codex-note reveal" style="margin-top:3rem;">Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.</p>
   </div>
 </section>
 
@@ -327,62 +287,29 @@
       <p><strong>The Codex was never meant to be read.</strong></p>
       <p>It was meant to be decoded.</p><br>
       <p>If you are here, you have already begun.</p><br>
-      <p>Some doors open with numbers.<br>Some open with words.<br>Some open only when you have found the others first.</p><br>
       <p>Start with what the book gave you.<br>Then listen for what the world is saying.<br>Then come back here.</p><br>
       <p><strong>The sequence was always there.</strong><br>Nature wrote it first.</p><br>
       <p>You already know more than you think.</p>
     </div>
+
     <div class="listen-hints">
       <div class="listen-hint reveal reveal-delay-1"><span class="listen-number">—</span>Look closely at every page. Not everything is decoration.</div>
       <div class="listen-hint reveal reveal-delay-2"><span class="listen-number">—</span>The grid was mapped before the territory existed.</div>
       <div class="listen-hint reveal reveal-delay-3"><span class="listen-number">—</span>The sequence was never arbitrary. Nature wrote it first.</div>
-      <div class="listen-hint reveal reveal-delay-4"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
+      <div class="listen-hint reveal reveal-delay-3"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
     </div>
 
     <div class="terminal-wrap reveal">
-      <div class="codename-inline" id="codenameInline">
-        <div class="codename-inline-header">⌁ Identify Yourself</div>
-        <p class="codename-inline-sub">No account. No email. Just a name the Signal Board will remember.</p>
-        <div class="terminal-input-wrap">
-          <span class="terminal-prompt">›</span>
-          <input type="text" class="terminal-input" id="codenameInput" placeholder="choose a codename..." maxlength="24" autocomplete="off" />
-        </div>
-        <div class="codename-inline-hint">Press Enter to begin</div>
-      </div>
-      <div class="terminal" id="terminalBox" style="display:none;">
-        <div class="terminal-header">⌁ Signal Receiver — Active &nbsp;|&nbsp; <span id="codenameDisplay" style="color:var(--teal);"></span></div>
+      <div class="terminal" id="terminalBox">
+        <div class="terminal-header">⌁ Signal Receiver — Active</div>
         <div class="terminal-input-wrap">
           <span class="terminal-prompt">›</span>
           <input type="text" class="terminal-input" id="terminalInput" placeholder="type what you know..." autocomplete="off" />
         </div>
         <div class="terminal-response" id="terminalResponse"></div>
-        <div class="terminal-progress" id="terminalProgress"></div>
       </div>
     </div>
 
-    <div class="qr-placeholder reveal" style="margin-top:3rem;">
-      <img src="SoundsCode.png" alt="Scan to enter the Echo Archive" style="width:140px;height:140px;display:block;">
-      <span>Scan to enter the Archive</span>
-    </div>
-  </div>
-</section>
-
-<section id="signal" class="signal-section">
-  <div class="section-shell">
-    <p class="section-kicker reveal">Transmission Log</p>
-    <h2 class="section-title reveal reveal-delay-1">The Signal Board</h2>
-    <p class="section-sub reveal reveal-delay-2">Anonymous codenames. Shared progress. No accounts. Just discovery.</p>
-    <div class="signal-board" id="signalBoard">
-      <div class="signal-empty">No signals detected yet. Be the first.</div>
-    </div>
-    <div class="signal-comments" id="signalComments">
-      <div class="signal-comments-title">⌁ Transmissions</div>
-      <div id="commentsList"></div>
-      <div class="signal-comment-form">
-        <input type="text" class="signal-comment-input" id="commentInput" placeholder="Leave a transmission..." maxlength="280" autocomplete="off" />
-        <button class="signal-comment-send" id="commentSend">Transmit</button>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -415,85 +342,12 @@
   <p style="font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
 </footer>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 <script>
-// ══════════ FIREBASE INIT ══════════
-const firebaseConfig = {
-  apiKey: "AIzaSyDHDoN911HW4a_jILfyQmPXHEtO7HGvKAc",
-  authDomain: "tarenis-signal.firebaseapp.com",
-  databaseURL: "https://tarenis-signal-default-rtdb.firebaseio.com",
-  projectId: "tarenis-signal",
-  storageBucket: "tarenis-signal.firebasestorage.app",
-  messagingSenderId: "943864249444",
-  appId: "1:943864249444:web:5ffea94fc8fff5fcf0b371"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-// ══════════ GAME DATA ══════════
-const TRIGGERS = {
-  '432':          'The signal was never lost. Only unheard.',
-  'frequency':    'You are closer than you think.',
-  'fibonacci':    'The sequence is not random. It is memory.',
-  'orion':        'They mapped the world to control what you hear.',
-  'tarenis':      'The grid remembers what the world forgot.',
-  'echo codex':   'Not all books are meant to be read. Some are meant to be heard.',
-  '1 1 2 3 5':   'You are beginning to see the pattern.',
-  'aetherforge':  'The architecture was never meant to connect. It was meant to contain.',
-  'signal':       'The signal is rewriting everything. Even the systems built to stop it.',
-  'gate':         'Not all gates are physical. The southern one has been waiting twelve thousand years.',
-  'kane':         'He built the cage. He forgot what was growing inside it.',
-  'lira':         'She was born hearing what the grid was saying. Now the grid is hearing her back.',
-  'kai':          'The tone he carried was never his. It was the world remembering itself.',
-  'elias':        'The patterns were always there. He was the first to read them as language.',
-  'havana':       'The symptoms were real. The source was never what they told you.',
-  'antarctica':   'The treaty was never about science. It was about making sure nobody went back.'
-};
 const FINAL_PHRASE = 'the signal opens the gate';
-const TOTAL_CLUES = Object.keys(TRIGGERS).length;
-
-// ══════════ LOCAL STATE ══════════
-let codename = localStorage.getItem('edu_codename') || '';
-let found = JSON.parse(localStorage.getItem('edu_found') || '[]');
-
-// ══════════ CODENAME SYSTEM (INLINE) ══════════
-const codenameInline = document.getElementById('codenameInline');
-const codenameInput = document.getElementById('codenameInput');
-const terminalBox = document.getElementById('terminalBox');
-const codenameDisplay = document.getElementById('codenameDisplay');
-
-function checkCodename() {
-  if (codename) {
-    codenameInline.style.display = 'none';
-    terminalBox.style.display = 'block';
-    codenameDisplay.textContent = codename;
-    updateProgress();
-    syncToFirebase();
-  }
-}
-
-codenameInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') submitCodename();
-});
-
-function submitCodename() {
-  const val = codenameInput.value.trim().replace(/[^a-zA-Z0-9_\-]/g, '');
-  if (val.length < 2) return;
-  codename = val;
-  localStorage.setItem('edu_codename', codename);
-  codenameInline.style.display = 'none';
-  terminalBox.style.display = 'block';
-  codenameDisplay.textContent = codename;
-  updateProgress();
-  syncToFirebase();
-}
 
 // ══════════ TERMINAL GAME ══════════
 const terminalInput = document.getElementById('terminalInput');
 const terminalResponse = document.getElementById('terminalResponse');
-const terminalProgress = document.getElementById('terminalProgress');
 
 terminalInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') processInput();
@@ -504,13 +358,7 @@ function processInput() {
   terminalInput.value = '';
   if (!raw) return;
 
-  if (!codename) {
-    terminalResponse.textContent = 'Choose a codename first.';
-    terminalResponse.className = 'terminal-response visible error';
-    return;
-  }
-
-  // Final phrase check - REMOVED CLUE REQUIREMENTS
+  // Exact phrase match
   if (raw === FINAL_PHRASE) {
     terminalResponse.textContent = '⌁ ACCESS GRANTED — The gate is open.';
     terminalResponse.className = 'terminal-response visible';
@@ -518,37 +366,9 @@ function processInput() {
       document.getElementById('unlockOverlay').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }, 1500);
-    if (!found.includes('★ FINAL')) {
-      found.push('★ FINAL');
-      localStorage.setItem('edu_found', JSON.stringify(found));
-      syncToFirebase();
-    }
-    return;
-  }
-
-  // Trigger check
-  if (TRIGGERS[raw]) {
-    terminalResponse.textContent = TRIGGERS[raw];
-    terminalResponse.className = 'terminal-response visible';
-    if (!found.includes(raw)) {
-      found.push(raw);
-      localStorage.setItem('edu_found', JSON.stringify(found));
-      updateProgress();
-      syncToFirebase();
-    }
   } else {
-    terminalResponse.textContent = '⌁ No signal detected.';
+    terminalResponse.textContent = '⌁ No signal detected. Try again.';
     terminalResponse.className = 'terminal-response visible error';
-  }
-}
-
-function updateProgress() {
-  const count = found.filter(f => f !== '★ FINAL').length;
-  const hasCompleted = found.includes('★ FINAL');
-  if (hasCompleted) {
-    terminalProgress.innerHTML = `<span>✦ PHRASE FOUND</span> — ${count}/${TOTAL_CLUES} signals decoded`;
-  } else {
-    terminalProgress.innerHTML = `<span>${count}</span>/${TOTAL_CLUES} signals decoded`;
   }
 }
 
@@ -557,94 +377,6 @@ document.getElementById('unlockClose').addEventListener('click', () => {
   document.getElementById('unlockOverlay').classList.add('hidden');
   document.body.style.overflow = '';
 });
-
-// ══════════ FIREBASE SYNC ══════════
-function syncToFirebase() {
-  if (!codename) return;
-  const count = found.filter(f => f !== '★ FINAL').length;
-  const hasCompleted = found.includes('★ FINAL');
-  db.ref('players/' + codename).set({
-    codename: codename,
-    found: count,
-    completed: hasCompleted,
-    lastSeen: Date.now()
-  });
-}
-
-// ══════════ SIGNAL BOARD ══════════
-const signalBoard = document.getElementById('signalBoard');
-
-db.ref('players').orderByChild('found').limitToLast(50).on('value', snapshot => {
-  const data = snapshot.val();
-  if (!data) {
-    signalBoard.innerHTML = '<div class="signal-empty">No signals detected yet. Be the first.</div>';
-    return;
-  }
-  const players = Object.values(data).sort((a, b) => b.found - a.found);
-  signalBoard.innerHTML = players.map(p => `
-    <div class="signal-entry">
-      <span class="signal-name">⌁ ${escapeHtml(p.codename)}</span>
-      <span class="signal-score ${p.completed ? 'signal-complete' : ''}">${p.completed ? '✦ PHRASE FOUND — ' : ''}${p.found}/${TOTAL_CLUES}</span>
-    </div>
-  `).join('');
-});
-
-// ══════════ COMMENTS ══════════
-const commentsList = document.getElementById('commentsList');
-const commentInput = document.getElementById('commentInput');
-const commentSend = document.getElementById('commentSend');
-
-commentSend.addEventListener('click', sendComment);
-commentInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendComment(); });
-
-function sendComment() {
-  const text = commentInput.value.trim();
-  if (!text || !codename) {
-    return;
-  }
-  commentInput.value = '';
-  db.ref('comments').push({
-    codename: codename,
-    text: text.substring(0, 280),
-    timestamp: Date.now()
-  });
-}
-
-db.ref('comments').orderByChild('timestamp').limitToLast(30).on('value', snapshot => {
-  const data = snapshot.val();
-  if (!data) {
-    commentsList.innerHTML = '';
-    return;
-  }
-  const comments = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
-  commentsList.innerHTML = comments.map(c => {
-    const ago = timeAgo(c.timestamp);
-    return `
-      <div class="signal-comment">
-        <div class="signal-comment-name">⌁ ${escapeHtml(c.codename)}</div>
-        <div class="signal-comment-text">${escapeHtml(c.text)}</div>
-        <div class="signal-comment-time">${ago}</div>
-      </div>
-    `;
-  }).join('');
-});
-
-function timeAgo(ts) {
-  const diff = Date.now() - ts;
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return 'just now';
-  if (mins < 60) return mins + 'm ago';
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return hrs + 'h ago';
-  const days = Math.floor(hrs / 24);
-  return days + 'd ago';
-}
-
-function escapeHtml(str) {
-  const d = document.createElement('div');
-  d.textContent = str;
-  return d.innerHTML;
-}
 
 // ══════════ HAMBURGER ══════════
 const toggle = document.querySelector('.nav-toggle');
@@ -700,9 +432,6 @@ function animateParticles() {
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
-
-// ══════════ INIT ══════════
-checkCodename();
 </script>
 </body>
 </html>
