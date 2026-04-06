@@ -315,15 +315,13 @@
         <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book One&body=Please notify me when Tarenis: Book One is available." class="book-notify">✦ Notify Me When Available</a>
       </div>
     </div>
-    <div class="spire-wrap reveal"><img src="image-4.jpg" alt="The Northern Polar Gate Spire"></div>
     <h2 class="section-title reveal">The World of Tarenis</h2>
     <p class="section-sub reveal reveal-delay-1">The ancient frequency grid has been silent for twelve thousand years.<br>It is silent no longer.</p>
-    <div class="characters-grid">
-      <div class="character-card reveal reveal-delay-1"><h3 class="character-name">Lira Voss</h3><p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p></div>
-      <div class="character-card reveal reveal-delay-2"><h3 class="character-name">Kai Resonance</h3><p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p></div>
-      <div class="character-card reveal reveal-delay-3"><h3 class="character-name">Elias</h3><p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p></div>
+   <div class="characters-grid">
+      <div class="character-card reveal reveal-delay-1"><img src="Lira_Voss_.jpeg" alt="Lira Voss" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12);"><h3 class="character-name">Lira Voss</h3><p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p></div>
+      <div class="character-card reveal reveal-delay-2"><img src="Kai.jpeg" alt="Kai Resonance" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12);"><h3 class="character-name">Kai Resonance</h3><p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p></div>
+      <div class="character-card reveal reveal-delay-3"><img src="Elias_.jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12);"><h3 class="character-name">Elias</h3><p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p></div>
     </div>
-    <div class="ritual-wrap reveal"><img src="image-6.jpg" alt="The Ritual at the Northern Polar Gate"></div>
     <div class="orion-panel reveal">
       <img src="image-5.jpg" alt="AetherForge ORION Operations Center">
       <div class="orion-overlay">
@@ -336,32 +334,11 @@
   </div>
 </section>
 
-<!-- ══ FIBONACCI ══ -->
-<section class="fibonacci-section">
-  <div class="fibonacci-wrap reveal"><img src="image-7.jpg" alt=""></div>
-</section>
-
 <!-- ══ HOW TO LISTEN + TERMINAL ══ -->
 <section id="listen" class="listen-section">
   <div class="listen-inner">
-    <p class="section-kicker reveal">For Those Who Are Paying Attention</p>
-    <h2 class="section-title reveal reveal-delay-1">How to Listen</h2>
-    <div class="listen-text reveal reveal-delay-2">
-      <p><strong>The Codex was never meant to be read.</strong></p>
-      <p>It was meant to be decoded.</p><br>
-      <p>If you are here, you have already begun.</p><br>
-      <p>Some doors open with numbers.<br>Some open with words.<br>Some open only when you have found the others first.</p><br>
-      <p>Start with what the book gave you.<br>Then listen for what the world is saying.<br>Then come back here.</p><br>
-      <p><strong>The sequence was always there.</strong><br>Nature wrote it first.</p><br>
-      <p>You already know more than you think.</p>
-    </div>
-    <div class="listen-hints">
-      <div class="listen-hint reveal reveal-delay-1"><span class="listen-number">—</span>Look closely at every page. Not everything is decoration.</div>
-      <div class="listen-hint reveal reveal-delay-2"><span class="listen-number">—</span>The grid was mapped before the territory existed.</div>
-      <div class="listen-hint reveal reveal-delay-3"><span class="listen-number">—</span>The sequence was never arbitrary. Nature wrote it first.</div>
-      <div class="listen-hint reveal reveal-delay-4"><span class="listen-number">—</span>When you find the phrase — you will know what comes next.</div>
-    </div>
-
+    <h2 class="section-title reveal">The Signal Opens the Gate</h2>
+    <p class="section-sub reveal reveal-delay-1">If you know the phrase, type it below.</p>
     <!-- CODENAME + GAME TERMINAL -->
     <div class="terminal-wrap reveal">
       <!-- Codename entry (shows when no codename set) -->
@@ -463,26 +440,9 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // ══════════ GAME DATA ══════════
-const TRIGGERS = {
-  '432':          'The signal was never lost. Only unheard.',
-  'frequency':    'You are closer than you think.',
-  'fibonacci':    'The sequence is not random. It is memory.',
-  'orion':        'They mapped the world to control what you hear.',
-  'tarenis':      'The grid remembers what the world forgot.',
-  'echo codex':   'Not all books are meant to be read. Some are meant to be heard.',
-  '1 1 2 3 5':   'You are beginning to see the pattern.',
-  'aetherforge':  'The architecture was never meant to connect. It was meant to contain.',
-  'signal':       'The signal is rewriting everything. Even the systems built to stop it.',
-  'gate':         'Not all gates are physical. The southern one has been waiting twelve thousand years.',
-  'kane':         'He built the cage. He forgot what was growing inside it.',
-  'lira':         'She was born hearing what the grid was saying. Now the grid is hearing her back.',
-  'kai':          'The tone he carried was never his. It was the world remembering itself.',
-  'elias':        'The patterns were always there. He was the first to read them as language.',
-  'havana':       'The symptoms were real. The source was never what they told you.',
-  'antarctica':   'The treaty was never about science. It was about making sure nobody went back.'
-};
+const TRIGGERS = {};
 const FINAL_PHRASE = 'the signal opens the gate';
-const TOTAL_CLUES = Object.keys(TRIGGERS).length;
+const TOTAL_CLUES = 1;
 
 // ══════════ LOCAL STATE ══════════
 let codename = localStorage.getItem('edu_codename') || '';
@@ -542,7 +502,7 @@ function processInput() {
 
   // Final phrase check
   if (raw === FINAL_PHRASE) {
-    if (found.length >= 8) {
+    if (true) {
       terminalResponse.textContent = '⌁ ACCESS GRANTED — The gate is open.';
       terminalResponse.className = 'terminal-response visible';
       setTimeout(() => {
