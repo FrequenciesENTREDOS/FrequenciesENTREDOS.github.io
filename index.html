@@ -4,440 +4,209 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Entre Dos Universe</title>
-  <meta name="description" content="Where frequencies become stories. Explore the Tarenis saga, the Fireline Universe, and the music of Entre Dos." />
-  <meta name="theme-color" content="#050508" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --void: #050508; --deep: #0a0a12; --surface: #0f0f1a; --panel: #13131f;
-      --teal: #00c9b1; --teal-dim: #007a6d; --teal-glow: rgba(0,201,177,0.15);
-      --gold: #c9a84c; --gold-dim: #7a6030; --gold-glow: rgba(201,168,76,0.12);
-      --vellum: #f0e6c8; --vellum-dim: #b8a87a; --text: #e8e0d0; --text-dim: #8a8070;
-      --border: rgba(201,168,76,0.2); --border-teal: rgba(0,201,177,0.2);
-      --red: #c94c4c;
+      --teal: #00c9b1; --teal-dim: #007a6d; --gold: #c9a84c; --gold-dim: #7a6030;
+      --vellum: #f0e6c8; --text: #e8e0d0; --text-dim: #8a8070;
+      --border-teal: rgba(0,201,177,0.2); --border-gold: rgba(201,168,76,0.2);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { background:var(--void); color:var(--text); font-family:'EB Garamond',Georgia,serif; font-size:18px; line-height:1.7; overflow-x:hidden; }
-    a { text-decoration:none; }
-    section { scroll-margin-top:100px; }
-    #particles { position:fixed; inset:0; width:100%; height:100%; z-index:-3; pointer-events:none; }
-
-    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+    body { background:var(--void); color:var(--text); font-family:'EB Garamond', serif; font-size:18px; line-height:1.7; overflow-x:hidden; }
+    
+    /* ── ANIMATIONS ── */
+    .reveal { opacity:0; transform:translateY(30px); transition: all 0.8s ease-out; }
     .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-delay-1 { transition-delay:0.12s; }
-    .reveal-delay-2 { transition-delay:0.24s; }
-    .reveal-delay-3 { transition-delay:0.36s; }
-
-    /* ── NAV ── */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(5,5,8,0.96) 0%,rgba(5,5,8,0.78) 60%,transparent 100%); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-    .nav-logo { font-family:'Cinzel Decorative',serif; font-size:1.15rem; color:var(--gold); letter-spacing:0.08em; text-shadow:0 0 18px rgba(201,168,76,0.25); white-space:nowrap; }
-    .nav-links { display:flex; gap:1.4rem; list-style:none; justify-content:flex-end; }
-    .nav-links a { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-dim); transition:color 0.3s; position:relative; }
-    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--teal); transition:width 0.3s ease; }
+    
+    /* ── NAVIGATION ── */
+    nav { position:fixed; top:0; width:100%; z-index:100; padding:1.2rem 2rem; display:flex; justify-content:space-between; align-items:center; background:rgba(5,5,8,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--border-gold); }
+    .nav-logo { font-family:'Cinzel Decorative', serif; font-size:1.2rem; color:var(--gold); letter-spacing:0.1em; }
+    .nav-links { display:flex; gap:1.5rem; list-style:none; }
+    .nav-links a { font-family:'Cinzel', serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); text-decoration:none; transition:0.3s; }
     .nav-links a:hover { color:var(--teal); }
-    .nav-links a:hover::after { width:100%; }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; width:28px; height:20px; position:relative; z-index:101; }
-    .nav-toggle span { display:block; width:100%; height:2px; background:var(--gold); position:absolute; left:0; transition:all 0.3s ease; }
-    .nav-toggle span:nth-child(1) { top:0; }
-    .nav-toggle span:nth-child(2) { top:9px; }
-    .nav-toggle span:nth-child(3) { top:18px; }
-    .nav-toggle.active span:nth-child(1) { top:9px; transform:rotate(45deg); }
-    .nav-toggle.active span:nth-child(2) { opacity:0; }
-    .nav-toggle.active span:nth-child(3) { top:9px; transform:rotate(-45deg); }
 
     /* ── HERO ── */
-    .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:7rem 1.5rem 4rem; overflow:hidden; z-index:1; }
-    .hero-video-wrap { position:absolute; inset:0; z-index:-2; overflow:hidden; }
-    .hero-video-wrap video { width:100%; height:100%; object-fit:cover; opacity:0.45; }
-    .hero-video-wrap .fallback { display:none; position:absolute; inset:0; background:url('4z6th.jpg') center/cover no-repeat; opacity:0.35; }
-    .hero-overlay { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(5,5,8,0.6) 0%,rgba(5,5,8,0.3) 50%,rgba(5,5,8,0.8) 100%); }
-    .hero-eyebrow { font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; text-shadow:0 0 20px rgba(0,201,177,0.6); animation:fadeInDown 1s ease 0.2s both; }
-    .hero-title { font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,8vw,6.6rem); line-height:1.05; color:var(--vellum); text-shadow:0 0 60px rgba(201,168,76,0.4),0 2px 20px rgba(0,0,0,0.9); margin-bottom:0.4em; animation:fadeInUp 1.2s ease 0.4s both; }
-    .hero-sub { font-size:clamp(1rem,2.3vw,1.28rem); font-style:italic; color:var(--text-dim); max-width:720px; margin:1rem auto 2.4rem; text-shadow:0 1px 8px rgba(0,0,0,0.9); animation:fadeInUp 1s ease 0.7s both; }
-    .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; animation:fadeInUp 1s ease 0.9s both; }
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+    .hero { position:relative; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
+    .hero-video { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; filter: saturate(1.3) contrast(1.1); opacity:0.6; }
+    .hero-overlay { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, transparent, var(--void)); }
+    .hero-title { font-family:'Cinzel Decorative', serif; font-size:clamp(3rem, 10vw, 6rem); color:var(--vellum); margin-bottom:0.2em; text-shadow:0 0 30px rgba(0,0,0,0.8); }
+    .hero-sub { font-style:italic; color:var(--text-dim); max-width:600px; margin-bottom:2rem; }
 
-    /* ── BUTTONS ── */
-    .btn-primary,.btn-secondary { display:inline-block; padding:0.95rem 1.8rem; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; border-radius:4px; transition:transform 0.25s,box-shadow 0.25s; cursor:pointer; }
-    .btn-primary { background:var(--gold); color:#050508; box-shadow:0 0 28px rgba(201,168,76,0.22); border:none; }
-    .btn-secondary { color:var(--teal); border:1px solid var(--border-teal); background:rgba(0,201,177,0.03); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 4px 36px rgba(201,168,76,0.35); }
-    .btn-secondary:hover { transform:translateY(-2px); box-shadow:0 4px 24px rgba(0,201,177,0.12); }
-
-    /* ── SECTION COMMON ── */
-    .section-shell { max-width:1200px; margin:0 auto; }
-    .section-kicker { text-align:center; color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:1rem; font-size:0.78rem; }
-    .section-title { text-align:center; font-family:'Cinzel Decorative',serif; font-size:clamp(2.1rem,5vw,3rem); color:var(--vellum); margin-bottom:1.2rem; }
-    .section-sub { max-width:760px; margin:0 auto 3rem; text-align:center; color:var(--text-dim); }
-
-    /* ── TARENIS ── */
-    .tarenis-section { padding:8rem 1.25rem; background:var(--surface); position:relative; overflow:hidden; }
-    .tarenis-feature { display:grid; grid-template-columns:1fr 1fr; gap:0; background:linear-gradient(180deg,rgba(19,19,31,0.98),rgba(12,12,18,0.98)); border:1px solid var(--border-teal); overflow:hidden; margin-bottom:4rem; transition:box-shadow 0.4s; }
-    .tarenis-feature:hover { box-shadow:0 20px 60px rgba(0,201,177,0.08); }
-    .tarenis-feature-cover { overflow:hidden; background:#0d0d14; }
-    .tarenis-feature-cover img { display:block; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-    .tarenis-feature:hover .tarenis-feature-cover img { transform:scale(1.03); }
-    .tarenis-feature-info { padding:3rem 2.5rem; display:flex; flex-direction:column; justify-content:center; }
-    .tarenis-feature-info .book-meta { color:var(--teal); font-size:0.8rem; margin-bottom:0.6rem; }
-    .tarenis-feature-info h3 { font-family:'Cinzel Decorative',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); color:var(--vellum); margin-bottom:1rem; line-height:1.2; }
-    .tarenis-feature-info p { color:var(--text-dim); font-size:1.05rem; line-height:1.75; margin-bottom:1.6rem; }
-    .book-notify { display:inline-block; padding:0.7em 1.4em; width:fit-content; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.3s,box-shadow 0.3s,transform 0.25s; }
-    .book-notify:hover { background:rgba(0,201,177,0.08); box-shadow:0 0 20px rgba(0,201,177,0.15); transform:translateY(-2px); }
+    /* ── CHARACTER SECTION ── */
+    .section-shell { max-width:1200px; margin:0 auto; padding:8rem 1.5rem; }
+    .characters-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; margin-top:3rem; }
+    .character-card { background:var(--surface); border:1px solid var(--border-teal); padding:2.5rem; text-align:center; border-radius:4px; }
     
-    .characters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; margin-top:3rem; }
-    .character-card { background:rgba(19,19,31,0.78); border:1px solid rgba(0,201,177,0.12); padding:1.6rem; text-align:center; transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s; }
-    .character-card:hover { border-color:rgba(0,201,177,0.35); transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,201,177,0.06); }
-    .character-img { width:100px; height:100px; border-radius:50%; object-fit:cover; margin:0 auto 1.2rem; border:1px solid var(--teal-dim); display:block; }
-    .character-name { color:var(--teal); font-family:'Cinzel',serif; margin-bottom:0.75rem; font-size:1rem; }
-    .character-desc { color:var(--text-dim); font-size:0.98rem; }
+    /* THE FIX: Image Containers */
+    .character-img-container { width:120px; height:120px; margin:0 auto 1.5rem; border-radius:50%; border:2px solid var(--teal-dim); overflow:hidden; background:var(--void); }
+    .character-img { width:100%; height:100%; object-fit:cover; display:block; }
+    .character-name { font-family:'Cinzel', serif; color:var(--teal); margin-bottom:0.8rem; letter-spacing:0.1em; }
 
-    .ritual-wrap { width:100%; max-height:480px; overflow:hidden; margin:3rem 0; position:relative; border:1px solid var(--border-teal); }
-    .ritual-wrap video { width:100%; height:480px; object-fit:cover; object-position:center; display:block; }
-    .ritual-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:80px; background:linear-gradient(var(--surface),transparent); z-index:1; }
-    .ritual-wrap::after { content:''; position:absolute; bottom:0; left:0; right:0; height:80px; background:linear-gradient(transparent,var(--surface)); z-index:1; }
+    /* ── VIDEO BLOCKS ── */
+    .video-block { position:relative; width:100%; margin:4rem 0; border:1px solid var(--border-teal); cursor:pointer; overflow:hidden; }
+    .video-block video { width:100%; display:block; filter: saturate(1.2) contrast(1.1); }
+    .sound-hint { position:absolute; bottom:20px; right:20px; background:rgba(0,0,0,0.7); color:var(--teal); padding:8px 15px; font-family:'Cinzel', serif; font-size:0.7rem; border-radius:30px; border:1px solid var(--teal); transition:0.3s; }
+    .video-block:hover .sound-hint { background:var(--teal); color:var(--void); }
 
-    .orion-panel { margin-top:4rem; position:relative; overflow:hidden; border:1px solid rgba(0,201,177,0.15); }
-    .orion-panel video { width:100%; height:360px; object-fit:cover; object-position:center; display:block; filter:brightness(0.7); }
-    .orion-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; background:rgba(5,5,8,0.45); }
-    .orion-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--teal); margin-bottom:0.8rem; }
-    .orion-title { font-family:'Cinzel Decorative',serif; font-size:clamp(1.5rem,4vw,2.5rem); color:var(--vellum); margin-bottom:1rem; }
-    .orion-desc { color:var(--text-dim); font-style:italic; max-width:560px; font-size:1rem; }
-
-    /* ── HOW TO LISTEN ── */
-    .listen-section { padding:8rem 1.25rem; background:var(--surface); text-align:center; }
-    .listen-inner { max-width:700px; margin:0 auto; }
-    .listen-text { font-size:1.15rem; color:var(--text-dim); font-style:italic; line-height:2; margin-bottom:3rem; }
-    .listen-text strong { color:var(--vellum); font-style:normal; font-weight:500; }
+    /* ── ARCHIVE GRID ── */
+    .archive-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem; margin-top:3rem; }
+    .archive-card { background:var(--panel); border:1px solid var(--border-gold); transition:0.3s; }
+    .archive-card:hover { transform:translateY(-5px); border-color:var(--gold); }
+    .archive-media { width:100%; aspect-ratio: 2/3; overflow:hidden; background:#000; }
+    .archive-media img, .archive-media video { width:100%; height:100%; object-fit:cover; }
+    .archive-info { padding:1.2rem; }
+    .archive-title { font-family:'Cinzel', serif; color:var(--vellum); font-size:0.9rem; margin-bottom:0.5rem; }
 
     /* ── TERMINAL ── */
-    .terminal-wrap { margin-top:3rem; max-width:520px; margin-left:auto; margin-right:auto; }
-    .terminal { background:rgba(5,5,8,0.9); border:1px solid var(--border-teal); padding:1.5rem; position:relative; }
-    .terminal-header { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--teal-dim); margin-bottom:1rem; }
-    .terminal-input-wrap { display:flex; gap:0.5rem; align-items:center; }
-    .terminal-prompt { color:var(--teal); font-family:monospace; font-size:1rem; }
-    .terminal-input { flex:1; background:transparent; border:none; outline:none; color:var(--vellum); font-family:'EB Garamond',Georgia,serif; font-size:1.1rem; caret-color:var(--teal); }
-    .terminal-input::placeholder { color:var(--text-dim); opacity:0.4; }
-    .terminal-response { margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(0,201,177,0.1); color:var(--gold); font-style:italic; font-size:1.05rem; line-height:1.7; display:none; }
-    .terminal-response.visible { display:block; animation:fadeInUp 0.5s ease both; }
-    .terminal-response.error { color:var(--red); }
+    .terminal-box { max-width:500px; margin:4rem auto; background:#000; border:1px solid var(--teal-dim); padding:1.5rem; font-family:monospace; }
+    .terminal-header { color:var(--teal-dim); font-size:0.7rem; margin-bottom:1rem; text-transform:uppercase; }
+    .terminal-row { display:flex; align-items:center; gap:10px; }
+    .terminal-input { background:transparent; border:none; color:var(--teal); outline:none; font-size:1.1rem; width:100%; }
 
-    /* ── HIDDEN UNLOCK PAGE ── */
-    .unlock-overlay { position:fixed; inset:0; background:rgba(5,5,8,0.96); z-index:200; overflow-y:auto; backdrop-filter:blur(12px); }
-    .unlock-overlay.hidden { display:none; }
-    .unlock-content { max-width:800px; margin:0 auto; padding:4rem 1.5rem; text-align:center; }
-    .unlock-content h2 { font-family:'Cinzel Decorative',serif; color:var(--teal); font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:0.5rem; }
-    .unlock-content .unlock-sub { color:var(--text-dim); font-style:italic; margin-bottom:3rem; font-size:1.05rem; }
-    .unlock-img-wrap { margin-bottom:3rem; }
-    .unlock-img-wrap img { width:100%; max-width:650px; height:auto; display:block; margin:0 auto; border:1px solid var(--border); }
-    .unlock-img-wrap video { width:100%; max-width:650px; height:auto; display:block; margin:0 auto; border:1px solid var(--border); }
-    .unlock-img-label { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--teal-dim); margin-top:1rem; margin-bottom:3rem; }
-    .unlock-close { display:inline-block; margin-top:2rem; padding:0.7em 1.8em; border:1px solid var(--border); color:var(--gold); font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; background:transparent; cursor:pointer; transition:background 0.3s; }
-    .unlock-close:hover { background:rgba(201,168,76,0.06); }
+    .btn { display:inline-block; padding:0.8rem 1.8rem; font-family:'Cinzel', serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; border:1px solid var(--gold); color:var(--gold); text-decoration:none; transition:0.3s; }
+    .btn:hover { background:var(--gold); color:var(--void); }
 
-    /* ── MUSIC ── */
-    .music-section { padding:8rem 1.25rem; background:var(--void); }
-    .music-cta { display:inline-block; margin-top:1rem; padding:1rem 1.6rem; border:1px solid var(--border-teal); color:var(--teal); font-family:'Cinzel',serif; letter-spacing:0.16em; text-transform:uppercase; font-size:0.72rem; transition:transform 0.25s,box-shadow 0.25s; }
-    .music-cta:hover { transform:translateY(-2px); box-shadow:0 0 24px rgba(0,201,177,0.12); }
-
-    /* ── ARCHIVE ── */
-    .archive-section { padding:8rem 1.25rem; background:var(--deep); position:relative; }
-    .archive-section::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:80px; height:1px; background:linear-gradient(90deg,transparent,var(--gold-dim),transparent); }
-    .archive-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.4rem; margin-bottom:3rem; }
-    .archive-card { background:linear-gradient(180deg,rgba(19,19,31,0.95),rgba(10,10,18,0.95)); border:1px solid rgba(201,168,76,0.1); overflow:hidden; transition:transform 0.35s,border-color 0.35s,box-shadow 0.35s; }
-    .archive-card:hover { transform:translateY(-6px); border-color:rgba(201,168,76,0.25); box-shadow:0 14px 36px rgba(0,0,0,0.3); }
-    .archive-cover { overflow:hidden; background:#0d0d14; }
-    .archive-cover img { display:block; width:100%; height:auto; transition:transform 0.45s; filter:brightness(0.9); }
-    .archive-card:hover .archive-cover img { transform:scale(1.04); filter:brightness(1); }
-    .archive-info { padding:1.2rem; }
-    .archive-meta { color:var(--gold-dim); font-size:0.75rem; margin-bottom:0.35rem; }
-    .archive-title { font-family:'Cinzel',serif; font-size:0.95rem; color:var(--vellum-dim); margin-bottom:0.45rem; line-height:1.35; }
-    .archive-desc { color:var(--text-dim); font-size:0.88rem; line-height:1.55; }
-    .archive-contact { text-align:center; margin-top:2rem; padding-top:2rem; border-top:1px solid rgba(201,168,76,0.1); }
-    .archive-contact p { color:var(--text-dim); font-style:italic; font-size:1rem; margin-bottom:1rem; }
-    .archive-email { display:inline-block; padding:0.7em 1.6em; border:1px solid var(--border); color:var(--gold); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.3s,box-shadow 0.3s,transform 0.25s; }
-    .archive-email:hover { background:rgba(201,168,76,0.06); box-shadow:0 0 20px rgba(201,168,76,0.18); transform:translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer { padding:4rem 1.25rem; text-align:center; border-top:1px solid var(--border); color:var(--text-dim); }
-    footer p:first-child { color:var(--text); }
-    .footer-divider { width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:1.2rem auto; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width:900px) {
-      .tarenis-feature { grid-template-columns:1fr; }
-      .tarenis-feature-info { padding:2rem 1.5rem; }
-      .ritual-wrap video { height:380px; }
-    }
-    @media (max-width:768px) {
-      .hero-video-wrap video { display:none; }
-      .hero-video-wrap .fallback { display:block; }
-      nav { padding:0.95rem 1.2rem; }
-      .nav-toggle { display:block; }
-      .nav-links { position:fixed; top:0; right:0; width:min(280px,75vw); height:100vh; background:rgba(5,5,8,0.97); backdrop-filter:blur(16px); flex-direction:column; justify-content:center; align-items:center; gap:2rem; padding:2rem; transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.22,1,0.36,1); border-left:1px solid var(--border); }
-      .nav-links.open { transform:translateX(0); }
-      .nav-links a { font-size:0.82rem; letter-spacing:0.2em; }
-      .hero { padding-top:7rem; min-height:100svh; }
-      .hero-actions { width:100%; flex-direction:column; align-items:center; gap:0.8rem; }
-      .btn-primary,.btn-secondary { width:100%; max-width:320px; text-align:center; }
-      .ritual-wrap video { height:280px; }
-      .orion-panel video { height:240px; }
-      .tarenis-section,.listen-section,.music-section,.archive-section { padding:5rem 1rem; }
-      .archive-grid { grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; }
-    }
-    @media (max-width:380px) {
-      .hero-title { font-size:2.5rem; }
-      .nav-logo { font-size:0.88rem; }
-    }
+    footer { padding:4rem; text-align:center; opacity:0.5; font-size:0.8rem; border-top:1px solid var(--border-gold); }
   </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
-
-<div class="unlock-overlay hidden" id="unlockOverlay">
-  <div class="unlock-content">
-    <h2>You Found It</h2>
-    <p class="unlock-sub">The signal opened the gate. You are through.</p>
-
-    <div class="unlock-img-wrap">
-      <img src="INTERNAL_MEMORANDUM.jpg" alt="AetherForge Internal Memorandum — Classified" loading="lazy">
-      <p class="unlock-img-label">Intercepted AetherForge Document — Classified</p>
-    </div>
-
-    <div class="unlock-img-wrap">
-      <img src="Book_2_teaser.jpg" alt="Tarenis: The Southern Gate — Coming Soon" loading="lazy">
-      <p class="unlock-img-label">Transmission Received — The Southern Gate</p>
-    </div>
-
-    <div class="unlock-img-wrap">
-      <img src="The_world_grid.jpg" alt="Tarenis Global Grid — Resonance Network" loading="lazy">
-      <p class="unlock-img-label">Tarenis Global Grid — Resonance Network</p>
-    </div>
-
-    <button class="unlock-close" id="unlockClose">Return to the Surface</button>
-  </div>
-</div>
-
 <nav>
-  <a href="#" class="nav-logo">Entre Dos</a>
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-logo">Entre Dos</div>
   <ul class="nav-links">
     <li><a href="#tarenis">Tarenis</a></li>
+    <li><a href="#archive">Archive</a></li>
     <li><a href="#listen">Decode</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#archive">Books</a></li>
   </ul>
 </nav>
 
 <section class="hero">
-  <div class="hero-video-wrap">
-    <video autoplay muted loop playsinline><source src="Haven_Bay.mp4" type="video/mp4"></video>
-    <div class="fallback"></div>
-  </div>
+  <video class="hero-video" autoplay muted loop playsinline><source src="Haven_Bay.mp4" type="video/mp4"></video>
   <div class="hero-overlay"></div>
-  <p class="hero-eyebrow">Welcome to the</p>
-  <h1 class="hero-title">ENTRE DOS<br><span>UNIVERSE</span></h1>
-  <p class="hero-sub">Where frequencies become stories.<br>Where the Codex waits to be decoded.<br>Music &amp; mystery sharing the same signal.</p>
-  <div class="hero-actions">
-    <a href="#tarenis" class="btn-primary">Enter Tarenis</a>
-    <a href="#listen" class="btn-secondary">Decode the Signal</a>
-  </div>
+  <h1 class="hero-title">ENTRE DOS</h1>
+  <p class="hero-sub">Where frequencies become stories. The Echo Codex is calling.</p>
+  <a href="#tarenis" class="btn">Enter Universe</a>
 </section>
 
-<section id="tarenis" class="tarenis-section">
-  <div class="section-shell">
-    <div class="tarenis-feature reveal">
-      <div class="tarenis-feature-cover"><img src="image.jpg" alt="Tarenis Book One cover" loading="lazy"></div>
-      <div class="tarenis-feature-info">
-        <p class="book-meta">Sci-Fi Conspiracy Thriller • Book One</p>
-        <h3>Tarenis</h3>
-        <p>The ancient frequency grid is waking. A sound engineer, an intuitive from the Interior, and a quiet cartographer who can read the Echo Codex must come together before the old powers silence the signal forever.</p>
-        <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book One&body=Please notify me when Tarenis: Book One is available." class="book-notify">✦ Notify Me When Available</a>
-      </div>
+<div class="section-shell" id="tarenis">
+  <h2 class="hero-title" style="font-size:3rem; text-align:center;">The Tarenis Saga</h2>
+  
+  <div class="characters-grid">
+    <div class="character-card reveal">
+      <div class="character-img-container"><img src="Lira Voss.jpeg" class="character-img"></div>
+      <h3 class="character-name">Lira Voss</h3>
+      <p>The intuitive who reads the living frequency grid like breathing.</p>
     </div>
-    <h2 class="section-title reveal">The World of Tarenis</h2>
-    <p class="section-sub reveal reveal-delay-1">The ancient frequency grid has been silent for twelve thousand years.<br>It is silent no longer.</p>
-    
-    <div class="characters-grid">
-      <div class="character-card reveal reveal-delay-1">
-        <img src="Lira Voss.jpeg" alt="Lira Voss" class="character-img">
-        <h3 class="character-name">Lira Voss</h3>
-        <p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p>
-      </div>
-      <div class="character-card reveal reveal-delay-2">
-        <img src="Kai.jpeg" alt="Kai Resonance" class="character-img">
-        <h3 class="character-name">Kai Resonance</h3>
-        <p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p>
-      </div>
-      <div class="character-card reveal reveal-delay-3">
-        <img src="Elias.jpeg" alt="Elias" class="character-img">
-        <h3 class="character-name">Elias</h3>
-        <p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p>
-      </div>
+    <div class="character-card reveal">
+      <div class="character-img-container"><img src="Kai.jpeg" class="character-img"></div>
+      <h3 class="character-name">Kai Resonance</h3>
+      <p>The engineer whose music became the signal that woke the grid.</p>
     </div>
-
-    <div class="ritual-wrap reveal">
-      <video autoplay muted loop playsinline><source src="orionsignal.mp4" type="video/mp4"></video>
-    </div>
-
-    <div class="orion-panel reveal">
-      <video autoplay muted loop playsinline><source src="HEAVENBAYWATER.mp4" type="video/mp4"></video>
-      <div class="orion-overlay">
-        <p class="orion-label">AetherForge — ORION System</p>
-        <h3 class="orion-title">They mapped the world<br>to own the frequency.</h3>
-        <p class="orion-desc">The corporation that has spent millennia making sure no one ever wakes up.</p>
-      </div>
+    <div class="character-card reveal">
+      <div class="character-img-container"><img src="Elias.jpeg" class="character-img"></div>
+      <h3 class="character-name">Elias</h3>
+      <p>The cartographer who translates the ancient notation of the Codex.</p>
     </div>
   </div>
-</section>
 
-<section id="listen" class="listen-section">
-  <div class="listen-inner">
-    <p class="section-kicker reveal">For Those Who Are Paying Attention</p>
-    <h2 class="section-title reveal reveal-delay-1">How to Listen</h2>
-    <div class="listen-text reveal reveal-delay-2">
-      <p><strong>The Codex was never meant to be read.</strong></p>
-      <p>It was meant to be decoded.</p><br>
-      <p>If you are here, you have already begun.</p><br>
-      <p>Start with what the book gave you.<br>Then listen for what the world is saying.<br>Then come back here.</p><br>
-      <p><strong>The sequence was always there.</strong><br>Nature wrote it first.</p><br>
-      <p>You already know more than you think.</p>
+  <div class="video-block reveal" onclick="toggleSound(this)">
+    <video autoplay muted loop playsinline><source src="orionsignal.mp4" type="video/mp4"></video>
+    <div class="sound-hint">✦ CLICK FOR SOUND</div>
+  </div>
+
+  <div class="video-block reveal" onclick="toggleSound(this)">
+    <video autoplay muted loop playsinline><source src="HEAVENBAYWATER.mp4" type="video/mp4"></video>
+    <div class="sound-hint">✦ CLICK FOR SOUND</div>
+  </div>
+</div>
+
+<div class="section-shell" id="archive" style="background:var(--deep);">
+  <h2 class="hero-title" style="font-size:2.5rem; text-align:center;">The Archive</h2>
+  <div class="archive-grid">
+    <div class="archive-card reveal">
+      <div class="archive-media"><img src="image (2).jpg"></div>
+      <div class="archive-info"><h3 class="archive-title">The Fireline: 432 Hz</h3></div>
     </div>
-
-    <div class="terminal-wrap reveal">
-      <div class="terminal" id="terminalBox">
-        <div class="terminal-header">⌁ Signal Receiver — Active</div>
-        <div class="terminal-input-wrap">
-          <span class="terminal-prompt">›</span>
-          <input type="text" class="terminal-input" id="terminalInput" placeholder="type what you know..." autocomplete="off" />
-        </div>
-        <div class="terminal-response" id="terminalResponse"></div>
-      </div>
+    <div class="archive-card reveal">
+      <div class="archive-media"><img src="image (3).jpg"></div>
+      <div class="archive-info"><h3 class="archive-title">The Fireline: 0 Hz</h3></div>
+    </div>
+    <div class="archive-card reveal">
+      <div class="archive-media"><video autoplay muted loop playsinline><source src="worldmapvoice.mp4"></video></div>
+      <div class="archive-info"><h3 class="archive-title">The Lattice Protocol</h3></div>
+    </div>
+    <div class="archive-card reveal">
+      <div class="archive-media"><img src="image (5).jpg"></div>
+      <div class="archive-info"><h3 class="archive-title">The Ghost Garden</h3></div>
+    </div>
+    <div class="archive-card reveal">
+      <div class="archive-media"><img src="image (1).jpg"></div>
+      <div class="archive-info"><h3 class="archive-title">Fireline Zero-Day</h3></div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="music" class="music-section">
-  <div class="section-shell" style="text-align:center;">
-    <h2 class="section-title reveal">Entre Dos Music</h2>
-    <p class="section-sub reveal reveal-delay-1">The emotional frequencies that connect the books and the music.<br>The soundtrack to the awakening.</p>
-    <a class="music-cta reveal reveal-delay-2" href="https://www.youtube.com/playlist?list=PLk4Sp4lD-uQPyIEDCHGlqHwKHJKSrOS--" target="_blank" rel="noopener">The Echo Archive →</a>
-  </div>
-</section>
-
-<section id="archive" class="archive-section">
-  <div class="section-shell">
-    <p class="section-kicker reveal">More Titles from the</p>
-    <h2 class="section-title reveal reveal-delay-1">Entre Dos Universe</h2>
-    <div class="archive-grid">
-      <div class="archive-card reveal reveal-delay-1"><div class="archive-cover"><img src="image (2).jpg" alt="The Fireline 432 Hz Covenant" loading="lazy"></div><div class="archive-info"><p class="archive-meta">The Fireline • Book One</p><h3 class="archive-title">THE FIRELINE<br>The 432 Hz Covenant</h3><p class="archive-desc">Something is wrong with the world. Most people just can't hear it. But a hidden frequency has begun to surface — and the people who notice it don't see reality the same way again.</p></div></div>
-      <div class="archive-card reveal reveal-delay-2"><div class="archive-cover"><img src="image (3).jpg" alt="The Fireline 0 Hz Covenant" loading="lazy"></div><div class="archive-info"><p class="archive-meta">The Fireline</p><h3 class="archive-title">THE FIRELINE<br>The 0 Hz Covenant</h3><p class="archive-desc">Time was designed to keep you in place. Memory was designed to keep you compliant. But something survived the reset. Now a hidden space is emerging — outside the system's control.</p></div></div>
-      <div class="archive-card reveal reveal-delay-3"><div class="archive-cover"><img src="image (5).jpg" alt="The Ghost Garden" loading="lazy"></div><div class="archive-info"><p class="archive-meta">Protocol 432</p><h3 class="archive-title">THE GHOST GARDEN</h3><p class="archive-desc">The world you see isn't the real one. It's just the version you're allowed to see. When the illusion starts to flicker, a hidden layer of reality begins to bleed through.</p></div></div>
-      <div class="archive-card reveal reveal-delay-4"><div class="archive-cover"><video autoplay muted loop playsinline><source src="worldmapvoice.mp4" type="video/mp4"></video></div><div class="archive-info"><p class="archive-meta">The Fireline • Book 4</p><h3 class="archive-title">THE LATTICE PROTOCOL</h3><p class="archive-desc">There is something beneath the system. And it's waking up. As the cracks spread, a deeper network — older, quieter, impossible to control — begins to surface through the people themselves.</p></div></div>
-      <div class="archive-card reveal reveal-delay-5"><div class="archive-cover"><img src="image (1).jpg" alt="Fireline Zero-Day" loading="lazy"></div><div class="archive-info"><p class="archive-meta">The Fireline • Book 5</p><h3 class="archive-title">FIRELINE ZERO-DAY</h3><p class="archive-desc">The system resets every day. So no one remembers. Until one moment slips through. When a routine night shift exposes a glitch that shouldn't exist, everything begins to surface.</p></div></div>
+<div class="section-shell" id="listen">
+  <h2 class="hero-title" style="font-size:2.5rem; text-align:center;">Decode</h2>
+  <p style="text-align:center; color:var(--text-dim); font-style:italic;">"The sequence was always there. Nature wrote it first."</p>
+  
+  <div class="terminal-box">
+    <div class="terminal-header">⌁ Signal Receiver — Online</div>
+    <div class="terminal-row">
+      <span style="color:var(--teal);">›</span>
+      <input type="text" class="terminal-input" id="termInput" placeholder="enter passcode...">
     </div>
-    <div class="archive-contact reveal"><p>Interested in the Fireline Universe? Get in touch.</p><a href="mailto:oderaycortega@gmail.com?subject=Inquiry — Entre Dos Universe" class="archive-email">✦ Contact</a></div>
+    <div id="termOutput" style="margin-top:10px; color:var(--gold); font-size:0.8rem; min-height:1.2em;"></div>
   </div>
-</section>
+</div>
 
 <footer>
-  <p>© Entre Dos Universe — All rights reserved</p>
-  <div class="footer-divider"></div>
-  <p style="font-size:0.9rem;">Frequency: 432 Hz ✦ Signal: Active</p>
+  <p>© Entre Dos Universe ✦ Frequency: 432 Hz ✦ All Rights Reserved</p>
 </footer>
 
 <script>
-const FINAL_PHRASE = 'the signal opens the gate';
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
-// ══════════ TERMINAL GAME ══════════
-const terminalInput = document.getElementById('terminalInput');
-const terminalResponse = document.getElementById('terminalResponse');
-
-terminalInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') processInput();
-});
-
-function processInput() {
-  const raw = terminalInput.value.trim().toLowerCase();
-  terminalInput.value = '';
-  if (!raw) return;
-
-  if (raw === FINAL_PHRASE) {
-    terminalResponse.textContent = '⌁ ACCESS GRANTED — The gate is open.';
-    terminalResponse.className = 'terminal-response visible';
-    setTimeout(() => {
-      document.getElementById('unlockOverlay').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }, 1500);
-  } else {
-    terminalResponse.textContent = '⌁ No signal detected. Try again.';
-    terminalResponse.className = 'terminal-response visible error';
+  // SOUND TOGGLE
+  function toggleSound(container) {
+    const vid = container.querySelector('video');
+    const hint = container.querySelector('.sound-hint');
+    if(vid.muted) {
+      vid.muted = false;
+      hint.textContent = "🔊 SOUND ON";
+      hint.style.borderColor = "var(--gold)";
+      hint.style.color = "var(--gold)";
+    } else {
+      vid.muted = true;
+      hint.textContent = "✦ CLICK FOR SOUND";
+      hint.style.borderColor = "var(--teal)";
+      hint.style.color = "var(--teal)";
+    }
   }
-}
 
-// ══════════ UNLOCK PAGE ══════════
-document.getElementById('unlockClose').addEventListener('click', () => {
-  document.getElementById('unlockOverlay').classList.add('hidden');
-  document.body.style.overflow = '';
-});
-
-// ══════════ HAMBURGER ══════════
-const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('active');
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    toggle.classList.remove('active');
-    navLinks.classList.remove('open');
-  });
-});
-
-// ══════════ SCROLL REVEAL ══════════
-const revealEls = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
+  // TERMINAL LOGIC
+  const input = document.getElementById('termInput');
+  const output = document.getElementById('termOutput');
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      const val = input.value.toLowerCase().trim();
+      input.value = '';
+      if(val === 'the signal opens the gate') {
+        output.textContent = "ACCESS GRANTED. Welcome to the Interior.";
+        output.style.color = "var(--teal)";
+      } else {
+        output.textContent = "SIGNAL INTERRUPTED. WRONG SEQUENCE.";
+        output.style.color = "red";
+      }
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => revealObserver.observe(el));
-
-// ══════════ PARTICLES ══════════
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-const isMobile = window.innerWidth < 768;
-const particleCount = isMobile ? 28 : 60;
-const particles = [];
-for (let i = 0; i < particleCount; i++) {
-  particles.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.8+0.2, dx:(Math.random()-0.5)*0.22, dy:(Math.random()-0.5)*0.22, gold:Math.random()>0.7 });
-}
-let animating = true;
-document.addEventListener('visibilitychange', () => { animating = !document.hidden; if (animating) animateParticles(); });
-function animateParticles() {
-  if (!animating) return;
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for (const p of particles) {
-    p.x+=p.dx; p.y+=p.dy;
-    if(p.x<0||p.x>canvas.width) p.dx*=-1;
-    if(p.y<0||p.y>canvas.height) p.dy*=-1;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.gold?"rgba(201,168,76,0.35)":"rgba(0,201,177,0.42)";
-    ctx.fill();
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
 </script>
+
 </body>
 </html>
