@@ -177,9 +177,7 @@
         <p style="color:var(--teal); font-size:0.8rem; margin-bottom:0.6rem;">Sci-Fi Conspiracy Thriller • Book One</p>
         <h3>Tarenis</h3>
         <p>The ancient frequency grid is waking. A sound engineer, an intuitive from the Interior, and a quiet cartographer who can read the Echo Codex must come together before the old powers silence the signal forever.</p>
-        <a href="#" id="notifyBtn" class="btn-secondary" style="font-size:0.72rem; letter-spacing:0.14em;">
-  ✦ Notify Me When Available
-</a>
+        <a href="mailto:oderaycortega@gmail.com?subject=Notify Me" class="btn-secondary" style="font-size:0.72rem; letter-spacing:0.14em;">✦ Notify Me When Available</a>
       </div>
     </div>
 
@@ -188,17 +186,17 @@
 
     <div class="characters-grid">
       <div class="character-card reveal reveal-delay-1">
-        <img src="Lira Voss .jpeg" alt="Lira Voss" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
+        <img src="Lira Voss .jpeg" alt="Lira Voss" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
         <h3 class="character-name">Lira Voss</h3>
         <p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p>
       </div>
       <div class="character-card reveal reveal-delay-2">
-        <img src="Kai.jpeg" alt="Kai Resonance" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
+        <img src="Kai.jpeg" alt="Kai Resonance" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
         <h3 class="character-name">Kai Resonance</h3>
         <p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p>
       </div>
       <div class="character-card reveal reveal-delay-3">
-        <img src="Elias .jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
+        <img src="Elias .jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
         <h3 class="character-name">Elias</h3>
         <p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p>
       </div>
@@ -244,7 +242,7 @@
     <p style="margin-bottom: 1.5rem; font-style: italic; font-size: 0.95rem; color: var(--text-dim);">
       Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.
     </p>
-    <img src="SoundsCode.png" alt="Scan to enter the Echo Archive" style="width:140px; height:140px; display:block; margin: 0 auto; loading="lazy"">
+    <img src="SoundsCode.png" alt="Scan to enter the Echo Archive" style="width:140px; height:140px; display:block; margin: 0 auto; loading:lazy;">
     <span style="display:block; margin-top:0.8rem; letter-spacing: 0.2em;">SCAN TO ENTER THE ARCHIVE</span>
   </div>
 </section>
@@ -258,8 +256,7 @@
       <video autoplay loop muted playsinline><source src="worldmapvoice.mp4" type="video/mp4"></video>
       <p class="unlock-img-label">Tarenis Global Grid — Resonance Network [DECODED]</p>
     </div>
-    
-    
+
     <div class="unlock-img-wrap">
       <img src="INTERNAL_MEMORANDUM.jpg" alt="AetherForge Internal Memorandum" loading="lazy">
       <p class="unlock-img-label">Intercepted AetherForge Document — Classified</p>
@@ -275,169 +272,67 @@
 </footer>
 
 <script>
-/* =========================
-   GLOBAL ELEMENTS
-========================= */
-const codenameInput = document.getElementById('codenameInput');
-const overlay = document.getElementById('unlockOverlay');
-const closeBtn = document.getElementById('unlockClose');
-
-/* =========================
-   SOUND TOGGLE
-========================= */
+  // --- SOUND TOGGLE LOGIC ---
 const muteBtn = document.getElementById('globalMute');
 const allVideos = document.querySelectorAll('video');
 let isMuted = true;
 
 muteBtn.addEventListener('click', () => {
-  isMuted = !isMuted;
-  allVideos.forEach(vid => vid.muted = isMuted);
-
+  isMuted = !isMuted; // Toggle the mute state
+  allVideos.forEach(vid => {
+    vid.muted = isMuted; // Apply state to every video on the page
+  });
+  
+  // Update button appearance
   muteBtn.innerText = isMuted ? "SOUND: OFF" : "SOUND: ON";
   muteBtn.style.borderColor = isMuted ? "var(--teal)" : "var(--gold)";
   muteBtn.style.color = isMuted ? "var(--teal)" : "var(--gold)";
-});
-
-/* =========================
-   NAV TOGGLE
-========================= */
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  navToggle.classList.toggle('active');
-});
-
-/* =========================
-   TERMINAL FOCUS
-========================= */
-const terminalArea = document.getElementById('terminalArea');
-
-terminalArea.addEventListener('click', () => {
-  codenameInput.focus();
-});
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
   });
-}, { threshold: 0.1 });
+  
+  // Navigation Toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    navToggle.classList.toggle('active');
+  });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Terminal Auto-Focus Logic (Mechanical Necessity for Mobile UX)
+  const terminalArea = document.getElementById('terminalArea');
+  const codenameInput = document.getElementById('codenameInput');
+  
+  terminalArea.addEventListener('click', () => {
+    codenameInput.focus();
+  });
 
-/* =========================
-   NOTIFY BUTTON
-========================= */
-document.getElementById('notifyBtn').addEventListener('click', (e) => {
-  e.preventDefault();
-
-  const subject = encodeURIComponent("Notify Me When Available");
-  const body = encodeURIComponent("I'd like to be notified when Tarenis is available.");
-
-  window.location.href = `mailto:oderaycortega@gmail.com?subject=${subject}&body=${body}`;
-});
-
-/* =========================
-   UNLOCK OVERLAY CLOSE
-========================= */
-closeBtn.addEventListener('click', () => overlay.classList.add('hidden'));
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === "Escape") overlay.classList.add('hidden');
-});
-
-/* =========================
-   TERMINAL LOGIC (2-STAGE)
-========================= */
-let awaitingPhrase = false;
-
-codenameInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-
-    const input = codenameInput.value.trim();
-    if (!input) return;
-
-    // STEP 1 — SAVE CODENAME
-    if (!awaitingPhrase) {
-      localStorage.setItem('codename', input);
-
-      codenameInput.value = "";
-      codenameInput.placeholder = "enter the phrase...";
-
-      awaitingPhrase = true;
-      return;
-    }
-
-    // STEP 2 — CHECK PHRASE
-    const phrase = input.toLowerCase();
-
-    if (phrase === "the signal opens the gate") {
-      overlay.classList.remove('hidden');
-
-      const name = localStorage.getItem('codename');
-      let unlocked = JSON.parse(localStorage.getItem('unlockedUsers') || "[]");
-
-      if (!unlocked.includes(name)) {
-        unlocked.push(name);
-        localStorage.setItem('unlockedUsers', JSON.stringify(unlocked));
+  // Scroll Reveal Logic
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
       }
+    });
+  }, { threshold: 0.1 });
 
-    } else {
-      codenameInput.value = "";
-      codenameInput.placeholder = "…signal not recognized";
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-      setTimeout(() => {
-        codenameInput.placeholder = "enter the phrase...";
-      }, 2000);
-    }
-  }
-});
+  // Unlock Gate Logic
+  const overlay = document.getElementById('unlockOverlay');
+  const closeBtn = document.getElementById('unlockClose');
 
-/* =========================
-   SIGNAL BOARD (COMMENTS)
-========================= */
-const entriesDiv = document.getElementById('entries');
-const commentInput = document.getElementById('commentInput');
-const commentSubmit = document.getElementById('commentSubmit');
-
-function loadBoard() {
-  if (!entriesDiv) return;
-
-  const entries = JSON.parse(localStorage.getItem('signalBoard') || "[]");
-
-  entriesDiv.innerHTML = entries.map(e => `
-    <div style="border-bottom:1px solid rgba(0,201,177,0.1); padding:0.5rem 0;">
-      <span style="color:var(--teal); font-size:0.7rem;">${e.name}</span>
-      <p style="margin:0.2rem 0; font-size:0.9rem; color:var(--text-dim);">${e.message}</p>
-    </div>
-  `).join('');
-}
-
-if (commentSubmit) {
-  commentSubmit.addEventListener('click', () => {
-    const name = localStorage.getItem('codename');
-    const message = commentInput.value.trim();
-
-    if (!name || !message) return;
-
-    let entries = JSON.parse(localStorage.getItem('signalBoard') || "[]");
-
-    entries.unshift({ name, message });
-
-    localStorage.setItem('signalBoard', JSON.stringify(entries));
-
-    commentInput.value = "";
-    loadBoard();
+  closeBtn.addEventListener('click', () => overlay.classList.add('hidden'));
+  
+  // Close with Escape Key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") overlay.classList.add('hidden');
   });
-}
 
-loadBoard();
+  // Simple placeholder for terminal enter
+  codenameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      alert("Signal Received: " + codenameInput.value);
+    }
+  });
 </script>
 
 </body>
