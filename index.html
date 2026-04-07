@@ -258,7 +258,8 @@
       <video autoplay loop muted playsinline><source src="worldmapvoice.mp4" type="video/mp4"></video>
       <p class="unlock-img-label">Tarenis Global Grid — Resonance Network [DECODED]</p>
     </div>
-
+    
+    
     <div class="unlock-img-wrap">
       <img src="INTERNAL_MEMORANDUM.jpg" alt="AetherForge Internal Memorandum" loading="lazy">
       <p class="unlock-img-label">Intercepted AetherForge Document — Classified</p>
@@ -274,6 +275,17 @@
 </footer>
 
 <script>
+  const codenameInput = document.getElementById('codenameInput');
+
+codenameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const input = codenameInput.value.trim().toLowerCase();
+
+    // store codename (your original intent)
+    if (input) {
+      localStorage.setItem('codename', input);
+    }
+
   // --- SOUND TOGGLE LOGIC ---
 const muteBtn = document.getElementById('globalMute');
 const allVideos = document.querySelectorAll('video');
@@ -339,16 +351,48 @@ muteBtn.addEventListener('click', () => {
   });
 
   // Simple placeholder for terminal enter
-  codenameInput.addEventListener('keydown', (e) => {
+  let awaitingPhrase = false;
+
+codenameInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    const value = codenameInput.value.trim();
-    if (!value) return;
 
-    // save codename (optional)
-    localStorage.setItem('codename', value);
+    const input = codenameInput.value.trim();
 
-    // open the unlock overlay
-    overlay.classList.remove('hidden');
+    if (!input) return;
+
+    // FIRST ENTER = SAVE CODENAME
+    if (!awaitingPhrase) {
+      localStorage.setItem('codename', input);
+
+      codenameInput.value = "";
+      codenameInput.placeholder = "enter the phrase...";
+
+      awaitingPhrase = true;
+      return;
+    }
+
+    // SECOND ENTER = CHECK PHRASE
+    const phrase = input.toLowerCase();
+
+    if (phrase === "the signal opens the gate") {
+      overlay.classList.remove('hidden');
+
+      const name = localStorage.getItem('codename');
+      let unlocked = JSON.parse(localStorage.getItem('unlockedUsers') || "[]");
+
+      if (!unlocked.includes(name)) {
+        unlocked.push(name);
+        localStorage.setItem('unlockedUsers', JSON.stringify(unlocked));
+      }
+
+    } else {
+      codenameInput.value = "";
+      codenameInput.placeholder = "…signal not recognized";
+
+      setTimeout(() => {
+        codenameInput.placeholder = "enter the phrase...";
+      }, 2000);
+    }
   }
 });
 </script>
