@@ -177,7 +177,9 @@
         <p style="color:var(--teal); font-size:0.8rem; margin-bottom:0.6rem;">Sci-Fi Conspiracy Thriller • Book One</p>
         <h3>Tarenis</h3>
         <p>The ancient frequency grid is waking. A sound engineer, an intuitive from the Interior, and a quiet cartographer who can read the Echo Codex must come together before the old powers silence the signal forever.</p>
-        <a href="mailto:oderaycortega@gmail.com?subject=Notify Me" class="btn-secondary" style="font-size:0.72rem; letter-spacing:0.14em;">✦ Notify Me When Available</a>
+        <a href="#" id="notifyBtn" class="btn-secondary" style="font-size:0.72rem; letter-spacing:0.14em;">
+  ✦ Notify Me When Available
+</a>
       </div>
     </div>
 
@@ -186,17 +188,17 @@
 
     <div class="characters-grid">
       <div class="character-card reveal reveal-delay-1">
-        <img src="Lira Voss .jpeg" alt="Lira Voss" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
+        <img src="Lira Voss .jpeg" alt="Lira Voss" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
         <h3 class="character-name">Lira Voss</h3>
         <p class="character-desc">The intuitive born in the Interior. She reads the living frequency grid like breathing. Her connection to the planet's hidden operating system makes her the heart of the awakening.</p>
       </div>
       <div class="character-card reveal reveal-delay-2">
-        <img src="Kai.jpeg" alt="Kai Resonance" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
+        <img src="Kai.jpeg" alt="Kai Resonance" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
         <h3 class="character-name">Kai Resonance</h3>
         <p class="character-desc">The sound engineer sustaining the original tone for eight months. His music became the signal that first stirred the grid. He carries the overlap between the old world and the new.</p>
       </div>
       <div class="character-card reveal reveal-delay-3">
-        <img src="Elias .jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading:lazy;">
+        <img src="Elias .jpeg" alt="Elias" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block;margin-bottom:1.2rem;border-bottom:1px solid rgba(0,201,177,0.12); loading="lazy"">
         <h3 class="character-name">Elias</h3>
         <p class="character-desc">The quiet cartographer who can read the Echo Codex like no one else. The patterns have lived in his mind since childhood. He is the key that unlocks the ancient notation.</p>
       </div>
@@ -242,7 +244,7 @@
     <p style="margin-bottom: 1.5rem; font-style: italic; font-size: 0.95rem; color: var(--text-dim);">
       Scan the QR codes in the book to activate the short frequency videos from the Entre Dos channel.
     </p>
-    <img src="SoundsCode.png" alt="Scan to enter the Echo Archive" style="width:140px; height:140px; display:block; margin: 0 auto; loading:lazy;">
+    <img src="SoundsCode.png" alt="Scan to enter the Echo Archive" style="width:140px; height:140px; display:block; margin: 0 auto; loading="lazy"">
     <span style="display:block; margin-top:0.8rem; letter-spacing: 0.2em;">SCAN TO ENTER THE ARCHIVE</span>
   </div>
 </section>
@@ -314,8 +316,17 @@ muteBtn.addEventListener('click', () => {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.getElementById('notifyBtn').addEventListener('click', (e) => {
+  e.preventDefault();
 
+  const subject = encodeURIComponent("Notify Me When Available");
+  const body = encodeURIComponent("I'd like to be notified when Tarenis is available.");
+
+  window.location.href = `mailto:oderaycortega@gmail.com?subject=${subject}&body=${body}`;
+});
+  
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  
   // Unlock Gate Logic
   const overlay = document.getElementById('unlockOverlay');
   const closeBtn = document.getElementById('unlockClose');
@@ -328,11 +339,18 @@ muteBtn.addEventListener('click', () => {
   });
 
   // Simple placeholder for terminal enter
-  codenameInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      alert("Signal Received: " + codenameInput.value);
-    }
-  });
+  codenameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const value = codenameInput.value.trim();
+    if (!value) return;
+
+    // save codename (optional)
+    localStorage.setItem('codename', value);
+
+    // open the unlock overlay
+    overlay.classList.remove('hidden');
+  }
+});
 </script>
 
 </body>
