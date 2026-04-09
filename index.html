@@ -13,25 +13,33 @@
 
   <style>
     :root {
-      --void: #050508; --deep: #0a0a12; --surface: #0f0f1a; --panel: #13131f;
-      --teal: #00c9b1; --teal-dim: #007a6d; --teal-glow: rgba(0,201,177,0.15);
-      --gold: #c9a84c; --gold-dim: #7a6030; --gold-glow: rgba(201,168,76,0.12);
-      --vellum: #f0e6c8; --vellum-dim: #b8a87a; --text: #e8e0d0; --text-dim: #8a8070;
-      --border: rgba(201,168,76,0.2); --border-teal: rgba(0,201,177,0.2);
-      --red: #c94c4c;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { background:var(--void); color:var(--text); font-family:'EB Garamond',Georgia,serif; font-size:18px; line-height:1.7; overflow-x:hidden; }
-    a { text-decoration:none; }
-    section { scroll-margin-top:100px; }
-    #particles { position:fixed; inset:0; width:100%; height:100%; z-index:-3; pointer-events:none; }
+  --void: #050508; --deep: #0a0a12; --surface: #0f0f1a; --panel: #13131f;
+  --teal: #00c9b1; --teal-dim: #007a6d; --teal-glow: rgba(0,201,177,0.15);
+  --gold: #c9a84c; --gold-dim: #7a6030; --gold-glow: rgba(201,168,76,0.12);
+  --vellum: #f0e6c8; --vellum-dim: #b8a87a; --text: #e8e0d0; --text-dim: #8a8070;
+  --border: rgba(201,168,76,0.2); --border-teal: rgba(0,201,177,0.2);
+  --red: #c94c4c;
 
-    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-delay-1 { transition-delay:0.12s; }
-    .reveal-delay-2 { transition-delay:0.24s; }
-    .reveal-delay-3 { transition-delay:0.36s; }
+  --mgmt-yellow: #d4d44d; 
+  --mgmt-green: #2d4d2d;
+  --mgmt-flicker: rgba(212, 212, 77, 0.1);
+  --signal-blue: #00f2ff; 
+  --signal-glow: rgba(0, 242, 255, 0.4);
+}
+
+@keyframes resonancePulse {
+  0% { box-shadow: 0 0 5px var(--signal-glow); border-color: rgba(0, 242, 255, 0.2); }
+  50% { box-shadow: 0 0 20px var(--signal-glow); border-color: rgba(0, 242, 255, 0.6); }
+  100% { box-shadow: 0 0 5px var(--signal-glow); border-color: rgba(0, 242, 255, 0.2); }
+}
+
+.character-card:hover {
+  animation: resonancePulse 1.5s infinite ease-in-out;
+  transform: scale(1.02);
+  border-color: var(--signal-blue);
+}
+
+@keyframes blink { 50% { opacity: 0; } }
 
     /* ── SOUND TOGGLE ── */
     #globalMute { 
@@ -135,12 +143,36 @@
       .nav-links.open { transform:translateX(0); }
       .nav-toggle { display:block; }
     }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
+                  transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.2s; }
+    .reveal-delay-2 { transition-delay: 0.4s; }
+    .reveal-delay-3 { transition-delay: 0.6s; }
+
+    /* Management Interference Flickering for Evidence Locker */
+    .liminal-weakness {
+      filter: drop-shadow(0 0 10px var(--signal-glow));
+      border: 1px solid var(--signal-blue) !important;
+    }
+
   </style>
 </head>
 <body>
 
 <button id="globalMute">SOUND: OFF</button>
-<canvas id="particles"></canvas>
 
 <nav>
   <a href="#" class="nav-logo">Entre Dos</a>
@@ -222,6 +254,31 @@
   </div>
 </section>
 
+<section id="evidence" style="padding: 5rem 1.25rem; background: var(--void);">
+  <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--gold);" class="reveal">Evidence Locker: Node 07</h2>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width:1200px; margin: 3rem auto;">
+  
+  <div class="reveal" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+    <img src="tJyUZ.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Bimini Node">
+    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: CLASSIFIED GEOLOGY</p>
+    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: 432HZ RESONANCE DETECTED</p>
+  </div>
+
+  <div class="reveal reveal-delay-1" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+    <img src="cpQ8k.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Atlantic Node">
+    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: SUBMERGED STRUCTURE</p>
+    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: VITRIFICATION COMPLETE</p>
+  </div>
+
+  <div class="reveal reveal-delay-2" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+    <img src="pYjGc.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Andean Node">
+    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: INACTIVE MONITORING</p>
+    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: ECHO CODEX DETECTED</p>
+  </div>
+
+</div>
+</section>
+
 <section id="listen" style="padding:8rem 1.25rem; text-align:center; background:var(--surface);">
   <h2 style="text-align:center; font-family:'Cinzel Decorative',serif; font-size:clamp(2.1rem,5vw,3rem); color:var(--vellum); margin-bottom:1.2rem;" class="reveal">The Signal Opens the Gate</h2>
   <p style="max-width:760px; margin:0 auto 3rem; text-align:center; color:var(--text-dim);" class="reveal">If you know the phrase, type it below.</p>
@@ -289,13 +346,24 @@ muteBtn.addEventListener('click', () => {
   muteBtn.style.color = isMuted ? "var(--teal)" : "var(--gold)";
   });
   
-  // Navigation Toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    navToggle.classList.toggle('active');
+  // --- NAVIGATION TOGGLE LOGIC ---
+
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+// 1. Open/Close Menu via Hamburger Button
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  navToggle.classList.toggle('active');
+});
+
+// 2. Auto-Close Menu when a Link is Clicked (For Mobile UX)
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('active');
   });
+});
 
   // Terminal Auto-Focus Logic (Mechanical Necessity for Mobile UX)
   const terminalArea = document.getElementById('terminalArea');
@@ -327,12 +395,87 @@ muteBtn.addEventListener('click', () => {
     if (e.key === "Escape") overlay.classList.add('hidden');
   });
 
-  // Simple placeholder for terminal enter
   codenameInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      alert("Signal Received: " + codenameInput.value);
+  if (e.key === 'Enter') {
+    const name = codenameInput.value.toUpperCase();
+    codenameInput.value = ""; // Clear input
+    
+    // Create a "Management" style intercept message
+    const terminal = document.getElementById('codenameInline');
+    terminal.innerHTML = `
+      <div class="terminal-header" style="color:var(--red)">⚠ SIGNAL INTERCEPTED</div>
+      <p style="font-family:monospace; color:var(--mgmt-yellow); font-size:0.8rem; text-align:left; line-height:1.4;">
+        ID: ${name}<br>
+        STATUS: UNMANAGED FREQUENCY DETECTED<br>
+        LOCATION: [REDACTED]<br><br>
+        <span style="color:var(--signal-blue); animation: blink 1s infinite; display:block; margin-top:10px;">
+           ORION: "FOLLOW THE ROAD, ${name}."
+        </span>
+      </p>
+    `;
+    
+    // Trigger the unlock overlay after 2 seconds
+    setTimeout(() => {
+      document.getElementById('unlockOverlay').classList.remove('hidden');
+    }, 2000);
+  }
+});
+  // --- LIMINAL HOUR LOGIC ---
+
+// 1. Capture the "Evidence" as it looks on page load so we can restore it later
+// Place this at the very top of your <script> tag
+const originalEvidenceHTML = document.getElementById('evidence').innerHTML;
+
+function checkLiminalPhase() {
+  const hour = new Date().getHours();
+  const evidenceSection = document.getElementById('evidence');
+
+  // Define Liminal Hours: 3AM-5AM (Dawn) and 6PM-8PM (Dusk)
+  const isLiminal = (hour >= 3 && hour <= 5) || (hour >= 18 && hour <= 20);
+
+  if (!isLiminal) {
+    // --- MANAGEMENT IS STRONG: DATA SUPPRESSED ---
+    evidenceSection.style.opacity = "0.1";
+    evidenceSection.style.pointerEvents = "none";
+    evidenceSection.style.filter = "grayscale(1) blur(4px)";
+    
+    // Swap original cards for the "Signal Lost" placeholder
+    evidenceSection.innerHTML = `
+      <div class="signal-lost-wrapper" style="padding: 8rem 1.25rem; text-align:center;">
+        <h2 style="font-family:'Cinzel Decorative'; color:var(--red); letter-spacing:4px;">
+          [ SIGNAL LOST ]
+        </h2>
+        <p style="font-family:monospace; color:var(--text-dim); margin-top:1rem; font-size:0.8rem;">
+          RECONNECT DURING LIRIAL DUSK OR DAWN PHASE
+        </p>
+      </div>
+    `;
+    console.log("MANAGEMENT SIGNAL STRENGTH: OPTIMAL. DATA SUPPRESSED.");
+    
+  } else {
+    // --- MANAGEMENT IS WEAK: REVEAL THE TRUTH ---
+    
+    // Check if we need to restore the HTML (prevents flickering if already restored)
+    if (evidenceSection.innerHTML.includes('SIGNAL LOST')) {
+      evidenceSection.innerHTML = originalEvidenceHTML; 
+      
+      // CRITICAL: Re-link the scroll observer to the new elements
+      evidenceSection.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
-  });
+    
+    evidenceSection.style.opacity = "1";
+    evidenceSection.style.pointerEvents = "auto";
+    evidenceSection.style.filter = "none";
+    evidenceSection.classList.add('liminal-weakness');
+    console.log("SIGNAL LEAK DETECTED: LIMINAL PHASE ACTIVE.");
+  }
+}
+
+// Run the check immediately on load
+checkLiminalPhase();
+
+// Check every minute so the site "unlocks" live without a refresh
+setInterval(checkLiminalPhase, 60000);
 </script>
 
 </body>
