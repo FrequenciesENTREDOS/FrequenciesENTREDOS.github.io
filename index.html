@@ -81,6 +81,48 @@
     @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
+    /* --- HERO DEPTH RESTORATION --- */
+    .hero-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(5,5,8,0.7) 0%, 
+        rgba(5,5,8,0.2) 50%, 
+        rgba(5,5,8,0.85) 100%
+      ) !important;
+    }
+
+    .hero-title span {
+      color: var(--teal);
+      text-shadow: 0 0 20px var(--teal-glow);
+    }
+
+    /* --- REFINED SIGNAL LOST LOOK --- */
+    .signal-lost-wrapper {
+      border: 1px dashed var(--red);
+      background: rgba(201, 76, 76, 0.05);
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 3rem !important;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Adds a subtle "scanning line" effect to the lost signal box */
+    .signal-lost-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: var(--red);
+      opacity: 0.2;
+      animation: scanline 3s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
     /* ── BUTTONS ── */
     .btn-primary,.btn-secondary { display:inline-block; padding:0.95rem 1.8rem; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; border-radius:4px; transition:transform 0.25s,box-shadow 0.25s; cursor:pointer; }
     .btn-primary { background:var(--gold); color:#050508; box-shadow:0 0 28px rgba(201,168,76,0.22); border:none; }
@@ -254,29 +296,49 @@
   </div>
 </section>
 
-<section id="evidence" style="padding: 5rem 1.25rem; background: var(--void);">
-  <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--gold);" class="reveal">Evidence Locker: Node 07</h2>
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width:1200px; margin: 3rem auto;">
-  
-  <div class="reveal" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
-    <img src="tJyUZ.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Bimini Node">
-    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: CLASSIFIED GEOLOGY</p>
-    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: 432HZ RESONANCE DETECTED</p>
-  </div>
+<section id="evidence" style="padding: 5rem 1.25rem; background: var(--void); min-height: 500px; display: flex; align-items: center; justify-content: center;">
+  <div class="section-shell" style="width: 100%; max-width: 1200px;">
+    
+    <div id="signal-lost-msg" class="signal-lost-wrapper" style="display:none; text-align:center;">
+        <h2 style="font-family:'Cinzel Decorative'; color:var(--red); letter-spacing:4px; font-size: 1.4rem; margin-bottom: 1rem;">
+          ⚠ ACCESS RESTRICTED
+        </h2>
+        <p style="font-family:monospace; color:var(--text-dim); font-size:0.8rem; line-height: 1.8; text-transform: uppercase;">
+          ORION SYSTEM STATUS: OPTIMAL<br>
+          LOCAL FREQUENCY: ENCRYPTED<br>
+          PHASE: NON-LIMINAL<br><br>
+          <span style="color:var(--mgmt-yellow); animation: blink 1.5s infinite;">
+            Return during Dusk (18:00) or Dawn (03:00)
+          </span>
+        </p>
+    </div>
 
-  <div class="reveal reveal-delay-1" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
-    <img src="cpQ8k.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Atlantic Node">
-    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: SUBMERGED STRUCTURE</p>
-    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: VITRIFICATION COMPLETE</p>
-  </div>
+    <div id="evidence-content">
+      <h2 style="font-family:'Cinzel Decorative'; text-align:center; color:var(--gold); margin-bottom: 3rem;" class="reveal">Evidence Locker: Node 07</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <div class="reveal" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+          <img src="tJyUZ.jpg" style="width:100%; border: 1px solid var(--border-teal);" alt="Bimini Node">
+          <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: CLASSIFIED GEOLOGY</p>
+          <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: 432HZ RESONANCE DETECTED</p>
+        </div>
 
-  <div class="reveal reveal-delay-2" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
-    <img src="pYjGc.jpg" style="width:100%; filter: sepia(0.5) contrast(1.2); border: 1px solid var(--border-teal);" alt="Andean Node">
-    <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: INACTIVE MONITORING</p>
-    <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: ECHO CODEX DETECTED</p>
-  </div>
+        <div class="reveal reveal-delay-1" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+          <img src="cpQ8k.jpg" style="width:100%; border: 1px solid var(--border-teal);" alt="Atlantic Node">
+          <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: SUBMERGED STRUCTURE</p>
+          <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: VITRIFICATION COMPLETE</p>
+        </div>
 
-</div>
+        <div class="reveal reveal-delay-2" style="border: 1px solid var(--border); padding: 1rem; background: var(--panel);">
+          <img src="pYjGc.jpg" style="width:100%; border: 1px solid var(--border-teal);" alt="Andean Node">
+          <p style="font-family:'Cinzel'; font-size: 0.6rem; color: var(--mgmt-yellow); margin-top: 0.5rem;">STATUS: INACTIVE MONITORING</p>
+          <p style="font-size: 0.85rem; color: var(--signal-blue); font-family: monospace;">[SIGNAL]: ECHO CODEX DETECTED</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <section id="listen" style="padding:8rem 1.25rem; text-align:center; background:var(--surface);">
@@ -420,62 +482,54 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     }, 2000);
   }
 });
-  // --- LIMINAL HOUR LOGIC ---
+  // --- LIMINAL HOUR LOGIC: FULL INTEGRATION ---
 
-// 1. Capture the "Evidence" as it looks on page load so we can restore it later
-// Place this at the very top of your <script> tag
-const originalEvidenceHTML = document.getElementById('evidence').innerHTML;
+  function checkLiminalPhase() {
+    const hour = new Date().getHours();
+    const evidenceContent = document.getElementById('evidence-content');
+    const signalLostMsg = document.getElementById('signal-lost-msg');
+    const mainEvidenceSection = document.getElementById('evidence');
 
-function checkLiminalPhase() {
-  const hour = new Date().getHours();
-  const evidenceSection = document.getElementById('evidence');
+    // Define Liminal Hours: 3AM-5AM (Dawn) and 6PM-8PM (Dusk)
+    const isLiminal = (hour >= 3 && hour <= 5) || (hour >= 18 && hour <= 20);
 
-  // Define Liminal Hours: 3AM-5AM (Dawn) and 6PM-8PM (Dusk)
-  const isLiminal = (hour >= 3 && hour <= 5) || (hour >= 18 && hour <= 20);
-
-  if (!isLiminal) {
-    // --- MANAGEMENT IS STRONG: DATA SUPPRESSED ---
-    evidenceSection.style.opacity = "0.1";
-    evidenceSection.style.pointerEvents = "none";
-    evidenceSection.style.filter = "grayscale(1) blur(4px)";
+    if (!isLiminal) {
+      // STATE: MANAGEMENT ACTIVE (Data Suppressed)
+      if (evidenceContent) evidenceContent.style.display = "none";
+      if (signalLostMsg) signalLostMsg.style.display = "block";
     
-    // Swap original cards for the "Signal Lost" placeholder
-    evidenceSection.innerHTML = `
-      <div class="signal-lost-wrapper" style="padding: 8rem 1.25rem; text-align:center;">
-        <h2 style="font-family:'Cinzel Decorative'; color:var(--red); letter-spacing:4px;">
-          [ SIGNAL LOST ]
-        </h2>
-        <p style="font-family:monospace; color:var(--text-dim); margin-top:1rem; font-size:0.8rem;">
-          RECONNECT DURING LIRIAL DUSK OR DAWN PHASE
-        </p>
-      </div>
-    `;
-    console.log("MANAGEMENT SIGNAL STRENGTH: OPTIMAL. DATA SUPPRESSED.");
+      if (mainEvidenceSection) {
+          mainEvidenceSection.style.filter = "grayscale(1) brightness(0.7)";
+      }
+      console.log("MANAGEMENT SIGNAL STRENGTH: OPTIMAL. DATA SUPPRESSED.");
     
-  } else {
-    // --- MANAGEMENT IS WEAK: REVEAL THE TRUTH ---
+    } else {
+      // STATE: LIMINAL PHASE (The Truth Revealed)
+      if (evidenceContent) evidenceContent.style.display = "block";
+      if (signalLostMsg) signalLostMsg.style.display = "none";
     
-    // Check if we need to restore the HTML (prevents flickering if already restored)
-    if (evidenceSection.innerHTML.includes('SIGNAL LOST')) {
-      evidenceSection.innerHTML = originalEvidenceHTML; 
-      
-      // CRITICAL: Re-link the scroll observer to the new elements
-      evidenceSection.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      if (mainEvidenceSection) {
+          mainEvidenceSection.style.filter = "none";
+          mainEvidenceSection.classList.add('liminal-weakness');
+      }
+    
+      // Re-trigger the scroll reveals so the cards animate in
+      if (evidenceContent) {
+          evidenceContent.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+          });
+      }
+    
+      console.log("SIGNAL LEAK DETECTED: LIMINAL PHASE ACTIVE.");
     }
-    
-    evidenceSection.style.opacity = "1";
-    evidenceSection.style.pointerEvents = "auto";
-    evidenceSection.style.filter = "none";
-    evidenceSection.classList.add('liminal-weakness');
-    console.log("SIGNAL LEAK DETECTED: LIMINAL PHASE ACTIVE.");
   }
-}
 
-// Run the check immediately on load
-checkLiminalPhase();
+  // 1. Kick it off immediately
+  checkLiminalPhase();
 
-// Check every minute so the site "unlocks" live without a refresh
-setInterval(checkLiminalPhase, 60000);
+  // 2. Check every 30 seconds to catch the transition live
+  setInterval(checkLiminalPhase, 30000);
+
 </script>
 
 </body>
