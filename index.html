@@ -231,27 +231,36 @@ section{position:relative;padding:3rem 0;}
   position: relative;
   overflow: hidden;
   aspect-ratio: 16/9;
-  min-height: 350px; /* Ensures the container is tall enough to prevent text overlap */
   background: var(--dark);
 }
-  
-.world-cell.tall{aspect-ratio:4/5;}
-.world-cell.wide{grid-column:span 2;}
-.world-cell img,.world-cell video{
-  width:100%;height:100%;object-fit:cover;
-  filter:brightness(0.75) saturate(1.2);
-  transition:all 0.5s ease;
+
+.world-cell.tall { aspect-ratio: 4/5; }
+.world-cell.wide { grid-column: span 2; }
+
+.world-cell img,
+.world-cell video {
+  position: absolute;   /* ← KEY FIX: takes media out of flow */
+  inset: 0;             /* top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75) saturate(1.2);
+  transition: all 0.5s ease;
 }
-.world-cell:hover img,.world-cell:hover video{
-  filter:brightness(1) saturate(1.4);transform:scale(1.03);
+
+.world-cell:hover img,
+.world-cell:hover video {
+  filter: brightness(1) saturate(1.4);
+  transform: scale(1.03);
 }
+
 .world-cell-label {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2rem 1.5rem 1rem; /* Added more top padding for the gradient */
-  background: linear-gradient(to top, rgba(3,8,16,1) 30%, transparent); /* Solid dark base to clear the text */
+  padding: 2rem 1.5rem 1rem;
+  background: linear-gradient(to top, rgba(3,8,16,0.95) 0%, rgba(3,8,16,0.6) 50%, transparent 100%);
   font-family: var(--mono);
   font-size: 0.65rem;
   color: var(--teal);
@@ -262,7 +271,7 @@ section{position:relative;padding:3rem 0;}
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.world-cell:hover .world-cell-label{opacity:1}
+.world-cell:hover .world-cell-label { opacity: 1; }
 
 /* ═══════════════════════════════════════
    CHARACTERS
@@ -923,7 +932,6 @@ section {
     </div>
     <div class="archive-contact">
       <a href="mailto:oderaycortega@gmail.com?subject=Inquiry — Entre Dos Universe">Contact the Author</a>
-</p>
     </div>
   </div>
 </section>
@@ -936,7 +944,7 @@ section {
     <li><a href="#books">Books</a></li>
     <li><a href="#characters">The Triad</a></li>
     <li><a href="#music">Echo Archive</a></li>
-    <li><a href="mailto:oderaycortega@gmail.com?subject=Inquiry — Entre Dos Universe">Contact</a></li>
+    <li><a href="mailto:oderaycortega@gmail.com?subject=Inquiry%20%E2%80%94%20Entre%20Dos%20Universe">Contact</a></li>
   </ul>
   <div class="footer-freq">432 Hz · VARENTHIS NODE · SIGNAL ACTIVE · © ODERAY ORTEGA</div>
 </footer>
