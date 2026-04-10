@@ -3,171 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENTRE DOS | The Metal Library</title>
+    <title>ENTRE DOS | The Signal</title>
     <style>
-        :root {
-            --glow: #00f2ff;
-            --metal: #1a1a1a;
-            --text: #e0e0e0;
-        }
+        :root { --glow: #00f2ff; --metal: #121212; --accent: #ff00ea; --text: #e0e0e0; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; color: var(--text); font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        
+        .bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; object-fit: cover; opacity: 0; transition: opacity 1.5s ease; }
+        .visible-bg { opacity: 0.5; }
 
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            background: #000;
-            color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
+        .screen { display: none; height: 100vh; width: 100%; flex-direction: column; align-items: center; justify-content: start; padding: 60px 20px; box-sizing: border-box; overflow-y: auto; }
+        .active { display: flex; animation: scanline 0.5s ease-out; }
 
-        /* Video Background Logic */
-        .bg-layer {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1; object-fit: cover;
-            opacity: 0.5; transition: opacity 1s ease;
-        }
+        @keyframes scanline { from { filter: brightness(3); opacity: 0; } to { filter: brightness(1); opacity: 1; } }
 
-        /* Screen Management */
-        .screen {
-            display: none;
-            height: 100vh;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.8); padding: 10px; display: flex; justify-content: center; gap: 20px; z-index: 100; border-bottom: 1px solid var(--glow); }
+        nav a { color: var(--glow); text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; }
 
-        .active { display: flex; animation: fadeIn 1s; }
+        /* UI Elements */
+        .glass-panel { background: rgba(20, 20, 20, 0.9); border: 1px solid var(--glow); padding: 25px; margin: 15px; max-width: 800px; border-radius: 2px; box-shadow: 0 0 15px rgba(0,242,255,0.1); }
+        .terminal-input { background: transparent; border: none; border-bottom: 1px solid var(--glow); color: var(--glow); font-family: monospace; font-size: 1.2rem; outline: none; width: 100%; max-width: 400px; text-align: center; }
+        .btn { padding: 10px 20px; border: 1px solid var(--glow); color: var(--glow); background: transparent; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; margin-top: 10px; }
+        .btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Lore Grid */
+        .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 20px; }
+        .character-card { border-left: 4px solid var(--glow); background: rgba(0,0,0,0.6); padding: 20px; text-align: left; }
+        .character-card h3 { margin-top: 0; color: var(--glow); letter-spacing: 3px; }
 
-        /* Terminal Styling */
-        #terminal-box {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--glow);
-            padding: 20px;
-            width: 80%; max-width: 600px;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-            font-family: 'Courier New', monospace;
-        }
-
-        input {
-            background: transparent; border: none; color: var(--glow);
-            font-size: 1.2rem; width: 80%; outline: none;
-        }
-
-        /* Character Cards */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px; width: 90%;
-        }
-
-        .card {
-            background: rgba(26, 26, 26, 0.9);
-            border-bottom: 3px solid var(--glow);
-            padding: 15px; border-radius: 5px;
-        }
-
-        .btn {
-            margin-top: 20px;
-            padding: 10px 25px;
-            background: transparent;
-            border: 1px solid var(--glow);
-            color: var(--glow);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .btn:hover { background: var(--glow); color: #000; }
-
-        /* Hidden Vault Glitch Effect */
-        .vault-text { color: #fff; text-shadow: 0 0 10px var(--glow); }
-
+        /* Lira's Glitch Effect */
+        .glitch-text:hover { animation: glitch 0.3s infinite; color: var(--accent); }
+        @keyframes glitch { 0% { transform: translate(2px,0); } 50% { transform: translate(-2px,0); } 100% { transform: translate(0,0); } }
     </style>
 </head>
 <body>
 
-    <video id="bg-main" class="bg-layer" autoplay muted loop src="g2pzW.mp4"></video>
-    <video id="bg-tarenis" class="bg-layer" style="opacity:0" muted loop src="AEhsD.mp4"></video>
-    <video id="bg-vault" class="bg-layer" style="opacity:0" muted loop src="L9QXU.mp4"></video>
+    <video id="bg-landing" class="bg-layer visible-bg" autoplay muted loop src="g2pzW.mp4"></video>
+    <video id="bg-tarenis" class="bg-layer" muted loop src="AEhsD.mp4"></video>
+    <video id="bg-other" class="bg-layer" muted loop src="L9QXU.mp4"></video>
+
+    <nav>
+        <a onclick="showScreen('landing')">TERMINAL</a>
+        <a onclick="showScreen('tarenis')">TARENIS ARCHIVE</a>
+        <a onclick="showScreen('other')">BEYOND THE GRID</a>
+    </nav>
 
     <section id="screen-landing" class="screen active">
-        <h1 style="letter-spacing: 5px;">ENTRE DOS UNIVERSE</h1>
-        <div id="terminal-box">
-            <div id="logs">Welcome to the Metal Library. Establish Identity.</div>
-            <div style="margin-top:15px;">
-                <span>></span> <input type="text" id="cmd-input" placeholder="Enter Codename..." autofocus>
-            </div>
+        <h1 style="font-size: 3rem; letter-spacing: 10px; margin-top: 10vh;">ENTRE DOS</h1>
+        <p>“Where frequencies become stories”</p>
+        <div class="glass-panel" style="margin-top: 50px;">
+            <p id="terminal-msg">SYSTEM: Awaiting Frequency Authentication...</p>
+            <input type="text" id="cmd-input" class="terminal-input" placeholder="DECODE SIGNAL..." autofocus>
+            <p style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;">AUTH HINTS: Kai | Lira | Elias | ORION | Saksaywaman</p>
         </div>
-        <p style="font-size: 0.8rem; color: #555; margin-top: 10px;">Hint: Try "Kai", "Lira", "Elias", or the secret phrase.</p>
-        <button class="btn" onclick="showScreen('tarenis')">Enter Archive</button>
     </section>
 
     <section id="screen-tarenis" class="screen">
-        <h2>TARENIS: THE FREQUENCY GRID</h2>
-        <div class="grid-container">
-            <div class="card">
-                <h3>KAI RESONANCE</h3>
-                <p>Role: The Signal Carrier. Can make ancient grid hardware "remember."</p>
-            </div>
-            <div class="card">
-                <h3>LIRA VOSS</h3>
-                <p>Role: The Grid Interface. Sees the smoothing failures of the Interior.</p>
-            </div>
-            <div class="card">
-                <h3>ELIAS</h3>
-                <p>Role: The Cartographer. Mapping the Blind Paths drones can't see.</p>
-            </div>
+        <h2 style="letter-spacing: 5px;">THE TARENIS CHRONICLES</h2>
+        <div class="glass-panel">
+            <h3>Book 1: Tarenis - The Evidence</h3>
+            <p>The Grid's 440 Hz "Overlay" paints a world of smooth Bio-Lanes, but the frequency is shifting. Kai, Lira, and Elias must uncover the Metal Library before the Management dampens the signal forever.</p>
+            <a href="mailto:oderaycortega@gmail.com?subject=Notify Me: Tarenis Book 1" class="btn">SECURE BOOK 1</a>
         </div>
-        <div style="margin-top:30px;">
-            <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis" class="btn">Notify Me of Book 3</a>
-            <button class="btn" onclick="showScreen('landing')">Back to Terminal</button>
+
+        <div class="lore-grid">
+            <div class="character-card">
+                <h3>KAI RESONANCE</h3>
+                <p><b>Role:</b> The Signal Carrier / Frequency Interface</p>
+                <p>His body responds to 432 Hz tones. He is the operating system for ancient technology. Why has the grid waited 12,000 years for his specific tone?</p>
+            </div>
+            <div class="character-card">
+                <h3 class="glitch-text">LIRA VOSS</h3>
+                <p><b>Role:</b> The Grid Interface / Interior Anchor</p>
+                <p>She runs a frequency just below the baseline, making her "static" to the Grid. She sees the smoothing failures—the world as it actually is.</p>
+            </div>
+            <div class="character-card">
+                <h3>ELIAS</h3>
+                <p><b>Role:</b> The Cartographer</p>
+                <p>Investigating the "Blind Paths" where drones can't map. He holds a rusted fragment of the old lattice that still grows warm in his hand.</p>
+            </div>
         </div>
     </section>
 
-    <section id="screen-vault" class="screen">
-        <h1 class="vault-text">VAULT ACCESS GRANTED</h1>
-        <p>You have bypassed the Management's smoothing filters.</p>
-        <div class="grid-container">
-             <img src="r8BmQ.jpg" style="width:100%; border:1px solid var(--glow);" alt="The World Grid">
-             <p>CLASSIFIED: Global Frequency Map Detected.</p>
+    <section id="screen-other" class="screen">
+        <h2 style="letter-spacing: 5px;">ADDITIONAL TRANSMISSIONS</h2>
+        <div class="lore-grid">
+            <div class="character-card">
+                <h3>THE GHOST GARDEN</h3>
+                <p>Protocol 432: When the marrow remembers it was never the property of the overlay.</p>
+                <a href="mailto:oderaycortega@gmail.com?subject=Inquiry: Ghost Garden" class="btn">GET UPDATES</a>
+            </div>
+            <div class="character-card">
+                <h3>THE LATTICE PROTOCOL</h3>
+                <p>Exploring the connections between Saksaywaman, Bimini, and the global resonance nodes.</p>
+                <a href="mailto:oderaycortega@gmail.com?subject=Inquiry: Lattice" class="btn">GET UPDATES</a>
+            </div>
+            <div class="character-card">
+                <h3>FIRELINE SERIES</h3>
+                <p>Archive Status: Pending Restoration.</p>
+                <a href="mailto:oderaycortega@gmail.com?subject=Inquiry: Fireline" class="btn">NOTIFY ME</a>
+            </div>
         </div>
-        <button class="btn" onclick="showScreen('landing')">Exit Vault</button>
+        
+        <div class="glass-panel" style="margin-top: 40px;">
+            <h3>AUDIO RESONANCE</h3>
+            <p>Listen to the 432Hz inspired animations and sounds on YouTube.</p>
+            <a href="https://youtube.com/@YourChannel" target="_blank" class="btn">VISIT TRANSMISSION HUB</a>
+        </div>
     </section>
 
     <script>
         const input = document.getElementById('cmd-input');
-        const screens = ['landing', 'tarenis', 'vault'];
-        const bgs = { landing: 'bg-main', tarenis: 'bg-tarenis', vault: 'bg-vault' };
+        const screens = ['landing', 'tarenis', 'other'];
+        const bgs = ['bg-landing', 'bg-tarenis', 'bg-other'];
 
-        function showScreen(screenId) {
-            // Hide all screens
+        function showScreen(id) {
             screens.forEach(s => document.getElementById(`screen-${s}`).classList.remove('active'));
-            // Hide all backgrounds
-            Object.values(bgs).forEach(b => document.getElementById(b).style.opacity = "0");
-
-            // Show selected
-            document.getElementById(`screen-${screenId}`).classList.add('active');
-            document.getElementById(bgs[screenId]).style.opacity = "0.5";
+            bgs.forEach(b => document.getElementById(b).classList.remove('visible-bg'));
+            
+            document.getElementById(`screen-${id}`).classList.add('active');
+            document.getElementById(`bg-${id}`).classList.add('visible-bg');
         }
 
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const val = input.value.toLowerCase().trim();
-                
-                if (val === "the signal opens the gate") {
-                    showScreen('vault');
-                } else if (val === "kai" || val === "lira" || val === "elias") {
-                    showScreen('tarenis');
+                const msg = document.getElementById('terminal-msg');
+
+                if (val.includes("gate") || val === "orion") {
+                    msg.innerText = "CRITICAL ACCESS GRANTED. UNLOCKING VAULT...";
+                    setTimeout(() => showScreen('tarenis'), 1000);
+                } else if (val === "lira" || val === "kai" || val === "elias") {
+                    msg.innerText = `AUTHENTICATING ${val.toUpperCase()}...`;
+                    setTimeout(() => showScreen('tarenis'), 1000);
                 } else {
-                    document.getElementById('logs').innerText = "Frequency Mismatch. Access Denied.";
-                    setTimeout(() => { document.getElementById('logs').innerText = "Welcome to the Metal Library. Establish Identity."; }, 2000);
+                    msg.innerText = "FREQUENCY MISMATCH. ACCESS DENIED.";
+                    setTimeout(() => msg.innerText = "SYSTEM: Awaiting Frequency Authentication...", 2000);
                 }
                 input.value = '';
             }
