@@ -1,344 +1,1562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entre Dos — The Evidence</title>
-  <meta name="description" content="Evidence changes nothing. Recognition changes everything." />
-  <meta name="theme-color" content="#050508" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entre Dos Universe — Where Frequencies Become Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Raleway:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#00e5c8;--teal-dim:#00b09b;--teal-dark:#004d45;
+  --gold:#c9a84c;--gold-bright:#f0c040;
+  --dark:#030810;--dark2:#070f1a;--dark3:#0a1525;
+  --text:#c8d8e8;--text-dim:#5a7a8a;--text-bright:#e8f4ff;
+  --danger:#ff3c3c;--danger-dim:#8b0000;
+  --mono:'Share Tech Mono',monospace;
+  --serif:'Cinzel',serif;
+  --serif-deco:'Cinzel Decorative',serif;
+  --sans:'Raleway',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--dark);color:var(--text);
+  font-family:var(--sans);font-weight:300;
+  overflow-x:hidden;cursor:default;
+}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:2px}
 
-  <style>
-    :root {
-      --void:#050508; --deep:#0a0a12; --surface:#0f0f1a; --panel:#13131f;
-      --teal:#00c9b1; --teal-dim:#007a6d;
-      --gold:#c9a84c; --text:#e8e0d0; --text-dim:#8a8070;
-      --border:rgba(201,168,76,0.2); --border-teal:rgba(0,201,177,0.2);
-    }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;
+  background:linear-gradient(to bottom,rgba(3,8,16,0.95),transparent);
+  backdrop-filter:blur(4px);
+}
+.nav-logo{
+  font-family:var(--serif-deco);font-size:1rem;
+  color:var(--teal);letter-spacing:0.2em;text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:0.7rem;color:var(--text-dim);
+  text-decoration:none;letter-spacing:0.15em;text-transform:uppercase;
+  transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--teal)}
 
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      background:var(--void);
-      color:var(--text);
-      font-family:'EB Garamond', serif;
-      overflow-x:hidden;
-    }
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero{
+  position:relative;height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0.5;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(3,8,16,0.2) 0%,rgba(3,8,16,0.85) 100%);
+}
+.hero-scanlines{
+  position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  padding:2rem;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--teal);letter-spacing:0.4em;text-transform:uppercase;
+  animation:fadeInDown 1.2s ease both;
+}
+.hero-title{
+  font-family:var(--serif-deco);font-size:clamp(2.5rem,8vw,6rem);
+  color:var(--text-bright);line-height:1;letter-spacing:0.05em;
+  text-shadow:0 0 60px rgba(0,229,200,0.3),0 0 120px rgba(0,229,200,0.15);
+  animation:fadeInUp 1.4s ease 0.2s both;
+}
+.hero-title span{color:var(--teal)}
+.hero-tagline{
+  font-family:var(--sans);font-size:clamp(0.8rem,2vw,1.1rem);
+  color:var(--text-dim);letter-spacing:0.3em;font-weight:300;
+  font-style:italic;animation:fadeInUp 1.4s ease 0.4s both;
+}
+.hero-freq{
+  font-family:var(--mono);font-size:0.7rem;color:var(--teal);
+  opacity:0.6;letter-spacing:0.2em;animation:pulse 3s ease infinite;
+}
+.hero-buttons{
+  display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeInUp 1.4s ease 0.6s both;margin-top:1rem;
+}
+.btn-primary{
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;padding:1rem 2.5rem;
+  background:transparent;border:1px solid var(--teal);color:var(--teal);
+  position:relative;overflow:hidden;transition:all 0.3s;cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:var(--teal);transform:translateX(-105%);transition:transform 0.3s;
+}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary:hover{color:var(--dark)}
+.btn-secondary{
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;padding:1rem 2.5rem;
+  background:transparent;border:1px solid var(--gold);color:var(--gold);
+  position:relative;overflow:hidden;transition:all 0.3s;cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-secondary::before{
+  content:'';position:absolute;inset:0;
+  background:var(--gold);transform:translateX(-105%);transition:transform 0.3s;
+}
+.btn-secondary:hover::before{transform:translateX(0)}
+.btn-secondary:hover{color:var(--dark)}
 
-    section{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:2rem;
-      position:relative;
-    }
+/* waveform bottom */
+.hero-wave{
+  position:absolute;bottom:0;left:0;right:0;height:80px;
+  background:linear-gradient(to top,var(--dark),transparent);
+}
 
-    video, img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-1;
-    }
+/* ═══════════════════════════════════════
+   SECTION COMMONS
+═══════════════════════════════════════ */
+section{position:relative;padding:6rem 0;}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 3rem;}
+.section-label{
+  font-family:var(--mono);font-size:0.6rem;color:var(--teal);
+  letter-spacing:0.4em;text-transform:uppercase;margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.section-label::after{
+  content:'';flex:1;max-width:80px;height:1px;background:var(--teal);opacity:0.4;
+}
+.section-title{
+  font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);
+  color:var(--text-bright);letter-spacing:0.05em;margin-bottom:1rem;
+}
+.section-divider{
+  width:60px;height:2px;
+  background:linear-gradient(to right,var(--teal),transparent);
+  margin:1.5rem 0;
+}
 
-    .overlay{
-      position:absolute;
-      inset:0;
-      background:rgba(5,5,8,0.6);
-      z-index:-1;
-    }
+/* ═══════════════════════════════════════
+   BOOKS SECTION
+═══════════════════════════════════════ */
+#books{background:linear-gradient(to bottom,var(--dark),var(--dark2));}
+.books-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;
+  margin-top:3rem;
+}
+.book-card{position:relative;}
+.book-media{
+  position:relative;overflow:hidden;
+  aspect-ratio:2/3;border:1px solid rgba(0,229,200,0.2);
+  box-shadow:0 0 40px rgba(0,229,200,0.1);
+}
+.book-media img,.book-media video{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.6s ease;
+}
+.book-media:hover img,.book-media:hover video{transform:scale(1.04)}
+.book-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(3,8,16,0.8) 0%,transparent 50%);
+}
+.book-badge{
+  position:absolute;top:1rem;left:1rem;z-index:2;
+  font-family:var(--mono);font-size:0.55rem;color:var(--teal);
+  border:1px solid var(--teal);padding:0.3rem 0.8rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  background:rgba(3,8,16,0.8);
+}
+.book-info{padding:2rem 0 0;}
+.book-number{
+  font-family:var(--mono);font-size:0.6rem;color:var(--text-dim);
+  letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;
+}
+.book-title{
+  font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);
+  color:var(--text-bright);line-height:1.2;margin-bottom:1rem;
+}
+.book-subtitle{
+  font-family:var(--serif);font-size:0.9rem;color:var(--gold);
+  margin-bottom:1.5rem;font-weight:400;
+}
+.book-desc{
+  font-size:0.88rem;line-height:1.8;color:var(--text-dim);
+  margin-bottom:2rem;
+}
+.book-desc em{color:var(--teal);font-style:normal;}
+.btn-notify{
+  display:inline-block;font-family:var(--mono);font-size:0.7rem;
+  letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;
+  padding:0.8rem 2rem;border:1px solid var(--gold);color:var(--gold);
+  transition:all 0.3s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+}
+.btn-notify:hover{background:var(--gold);color:var(--dark)}
 
-    .text-block{
-      max-width:700px;
-      line-height:1.7;
-      font-size:1.2rem;
-    }
+/* ═══════════════════════════════════════
+   TARENIS WORLD
+═══════════════════════════════════════ */
+#world{background:var(--dark2);overflow:hidden;}
+.world-intro{
+  max-width:600px;margin-bottom:4rem;
+}
+.world-intro p{font-size:0.95rem;line-height:1.9;color:var(--text-dim);}
+.world-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:1px;background:rgba(0,229,200,0.1);
+}
+.world-cell{
+  position:relative;overflow:hidden;aspect-ratio:16/9;
+  background:var(--dark);
+}
+.world-cell.tall{aspect-ratio:4/5;}
+.world-cell.wide{grid-column:span 2;}
+.world-cell img,.world-cell video{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.75) saturate(1.2);
+  transition:all 0.5s ease;
+}
+.world-cell:hover img,.world-cell:hover video{
+  filter:brightness(1) saturate(1.4);transform:scale(1.03);
+}
+.world-cell-label{
+  position:absolute;bottom:0;left:0;right:0;padding:1.5rem;
+  background:linear-gradient(to top,rgba(3,8,16,0.9),transparent);
+  font-family:var(--mono);font-size:0.6rem;color:var(--teal);
+  letter-spacing:0.2em;text-transform:uppercase;opacity:0;
+  transition:opacity 0.3s;
+}
+.world-cell:hover .world-cell-label{opacity:1}
 
-    h1{
-      font-family:'Cinzel Decorative', serif;
-      font-size:3rem;
-      margin-bottom:1rem;
-    }
+/* ═══════════════════════════════════════
+   CHARACTERS
+═══════════════════════════════════════ */
+#characters{
+  background:linear-gradient(to bottom,var(--dark2),var(--dark3));
+}
+.chars-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;
+}
+.char-card{
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.char-img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;
+  filter:brightness(0.6) saturate(0.8);
+  transition:all 0.5s ease;
+}
+.char-card:hover .char-img{
+  filter:brightness(0.85) saturate(1.2);transform:scale(1.02);
+}
+.char-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(3,8,16,0.95) 0%,rgba(3,8,16,0.3) 50%,transparent 100%);
+  transition:opacity 0.3s;
+}
+.char-info{
+  position:absolute;bottom:0;left:0;right:0;padding:2rem 1.5rem;
+}
+.char-role{
+  font-family:var(--mono);font-size:0.55rem;color:var(--teal);
+  letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.4rem;
+}
+.char-name{
+  font-family:var(--serif);font-size:1.4rem;color:var(--text-bright);
+  margin-bottom:0.75rem;
+}
+.char-ability{
+  font-size:0.75rem;line-height:1.6;color:var(--text-dim);
+  max-height:0;overflow:hidden;transition:max-height 0.4s ease;
+}
+.char-card:hover .char-ability{max-height:80px}
+.char-hook{
+  font-family:var(--mono);font-size:0.6rem;color:var(--gold);
+  margin-top:0.75rem;font-style:italic;line-height:1.5;
+  max-height:0;overflow:hidden;transition:max-height 0.4s ease 0.1s;
+}
+.char-card:hover .char-hook{max-height:60px}
+.char-freq{
+  display:inline-block;margin-top:0.5rem;
+  font-family:var(--mono);font-size:0.55rem;
+  color:var(--teal);border:1px solid rgba(0,229,200,0.4);
+  padding:0.2rem 0.6rem;letter-spacing:0.1em;
+}
 
-    .small{
-      font-size:0.9rem;
-      color:var(--text-dim);
-    }
+/* ═══════════════════════════════════════
+   ORION
+═══════════════════════════════════════ */
+#orion{
+  background:var(--dark);
+  border-top:1px solid rgba(255,60,60,0.15);
+  border-bottom:1px solid rgba(255,60,60,0.15);
+}
+.orion-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.orion-media{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,60,60,0.3);
+}
+.orion-media video,.orion-media img{
+  width:100%;display:block;
+  filter:saturate(0.5) brightness(0.8);
+}
+.orion-media::before{
+  content:'▶ LIVE FEED';position:absolute;top:1rem;left:1rem;z-index:2;
+  font-family:var(--mono);font-size:0.55rem;color:var(--danger);
+  letter-spacing:0.2em;animation:blink 1.5s step-end infinite;
+}
+.orion-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(139,0,0,0.15),transparent);
+  pointer-events:none;
+}
+.orion-text .section-label{color:var(--danger)}
+.orion-text .section-label::after{background:var(--danger)}
+.orion-title{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);
+  color:var(--danger);text-shadow:0 0 40px rgba(255,60,60,0.3);
+  margin-bottom:1rem;letter-spacing:0.2em;
+}
+.orion-desc{
+  font-size:0.88rem;line-height:1.9;color:var(--text-dim);margin-bottom:2rem;
+}
+.orion-tag{
+  display:inline-block;font-family:var(--mono);font-size:0.6rem;
+  color:var(--danger);border:1px solid rgba(255,60,60,0.4);
+  padding:0.3rem 0.8rem;letter-spacing:0.15em;margin-bottom:0.5rem;margin-right:0.5rem;
+}
 
-    /* Terminal */
-    .terminal{
-      margin-top:2rem;
-      border:1px solid var(--border-teal);
-      padding:1rem;
-      background:rgba(0,0,0,0.6);
-    }
+/* ═══════════════════════════════════════
+   TERMINAL / SIGNAL GAME
+═══════════════════════════════════════ */
+#terminal{
+  position:relative;background:var(--dark);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;
+}
+.terminal-bg{
+  position:absolute;inset:0;overflow:hidden;
+}
+.terminal-bg video{
+  width:100%;height:100%;object-fit:cover;
+  opacity:0.08;filter:saturate(0) brightness(2);
+}
+.terminal-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(3,8,16,0.3),rgba(3,8,16,0.9));
+}
+.terminal-wrap{
+  position:relative;z-index:2;width:100%;max-width:800px;padding:2rem;
+}
+.terminal-header{
+  text-align:center;margin-bottom:3rem;
+}
+.terminal-header .section-label{justify-content:center}
+.terminal-header .section-label::after{display:none}
+.terminal-title{
+  font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.5rem);
+  color:var(--teal);margin-bottom:0.5rem;
+}
+.terminal-sub{
+  font-family:var(--mono);font-size:0.7rem;color:var(--text-dim);
+  letter-spacing:0.1em;
+}
+.terminal-box{
+  background:rgba(3,8,16,0.95);
+  border:1px solid rgba(0,229,200,0.3);
+  padding:0;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,229,200,0.08),inset 0 0 40px rgba(0,0,0,0.5);
+}
+.terminal-topbar{
+  background:rgba(0,229,200,0.05);
+  border-bottom:1px solid rgba(0,229,200,0.15);
+  padding:0.75rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.terminal-topbar-left{
+  display:flex;gap:0.5rem;
+}
+.terminal-dot{
+  width:10px;height:10px;border-radius:50%;
+}
+.terminal-dot.r{background:#ff5f57}
+.terminal-dot.y{background:#ffbd2e}
+.terminal-dot.g{background:#28ca41}
+.terminal-status{
+  font-family:var(--mono);font-size:0.6rem;
+  color:var(--teal);letter-spacing:0.1em;
+}
+.terminal-status-dot{
+  display:inline-block;width:6px;height:6px;
+  border-radius:50%;background:var(--teal);
+  margin-right:0.4rem;animation:pulse 2s ease infinite;
+}
+/* codename input area */
+.terminal-codename{
+  padding:1.5rem;border-bottom:1px solid rgba(0,229,200,0.1);
+  display:flex;align-items:center;gap:1rem;
+}
+.terminal-codename-label{
+  font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);
+  letter-spacing:0.1em;white-space:nowrap;
+}
+.terminal-codename-input{
+  flex:1;background:transparent;border:none;border-bottom:1px solid rgba(0,229,200,0.3);
+  color:var(--teal);font-family:var(--mono);font-size:0.75rem;
+  padding:0.3rem 0;outline:none;
+}
+.terminal-codename-input::placeholder{color:rgba(0,229,200,0.3)}
+.btn-set-codename{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;
+  background:transparent;border:1px solid var(--teal);color:var(--teal);
+  padding:0.4rem 1rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.btn-set-codename:hover{background:var(--teal);color:var(--dark)}
+/* output area */
+.terminal-output{
+  height:320px;overflow-y:auto;padding:1.5rem;
+  font-family:var(--mono);font-size:0.72rem;line-height:1.7;
+  scrollbar-width:thin;
+}
+.t-line{margin-bottom:0.3rem;opacity:0;animation:fadeIn 0.3s ease forwards;}
+.t-sys{color:var(--teal)}
+.t-warn{color:var(--gold)}
+.t-err{color:var(--danger)}
+.t-user{color:var(--text-dim)}
+.t-lore{color:var(--text);font-style:italic;padding-left:1rem;border-left:2px solid var(--teal-dim);margin:0.5rem 0}
+.t-unlock{
+  color:var(--gold-bright);font-size:0.8rem;
+  text-shadow:0 0 20px rgba(240,192,64,0.5);
+  animation:glow 1s ease infinite alternate;
+}
+/* progress bar */
+.terminal-progress{
+  padding:1rem 1.5rem;border-top:1px solid rgba(0,229,200,0.1);
+  border-bottom:1px solid rgba(0,229,200,0.1);
+}
+.progress-label{
+  font-family:var(--mono);font-size:0.6rem;color:var(--text-dim);
+  letter-spacing:0.1em;margin-bottom:0.5rem;
+  display:flex;justify-content:space-between;
+}
+.progress-bar{
+  height:2px;background:rgba(0,229,200,0.1);
+}
+.progress-fill{
+  height:100%;background:linear-gradient(to right,var(--teal-dim),var(--teal));
+  transition:width 0.8s ease;
+  box-shadow:0 0 8px var(--teal);
+}
+/* input row */
+.terminal-input-row{
+  padding:1rem 1.5rem;display:flex;align-items:center;gap:0.75rem;
+}
+.terminal-prompt{
+  font-family:var(--mono);font-size:0.75rem;color:var(--teal);
+  white-space:nowrap;
+}
+.terminal-input{
+  flex:1;background:transparent;border:none;
+  color:var(--text-bright);font-family:var(--mono);font-size:0.75rem;
+  outline:none;caret-color:var(--teal);
+}
+.terminal-input::placeholder{color:rgba(90,122,138,0.5)}
+.terminal-send{
+  background:transparent;border:1px solid rgba(0,229,200,0.3);
+  color:var(--teal);font-family:var(--mono);font-size:0.6rem;
+  padding:0.4rem 1rem;cursor:pointer;transition:all 0.2s;
+  letter-spacing:0.1em;text-transform:uppercase;
+}
+.terminal-send:hover{background:var(--teal);color:var(--dark)}
+.terminal-hint{
+  padding:0.75rem 1.5rem;
+  font-family:var(--mono);font-size:0.6rem;color:rgba(90,122,138,0.6);
+  letter-spacing:0.05em;
+}
 
-    .terminal input{
-      width:100%;
-      background:none;
-      border:none;
-      color:var(--text);
-      font-size:1.1rem;
-      outline:none;
-    }
+/* UNLOCK PANEL */
+.unlock-panel{
+  display:none;margin-top:3rem;
+  border:1px solid var(--gold);
+  background:rgba(3,8,16,0.97);
+  animation:fadeIn 0.8s ease;
+}
+.unlock-panel.visible{display:block}
+.unlock-header{
+  background:rgba(201,168,76,0.1);
+  border-bottom:1px solid rgba(201,168,76,0.3);
+  padding:1.5rem;text-align:center;
+}
+.unlock-header h3{
+  font-family:var(--serif);font-size:1.5rem;
+  color:var(--gold-bright);
+  text-shadow:0 0 30px rgba(240,192,64,0.4);
+}
+.unlock-header p{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--text-dim);margin-top:0.5rem;letter-spacing:0.1em;
+}
+.unlock-files{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(201,168,76,0.15);
+}
+.unlock-file{
+  background:var(--dark);padding:1rem;text-align:center;
+  cursor:pointer;transition:background 0.2s;
+}
+.unlock-file:hover{background:rgba(201,168,76,0.08)}
+.unlock-file-name{
+  font-family:var(--mono);font-size:0.6rem;color:var(--gold);
+  letter-spacing:0.1em;margin-bottom:0.5rem;text-transform:uppercase;
+}
+.unlock-file img{width:100%;border:1px solid rgba(201,168,76,0.2);}
+.unlock-file-type{
+  font-family:var(--mono);font-size:0.5rem;color:var(--text-dim);
+  margin-top:0.4rem;
+}
 
-    .response{
-      margin-top:1rem;
-      color:var(--gold);
-      min-height:60px;
-    }
+/* LIGHTBOX */
+.lightbox{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.95);
+  align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;}
 
-    /* Puzzle image */
-    .puzzle img{
-      max-width:700px;
-      width:100%;
-      position:relative;
-    }
+/* ═══════════════════════════════════════
+   SIGNAL BOARD
+═══════════════════════════════════════ */
+#signalboard{
+  background:linear-gradient(to bottom,var(--dark3),var(--dark));
+}
+.board-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;
+}
+.board-panel{
+  background:rgba(0,0,0,0.4);
+  border:1px solid rgba(0,229,200,0.15);
+  overflow:hidden;
+}
+.board-panel-header{
+  padding:1rem 1.5rem;
+  background:rgba(0,229,200,0.05);
+  border-bottom:1px solid rgba(0,229,200,0.1);
+  font-family:var(--mono);font-size:0.65rem;color:var(--teal);
+  letter-spacing:0.2em;text-transform:uppercase;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.board-panel-header::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--teal);animation:pulse 2s ease infinite;
+}
+.board-list{
+  padding:1rem;max-height:300px;overflow-y:auto;
+  font-family:var(--mono);font-size:0.7rem;
+}
+.board-item{
+  padding:0.6rem 0.5rem;border-bottom:1px solid rgba(0,229,200,0.06);
+  display:flex;align-items:center;gap:1rem;
+  animation:fadeIn 0.3s ease;
+}
+.board-codename{color:var(--teal);font-size:0.7rem;}
+.board-status{color:var(--gold);font-size:0.6rem;margin-left:auto;}
+.board-complete{color:var(--gold-bright)}
+.board-clues{color:var(--text-dim);font-size:0.6rem}
+/* transmission input */
+.transmission-input-area{
+  padding:1rem;border-top:1px solid rgba(0,229,200,0.1);
+  display:flex;gap:0.5rem;
+}
+.transmission-input{
+  flex:1;background:rgba(0,0,0,0.3);border:1px solid rgba(0,229,200,0.2);
+  color:var(--text);font-family:var(--mono);font-size:0.7rem;
+  padding:0.5rem 0.75rem;outline:none;
+}
+.transmission-input::placeholder{color:var(--text-dim);font-size:0.65rem}
+.btn-transmit{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;
+  background:transparent;border:1px solid var(--teal);color:var(--teal);
+  padding:0.5rem 1rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase;
+}
+.btn-transmit:hover{background:var(--teal);color:var(--dark)}
 
-    /* Grid sections */
-    .records, .comments{
-      padding:4rem 1rem;
-      background:var(--deep);
-    }
+/* ═══════════════════════════════════════
+   MUSIC
+═══════════════════════════════════════ */
+#music{
+  background:var(--dark2);
+  border-top:1px solid rgba(0,229,200,0.08);
+}
+.music-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.music-visual{
+  position:relative;
+}
+.music-qr-wrap{
+  position:relative;display:inline-block;
+  border:1px solid rgba(0,229,200,0.3);
+  background:rgba(0,0,0,0.5);padding:1rem;
+}
+.music-qr{width:100%;max-width:280px;display:block;filter:invert(1)}
+.music-qr-label{
+  font-family:var(--mono);font-size:0.55rem;color:var(--teal);
+  letter-spacing:0.15em;text-align:center;margin-top:0.75rem;
+  text-transform:uppercase;
+}
+.music-waveform{
+  margin-top:2rem;display:flex;align-items:center;
+  gap:2px;height:40px;
+}
+.music-bar{
+  flex:1;background:var(--teal);opacity:0.4;border-radius:1px;
+  animation:wavebar 1.2s ease-in-out infinite alternate;
+  transform-origin:bottom;
+}
+.music-text .section-title{margin-bottom:1.5rem}
+.music-desc{
+  font-size:0.9rem;line-height:1.9;color:var(--text-dim);margin-bottom:2rem;
+}
+.music-desc em{color:var(--teal);font-style:normal}
+.btn-archive{
+  display:inline-block;font-family:var(--mono);font-size:0.75rem;
+  letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;
+  padding:1rem 2.5rem;background:transparent;
+  border:1px solid var(--teal);color:var(--teal);
+  position:relative;overflow:hidden;transition:all 0.3s;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-archive::before{
+  content:'';position:absolute;inset:0;background:var(--teal);
+  transform:translateX(-105%);transition:transform 0.3s;
+}
+.btn-archive:hover::before{transform:translateX(0)}
+.btn-archive:hover{color:var(--dark)}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:1rem;
-    }
+/* ═══════════════════════════════════════
+   ARCHIVE
+═══════════════════════════════════════ */
+#archive{background:linear-gradient(to bottom,var(--dark),var(--dark2))}
+.archive-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1.5rem;margin-top:3rem;
+}
+.archive-card{
+  position:relative;cursor:pointer;
+  border:1px solid rgba(0,229,200,0.1);
+  overflow:hidden;transition:border-color 0.3s;
+}
+.archive-card:hover{border-color:rgba(0,229,200,0.4)}
+.archive-img{
+  width:100%;aspect-ratio:2/3;object-fit:cover;
+  filter:brightness(0.7) saturate(0.9);
+  transition:all 0.4s;display:block;
+}
+.archive-card:hover .archive-img{
+  filter:brightness(0.9) saturate(1.2);transform:scale(1.04);
+}
+.archive-info{
+  padding:1rem 0.75rem;
+  background:rgba(3,8,16,0.95);
+}
+.archive-title{
+  font-family:var(--serif);font-size:0.7rem;color:var(--text-bright);
+  line-height:1.3;margin-bottom:0.4rem;
+}
+.archive-desc{
+  font-size:0.62rem;line-height:1.5;color:var(--text-dim);
+}
+.archive-contact{
+  text-align:center;margin-top:3rem;
+  font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);
+  letter-spacing:0.1em;
+}
+.archive-contact a{color:var(--teal);text-decoration:none}
+.archive-contact a:hover{text-decoration:underline}
 
-    .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      padding:1rem;
-    }
+/* ═══════════════════════════════════════
+   WORLD MAP
+═══════════════════════════════════════ */
+#worldmap{
+  background:var(--dark3);
+  border-top:1px solid rgba(0,229,200,0.1);
+  border-bottom:1px solid rgba(0,229,200,0.1);
+}
+.worldmap-inner{
+  text-align:center;
+}
+.worldmap-video-wrap{
+  position:relative;margin:3rem auto;max-width:900px;
+  border:1px solid rgba(0,229,200,0.2);
+  box-shadow:0 0 60px rgba(0,229,200,0.08);
+}
+.worldmap-video-wrap video{width:100%;display:block}
+.worldmap-video-wrap::before{
+  content:'TARENIS GLOBAL GRID — RESONANCE NETWORK';
+  position:absolute;top:1rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:0.55rem;color:var(--teal);
+  letter-spacing:0.2em;background:rgba(3,8,16,0.8);padding:0.3rem 0.8rem;
+  white-space:nowrap;z-index:2;
+}
+.worldmap-nodes{
+  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  margin-top:2rem;
+}
+.map-node{
+  font-family:var(--mono);font-size:0.6rem;color:var(--text-dim);
+  letter-spacing:0.15em;text-transform:uppercase;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.map-node::before{
+  content:'◈';color:var(--teal);font-size:0.8rem;
+}
 
-    .card img{
-      width:100%;
-      position:relative;
-    }
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:var(--dark);
+  border-top:1px solid rgba(0,229,200,0.1);
+  padding:3rem 0;
+  text-align:center;
+}
+.footer-logo{
+  font-family:var(--serif-deco);font-size:1.2rem;
+  color:var(--teal);letter-spacing:0.2em;margin-bottom:1rem;
+}
+.footer-tagline{
+  font-family:var(--sans);font-size:0.75rem;
+  color:var(--text-dim);font-style:italic;letter-spacing:0.2em;
+  margin-bottom:2rem;
+}
+.footer-links{
+  display:flex;justify-content:center;gap:2rem;list-style:none;
+  margin-bottom:2rem;
+}
+.footer-links a{
+  font-family:var(--mono);font-size:0.6rem;color:var(--text-dim);
+  text-decoration:none;letter-spacing:0.15em;text-transform:uppercase;
+  transition:color 0.3s;
+}
+.footer-links a:hover{color:var(--teal)}
+.footer-freq{
+  font-family:var(--mono);font-size:0.55rem;
+  color:rgba(90,122,138,0.4);letter-spacing:0.2em;
+}
 
-    /* Footer */
-    footer{
-      text-align:center;
-      padding:2rem;
-      border-top:1px solid var(--border);
-    }
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes glow{from{text-shadow:0 0 10px rgba(240,192,64,0.3)}to{text-shadow:0 0 30px rgba(240,192,64,0.8)}}
+@keyframes wavebar{from{transform:scaleY(0.2)}to{transform:scaleY(1)}}
+@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
+@keyframes glitch{
+  0%,90%,100%{transform:translate(0)}
+  92%{transform:translate(-2px,1px)}
+  94%{transform:translate(2px,-1px)}
+  96%{transform:translate(-1px,2px)}
+  98%{transform:translate(1px,-2px)}
+}
+.glitch{animation:glitch 6s ease infinite}
 
-    /* Reveal */
-    .hidden{opacity:0;transform:translateY(40px);transition:all 1s}
-    .show{opacity:1;transform:translateY(0)}
-  </style>
+/* CURSOR */
+body{cursor:none}
+.custom-cursor{
+  position:fixed;width:16px;height:16px;
+  border:1px solid var(--teal);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:width 0.2s,height 0.2s,opacity 0.2s;
+  mix-blend-mode:screen;
+}
+.custom-cursor-dot{
+  position:fixed;width:4px;height:4px;
+  background:var(--teal);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+}
+a:hover~.custom-cursor,button:hover~.custom-cursor{width:32px;height:32px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .books-grid,.orion-inner,.music-inner,.board-grid{grid-template-columns:1fr;gap:2rem}
+  .chars-grid{grid-template-columns:1fr 1fr}
+  .archive-grid{grid-template-columns:repeat(3,1fr)}
+  .world-grid{grid-template-columns:1fr 1fr}
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1rem}
+  .section-inner{padding:0 1.5rem}
+  .unlock-files{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .chars-grid,.archive-grid{grid-template-columns:1fr 1fr}
+  .world-grid{grid-template-columns:1fr}
+  .hero-buttons{flex-direction:column;align-items:center}
+  .nav-links{display:none}
+}
+</style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section>
-  <video autoplay muted loop src="CoverVideo.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block">
-    <h1>The evidence is no longer hidden.</h1>
-    <p>It never was.</p>
-    <p class="small">Most people will see it and return to their rhythm.</p>
-    <p>You won’t.</p>
+<!-- CURSOR -->
+<div class="custom-cursor" id="cursor"></div>
+<div class="custom-cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Entre Dos</div>
+  <ul class="nav-links">
+    <li><a href="#books">Books</a></li>
+    <li><a href="#characters">Triad</a></li>
+    <li><a href="#orion">ORION</a></li>
+    <li><a href="#terminal">Signal</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#archive">Archive</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="CoverVideo.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-scanlines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Tarenis Universe · The Fireline Series</div>
+    <h1 class="hero-title glitch">Entre <span>Dos</span></h1>
+    <p class="hero-tagline">Where frequencies become stories</p>
+    <div class="hero-freq">▶ 432 Hz · SIGNAL DETECTED · NODE ACTIVE</div>
+    <div class="hero-buttons">
+      <a href="#books" class="btn-primary">Enter Tarenis</a>
+      <a href="#terminal" class="btn-secondary">Decode the Signal</a>
+    </div>
   </div>
+  <div class="hero-wave"></div>
 </section>
 
-<!-- EVIDENCE SECTIONS -->
-<section>
-  <video autoplay muted loop src="AEhsD.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>Bimini</p>
-    <p>Submerged geometry.</p>
-    <p>Not random.</p>
-  </div>
-</section>
-
-<section>
-  <video autoplay muted loop src="worldmapvoice.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>It doesn’t stay local.</p>
-    <p>It connects.</p>
-  </div>
-</section>
-
-<section>
-  <video autoplay muted loop src="g2pzW.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>Restricted zones.</p>
-    <p>Not for science.</p>
-  </div>
-</section>
-
-<section>
-  <video autoplay muted loop src="L9QXU.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>Not ancient.</p>
-    <p>Engineered.</p>
-  </div>
-</section>
-
-<section>
-  <img src="tJyUZ.jpg">
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>Still active.</p>
-  </div>
-</section>
-
-<section>
-  <img src="pYjGc.jpg">
-  <div class="overlay"></div>
-  <div class="text-block">
-    <p>It was never separate.</p>
-  </div>
-</section>
-
-<!-- TRIAD -->
-<section>
-  <div class="text-block">
-    <h1>The Triad</h1>
-    <p>Lira — It answers.</p>
-    <p>Kai — He carried it.</p>
-    <p>Elias — He recognized it.</p>
-  </div>
-</section>
-
-<!-- PUZZLE -->
-<section class="puzzle">
-  <img src="ORION.jpg">
-  <div class="text-block">
-    <p>Not everything is meant to be read.</p>
-
-    <div class="terminal">
-      <input id="input" placeholder="type what you recognize…" />
-      <div class="response" id="response"></div>
+<!-- ═══════ BOOKS ═══════ -->
+<section id="books">
+  <div class="section-inner">
+    <div class="section-label">Tarenis Universe</div>
+    <h2 class="section-title">The Fireline Series</h2>
+    <div class="section-divider"></div>
+    <div class="books-grid">
+      <!-- Book 1 -->
+      <div class="book-card">
+        <div class="book-media">
+          <span class="book-badge">Book One</span>
+          <img src="image.jpg" alt="Tarenis: The Fireline Universe">
+        </div>
+        <div class="book-info">
+          <div class="book-number">The Fireline Universe · Book 01</div>
+          <h3 class="book-title">Tarenis</h3>
+          <div class="book-subtitle">The North Polar Gate</div>
+          <p class="book-desc">
+            In the coastal city of <em>Haven Bay</em>, the Endless Resonance Event has left the world irrevocably changed. 
+            For <em>Kai Resonance</em>, a sound engineer who perceives the world through frequencies, the aftermath is a haunting duality: 
+            two complete versions of his life running simultaneously. Beneath the surface, <em>Lira Voss</em> discovers a sound code 
+            that shatters twelve thousand years of silence. Together with <em>Elias</em>, they must activate the North Polar Gate — 
+            beginning a restoration as messy and uncertain as the new world it creates.
+          </p>
+          <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book One" class="btn-notify">Notify Me →</a>
+        </div>
+      </div>
+      <!-- Book 2 -->
+      <div class="book-card">
+        <div class="book-media">
+          <span class="book-badge">Book Two</span>
+          <video autoplay muted loop playsinline>
+            <source src="BOOKCOVERVIDEO.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="book-info">
+          <div class="book-number">The Fireline Universe · Book 02</div>
+          <h3 class="book-title">The Southern Gate</h3>
+          <div class="book-subtitle">Coming Soon</div>
+          <p class="book-desc">
+            The restoration has begun, but the cost is only starting to run. Across the globe, <em>anomalies</em> fracture managed reality: 
+            timestamps jump backward, shadows walk from empty benches, and people experience nauseating splits where multiple outcomes 
+            of a single moment feel equally real. While the shadowy <em>ORION grid</em> tightens its editorial grip on human perception, 
+            the triad follows a thickening thread of ancient signal toward a decommissioned rail yard — and a gate that has been patient 
+            for twelve millennia.
+          </p>
+          <a href="mailto:oderaycortega@gmail.com?subject=Notify Me — Tarenis Book Two" class="btn-notify">Notify Me →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ORION VIDEO (hidden until unlock) -->
-<section id="unlock" style="display:none;">
-  <video autoplay muted loop src="ORIONVIDEO.mp4"></video>
-  <div class="overlay"></div>
-  <div class="text-block" id="unlockText"></div>
-</section>
-
-<!-- AUDIO -->
-<section>
-  <div class="text-block">
-    <h1>Transmissions</h1>
-    <a href="https://www.youtube.com/playlist?list=PLk4Sp4lD-uQPyIEDCHGlqHwKHJKSrOS--" target="_blank">
-      Open Archive →
-    </a>
+<!-- ═══════ WORLD ═══════ -->
+<section id="world">
+  <div class="section-inner">
+    <div class="section-label">The World of Tarenis</div>
+    <h2 class="section-title">Haven Bay & Beyond</h2>
+    <div class="section-divider"></div>
+    <div class="world-intro">
+      <p>A planet-scale restoration grid, twelve thousand years dormant. Ancient gates concealed beneath coastal ruins, 
+         arctic ice, and mountain citadels. The world is not broken — it is remembering.</p>
+    </div>
+  </div>
+  <div class="world-grid">
+    <div class="world-cell wide">
+      <video autoplay muted loop playsinline><source src="HEAVENBAYWATER.mp4" type="video/mp4"></video>
+      <div class="world-cell-label">Haven Bay · Post-Resonance Event</div>
+    </div>
+    <div class="world-cell">
+      <img src="tJyUZ.jpg" alt="Coastal ruins">
+      <div class="world-cell-label">Varenthis Coastal Archive</div>
+    </div>
+    <div class="world-cell">
+      <img src="r8BmQ.jpg" alt="Global grid">
+      <div class="world-cell-label">Global Grid — From Orbit</div>
+    </div>
+    <div class="world-cell">
+      <img src="pYjGc.jpg" alt="Mountain citadel">
+      <div class="world-cell-label">Saksaywaman Node</div>
+    </div>
+    <div class="world-cell">
+      <img src="cpQ8k.jpg" alt="Southern pyramid coast">
+      <div class="world-cell-label">Southern Gate Approach</div>
+    </div>
+    <div class="world-cell">
+      <video autoplay muted loop playsinline><source src="Haven_Bay__1_.mp4" type="video/mp4"></video>
+      <div class="world-cell-label">Haven Bay · The Flood</div>
+    </div>
+    <div class="world-cell">
+      <video autoplay muted loop playsinline><source src="AEhsD.mp4" type="video/mp4"></video>
+      <div class="world-cell-label">Interior Frequency Zone</div>
+    </div>
+    <div class="world-cell">
+      <img src="L9QXU.jpg" alt="Arctic gate">
+      <div class="world-cell-label">North Polar Gate · Antarctica</div>
+    </div>
+    <div class="world-cell">
+      <img src="4z6th.jpg" alt="Earth from orbit">
+      <div class="world-cell-label">Grid Architecture · Macro View</div>
+    </div>
   </div>
 </section>
 
-<!-- BOOKS -->
-<section class="records">
-  <h1>Records</h1>
-  <div class="grid">
-    <div class="card"><img src="image.jpg"><p>Book 1</p></div>
-    <div class="card"><img src="image-4.jpg"><p>Book 2</p></div>
-    <div class="card"><img src="image-5.jpg"><p>Book 3</p></div>
+<!-- ═══════ CHARACTERS ═══════ -->
+<section id="characters">
+  <div class="section-inner">
+    <div class="section-label">The Triad</div>
+    <h2 class="section-title">Signal Carriers</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="chars-grid">
+    <div class="char-card">
+      <img class="char-img" src="Lira_Voss_.jpeg" alt="Lira Voss">
+      <div class="char-overlay"></div>
+      <div class="char-info">
+        <div class="char-role">Grid Interface · Interior Anchor</div>
+        <div class="char-name">Lira Voss</div>
+        <div class="char-ability">She has the deepest intuitive connection to the Interior frequency environment — she feels the static and the gaps in managed time more clearly than anyone.</div>
+        <div class="char-hook">"What exactly happened to Lira in the Interior that makes her the only one who can feel the difference between the original signal and Management's smoothed version?"</div>
+        <span class="char-freq">FREQ: Interior Band</span>
+      </div>
+    </div>
+    <div class="char-card">
+      <img class="char-img" src="Kai.jpeg" alt="Kai Resonance">
+      <div class="char-overlay"></div>
+      <div class="char-info">
+        <div class="char-role">Signal Carrier · Frequency Interface</div>
+        <div class="char-name">Kai Resonance</div>
+        <div class="char-ability">His body naturally generates and responds to 432 Hz tones. He can make ancient grid hardware remember and respond — acting as the operating system for old technology.</div>
+        <div class="char-hook">"Why does the grid hardware recognize Kai's specific tone as if it has been waiting for him personally for 12,000 years?"</div>
+        <span class="char-freq">FREQ: 432 Hz</span>
+      </div>
+    </div>
+    <div class="char-card">
+      <img class="char-img" src="Elias_.jpeg" alt="Elias">
+      <div class="char-overlay"></div>
+      <div class="char-info">
+        <div class="char-role">Navigational Intelligence · Map Keeper</div>
+        <div class="char-name">Elias</div>
+        <div class="char-ability">He reads spaces, geometries, and patterns as naturally as breathing. His mind works like a living Codex — linking physical sites to the larger global pattern.</div>
+        <div class="char-hook">"Why does the symbol carved in the Grand Canyon match the exact crayon drawing Elias made as a child — long before he ever saw the Codex?"</div>
+        <span class="char-freq">FREQ: Codex Pattern</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- COMMENTS -->
-<section class="comments">
-  <h1>Transmissions</h1>
-  <div id="comments"></div>
-  <input id="commentInput" placeholder="leave what you've seen…">
-  <button onclick="sendComment()">Send</button>
-</section>
-
-<!-- CONTACT -->
-<section>
-  <div class="text-block">
-    <p>If you’ve seen something you shouldn’t have—</p>
-    <a href="mailto:oderaycortega@gmail.com">send it</a>
+<!-- ═══════ ORION ═══════ -->
+<section id="orion">
+  <div class="section-inner">
+    <div class="orion-inner">
+      <div class="orion-media">
+        <video autoplay muted loop playsinline>
+          <source src="ORIONVIDEO.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="orion-text">
+        <div class="section-label" style="color:var(--danger)">Threat Classification · Active</div>
+        <div class="orion-title">ORION</div>
+        <p class="orion-desc">
+          The shadowy grid that maintains its editorial grip on human perception. While the triad follows the signal, 
+          ORION routes directly to the strongest carrier — Kai — through personalized dampening that hits him hardest. 
+          Its mission: prevent the restoration. Its method: managed reality, suppressed frequencies, and the smoothing 
+          of every anomaly that threatens the Standard.
+        </p>
+        <p class="orion-desc">
+          ORION does not fight the signal. It edits it. And somewhere inside ORION, something is rewriting itself.
+        </p>
+        <div>
+          <span class="orion-tag">440 Hz Standard</span>
+          <span class="orion-tag">Suppression Lock</span>
+          <span class="orion-tag">Neural Dampening</span>
+          <span class="orion-tag">Editorial Grid</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ═══════ TERMINAL ═══════ -->
+<section id="terminal">
+  <div class="terminal-bg">
+    <video autoplay muted loop playsinline>
+      <source src="orionsignal.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="terminal-wrap">
+    <div class="terminal-header">
+      <div class="section-label" style="justify-content:center">Classified Access · ARG Protocol</div>
+      <h2 class="terminal-title">Decode the Signal</h2>
+      <p class="terminal-sub">// Identify yourself. Speak to the system. Find the phrase.</p>
+    </div>
+    <div class="terminal-box">
+      <div class="terminal-topbar">
+        <div class="terminal-topbar-left">
+          <div class="terminal-dot r"></div>
+          <div class="terminal-dot y"></div>
+          <div class="terminal-dot g"></div>
+        </div>
+        <div class="terminal-status">
+          <span class="terminal-status-dot"></span>
+          VARENTHIS NODE — TERMINAL V4.32
+        </div>
+      </div>
+      <div class="terminal-codename" id="codenameArea">
+        <span class="terminal-codename-label">IDENTIFY OPERATOR ▶</span>
+        <input class="terminal-codename-input" id="codenameInput" type="text" maxlength="20" placeholder="Enter your codename...">
+        <button class="btn-set-codename" onclick="setCodename()">SET</button>
+      </div>
+      <div class="terminal-output" id="terminalOutput">
+        <div class="t-line t-sys">VARENTHIS ARCHIVE · NODE TERMINAL V4.32</div>
+        <div class="t-line t-sys">────────────────────────────────────────</div>
+        <div class="t-line t-warn">⚠ SIGNAL DETECTED IN SECTOR 7 — NORTH POLAR REGION</div>
+        <div class="t-line t-sys">Awaiting operator identification...</div>
+        <div class="t-line t-sys">Type a phrase to interact with the archive.</div>
+        <div class="t-line" style="color:var(--text-dim);font-size:0.6rem;margin-top:0.5rem">HINT: Try words like "frequency", "signal", "432", "gate", "lira", "kai", "elias", "orion", "varenthis"...</div>
+      </div>
+      <div class="terminal-progress">
+        <div class="progress-label">
+          <span>SIGNAL FRAGMENTS RECOVERED</span>
+          <span id="progressText">0 / 8</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="terminal-prompt" id="termPrompt">GUEST@VARENTHIS:~$</span>
+        <input class="terminal-input" id="terminalInput" type="text" placeholder="speak to the archive..." autocomplete="off">
+        <button class="terminal-send" onclick="sendTerminal()">SEND</button>
+      </div>
+      <div class="terminal-hint" id="terminalHint">// No login required · Your codename is your identity · Find the final phrase to unlock classified files</div>
+    </div>
+    <!-- UNLOCK PANEL -->
+    <div class="unlock-panel" id="unlockPanel">
+      <div class="unlock-header">
+        <h3>⊕ ACCESS GRANTED — CLASSIFIED FILES UNLOCKED</h3>
+        <p>// The signal opened the gate. You broke into something. — Dr. Kane</p>
+      </div>
+      <div class="unlock-files">
+        <div class="unlock-file" onclick="openLightbox('INTERNAL_MEMORANDUM.jpg')">
+          <div class="unlock-file-name">INTERNAL_MEMORANDUM.jpg</div>
+          <img src="INTERNAL_MEMORANDUM.jpg" alt="Classified document">
+          <div class="unlock-file-type">// AETHERFORGE · CLASSIFIED · DR. KANE</div>
+        </div>
+        <div class="unlock-file" onclick="openLightbox('Book_2_teaser.jpg')">
+          <div class="unlock-file-name">Book_2_teaser.jpg</div>
+          <img src="Book_2_teaser.jpg" alt="Book 2 teaser">
+          <div class="unlock-file-type">// TARENIS: THE SOUTHERN GATE · COMING SOON</div>
+        </div>
+        <div class="unlock-file" onclick="openLightbox('The_world_grid.jpg')">
+          <div class="unlock-file-name">The_world_grid.jpg</div>
+          <img src="The_world_grid.jpg" alt="World grid">
+          <div class="unlock-file-type">// TARENIS GLOBAL GRID — RESONANCE NETWORK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ═══════ SIGNAL BOARD ═══════ -->
+<section id="signalboard">
+  <div class="section-inner">
+    <div class="section-label">Live Signal Board</div>
+    <h2 class="section-title">Operators Online</h2>
+    <div class="section-divider"></div>
+    <div class="board-grid">
+      <div class="board-panel">
+        <div class="board-panel-header">Signal Board — Active Operators</div>
+        <div class="board-list" id="signalBoardList">
+          <div class="board-item">
+            <span class="board-codename">GHOST_CARRIER</span>
+            <span class="board-clues">8/8 fragments</span>
+            <span class="board-status board-complete">✓ UNLOCKED</span>
+          </div>
+          <div class="board-item">
+            <span class="board-codename">NODE_432</span>
+            <span class="board-clues">5/8 fragments</span>
+            <span class="board-status">IN PROGRESS</span>
+          </div>
+          <div class="board-item">
+            <span class="board-codename">LIRA_ECHO</span>
+            <span class="board-clues">3/8 fragments</span>
+            <span class="board-status">IN PROGRESS</span>
+          </div>
+        </div>
+      </div>
+      <div class="board-panel">
+        <div class="board-panel-header">Transmissions — Open Channel</div>
+        <div class="board-list" id="transmissionFeed">
+          <div class="board-item" style="flex-direction:column;align-items:flex-start;gap:0.2rem">
+            <span class="board-codename">GHOST_CARRIER</span>
+            <span style="color:var(--text);font-size:0.68rem">"the signal was always there. we just forgot to listen."</span>
+          </div>
+          <div class="board-item" style="flex-direction:column;align-items:flex-start;gap:0.2rem">
+            <span class="board-codename">NODE_432</span>
+            <span style="color:var(--text);font-size:0.68rem">"found the frequency. orion is watching."</span>
+          </div>
+        </div>
+        <div class="transmission-input-area">
+          <input class="transmission-input" id="transmissionInput" type="text" maxlength="120" placeholder="Broadcast a transmission (120 chars max)...">
+          <button class="btn-transmit" onclick="sendTransmission()">SEND</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WORLD MAP ═══════ -->
+<section id="worldmap">
+  <div class="section-inner worldmap-inner">
+    <div class="section-label" style="justify-content:center">Resonance Network</div>
+    <h2 class="section-title" style="text-align:center">The Global Grid</h2>
+    <div class="section-divider" style="margin:1.5rem auto"></div>
+    <div class="worldmap-video-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="worldmapvoice.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="worldmap-nodes">
+      <div class="map-node">Bimini Road</div>
+      <div class="map-node">Kincaid Caves</div>
+      <div class="map-node">Saksaywaman</div>
+      <div class="map-node">Cueva de los Tayos</div>
+      <div class="map-node">North Polar Gate</div>
+      <div class="map-node">Haven Bay</div>
+      <div class="map-node">Southern Gate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MUSIC ═══════ -->
+<section id="music">
+  <div class="section-inner">
+    <div class="music-inner">
+      <div class="music-visual">
+        <div class="music-qr-wrap">
+          <img class="music-qr" src="SoundsCode.png" alt="Entre Dos Playlist QR">
+          <div class="music-qr-label">Scan · The Echo Archive · YouTube</div>
+        </div>
+        <div class="music-waveform" id="waveform"></div>
+      </div>
+      <div class="music-text">
+        <div class="section-label">Entre Dos · Echo Archive</div>
+        <h2 class="section-title">Soundtrack to the World</h2>
+        <div class="section-divider"></div>
+        <p class="music-desc">
+          <em>Entre Dos</em> is the sonic undercurrent of the Tarenis universe — emotional music about love, distance, 
+          and things left unsaid. Each track is a frequency record from the world between the worlds. 
+          Scan the code or click below to enter the Echo Archive on YouTube.
+        </p>
+        <a href="https://www.youtube.com/playlist?list=PLk4Sp4lD-uQPyIEDCHGlqHwKHJKSrOS--" target="_blank" class="btn-archive">The Echo Archive →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ARCHIVE ═══════ -->
+<section id="archive">
+  <div class="section-inner">
+    <div class="section-label">The Fireline Series</div>
+    <h2 class="section-title">Complete Archive</h2>
+    <div class="section-divider"></div>
+    <div class="archive-grid">
+      <div class="archive-card">
+        <img class="archive-img" src="image__2_.jpg" alt="The Fireline: 432 Hz Covenant">
+        <div class="archive-info">
+          <div class="archive-title">The Fireline: The 432 Hz Covenant</div>
+          <div class="archive-desc">A hidden frequency — 432 Hz, the native heartbeat of the Earth — runs beneath the managed surface. Those sensitive to it begin to wake up.</div>
+        </div>
+      </div>
+      <div class="archive-card">
+        <img class="archive-img" src="image__3_.jpg" alt="The Fireline: 0 Hz Covenant">
+        <div class="archive-info">
+          <div class="archive-title">The Fireline: The 0 Hz Covenant</div>
+          <div class="archive-desc">0 Hz — The Mathematics of Stillness. In a world of constant noise, the most powerful thing is the stillness that precedes a first breath.</div>
+        </div>
+      </div>
+      <div class="archive-card">
+        <img class="archive-img" src="image__4_.jpg" alt="The Lattice Protocol">
+        <div class="archive-info">
+          <div class="archive-title">The Lattice Protocol</div>
+          <div class="archive-desc">Day 366 arrives. The managed blue of the sky permanently breaks, revealing the actual sky and a living lattice waiting twenty-two years to be recognized.</div>
+        </div>
+      </div>
+      <div class="archive-card">
+        <img class="archive-img" src="image__1_.jpg" alt="Fireline: Zero-Day">
+        <div class="archive-info">
+          <div class="archive-title">Fireline: Zero-Day</div>
+          <div class="archive-desc">Elara has lived thirty-seven years running a frequency just one micro-hertz below the managed baseline, making her static to the Grid.</div>
+        </div>
+      </div>
+      <div class="archive-card">
+        <img class="archive-img" src="image__5_.jpg" alt="The Ghost Garden">
+        <div class="archive-info">
+          <div class="archive-title">The Ghost Garden: Protocol 432</div>
+          <div class="archive-desc">When the overlay fails frame by frame, the Lattice underneath is revealed: warm, patient, and remembering. The beginning of the un-render.</div>
+        </div>
+      </div>
+    </div>
+    <div class="archive-contact">
+      <p>Inquiries, rights, and collaborations: <a href="mailto:oderaycortega@gmail.com?subject=Inquiry — Entre Dos Universe">oderaycortega@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
 <footer>
-  <p>The system is active.</p>
-  <p>You are not outside it.</p>
+  <div class="footer-logo">Entre Dos Universe</div>
+  <div class="footer-tagline">Where frequencies become stories</div>
+  <ul class="footer-links">
+    <li><a href="#books">Books</a></li>
+    <li><a href="#characters">The Triad</a></li>
+    <li><a href="#terminal">Decode the Signal</a></li>
+    <li><a href="#music">Echo Archive</a></li>
+    <li><a href="mailto:oderaycortega@gmail.com?subject=Inquiry — Entre Dos Universe">Contact</a></li>
+  </ul>
+  <div class="footer-freq">432 Hz · VARENTHIS NODE · SIGNAL ACTIVE · © ODERAY ORTEGA</div>
 </footer>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "tarenis-signal.firebaseapp.com",
-  databaseURL: "https://tarenis-signal-default-rtdb.firebaseio.com",
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-const phrase = "you are part of the architecture";
-
-document.getElementById("input").addEventListener("keydown", e=>{
-  if(e.key==="Enter"){
-    let val = e.target.value.toLowerCase().trim();
-    if(val===phrase){
-      showUnlock();
-    }else{
-      document.getElementById("response").innerText="No signal detected.";
-    }
-  }
+// ═══════════ CURSOR ═══════════
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+let cx=0,cy=0,dx=0,dy=0;
+document.addEventListener('mousemove',e=>{
+  dx=e.clientX;dy=e.clientY;
+  cursorDot.style.left=dx+'px';cursorDot.style.top=dy+'px';
+});
+function animateCursor(){
+  cx+=(dx-cx)*0.12;cy+=(dy-cy)*0.12;
+  cursor.style.left=cx+'px';cursor.style.top=cy+'px';
+  requestAnimationFrame(animateCursor);
+}animateCursor();
+document.querySelectorAll('a,button,input').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='28px';cursor.style.height='28px';cursor.style.borderColor='var(--gold)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='16px';cursor.style.height='16px';cursor.style.borderColor='var(--teal)';
+  });
 });
 
-function showUnlock(){
-  let r = document.getElementById("response");
-  let lines = [
-    "You see it now.",
-    "It was never outside you.",
-    "Recognition is not escape.",
-    "It is inclusion."
-  ];
-  let i=0;
-  function next(){
-    if(i<lines.length){
-      r.innerHTML += "<br>"+lines[i];
-      i++;
-      setTimeout(next,1200);
-    }else{
-      document.getElementById("unlock").style.display="flex";
-      document.getElementById("unlockText").innerHTML=
-      "The system persists through what recognizes it.<br>You are now visible.";
+// ═══════════ WAVEFORM ═══════════
+const wf=document.getElementById('waveform');
+for(let i=0;i<40;i++){
+  const b=document.createElement('div');
+  b.className='music-bar';
+  b.style.animationDelay=(Math.random()*1.2)+'s';
+  b.style.animationDuration=(0.6+Math.random()*0.8)+'s';
+  wf.appendChild(b);
+}
+
+// ═══════════ TERMINAL GAME ═══════════
+let codename = localStorage.getItem('tarenis_codename') || '';
+let cluesFound = JSON.parse(localStorage.getItem('tarenis_clues') || '[]');
+let unlocked = localStorage.getItem('tarenis_unlocked') === 'true';
+const totalClues = 8;
+
+const lore = {
+  frequency: {
+    response: "ARCHIVE RESPONSE: The original planetary grid operates at 432 Hz — the Earth's native heartbeat. Management's Standard compresses reality to 440 Hz, creating dissonant compliance. The difference is seven hertz. Seven hertz is the distance between freedom and managed obedience.",
+    clue: 'frequency'
+  },
+  "432": {
+    response: "ARCHIVE RESPONSE: 432 Hz. The Covenant frequency. The grid hardware doesn't just respond to this tone — it recognizes it. The question the archive refuses to answer: why does it recognize one specific voice above all others?",
+    clue: '432'
+  },
+  signal: {
+    response: "ARCHIVE RESPONSE: The sound code was transmitted from the Interior twelve thousand years after the silence began. Lira heard it first — not with her ears. With the part of her that was never fully surface-born.",
+    clue: 'signal'
+  },
+  gate: {
+    response: "ARCHIVE RESPONSE: There are two gates. The North Polar Gate has been activated. The Southern Gate remains sealed beneath Antarctic ice — patient, tonal, waiting. It does not open. It invites alignment.",
+    clue: 'gate'
+  },
+  lira: {
+    response: "ARCHIVE RESPONSE: LIRA VOSS — Grid Interface. She bridges the Interior civilization and the surface world. What happened to her in the Interior is the question the archive marks RESTRICTED. The static she feels is not noise. It is the original signal, fighting through the edit.",
+    clue: 'lira'
+  },
+  kai: {
+    response: "ARCHIVE RESPONSE: KAI RESONANCE — Signal Carrier. His neural signature is the strongest carrier ORION has ever detected. The dampening is personalized. Targeted. As if the grid knew he was coming before he did.",
+    clue: 'kai'
+  },
+  elias: {
+    response: "ARCHIVE RESPONSE: ELIAS — The Cartographer. File note: Subject drew the Grand Canyon symbol at age 7 using a brown crayon. Subject had never seen the Codex. Subject had never been to the Canyon. Archive classification: UNEXPLAINED.",
+    clue: 'elias'
+  },
+  orion: {
+    response: "ARCHIVE RESPONSE: ORION does not destroy anomalies. It edits them. The managed world runs on the smooth. The seamless. The version of events that keeps the heart ticking instead of beating. Somewhere inside ORION, something is rewriting itself. This entry was not authorized.",
+    clue: 'orion'
+  },
+  varenthis: {
+    response: "ARCHIVE RESPONSE: The Varenthis civilization existed 12,000 years before the Endless Resonance Event. They did not build gates. They tuned gates that were already there. The distinction matters. You cannot build what already exists.",
+    clue: 'varenthis'
+  },
+  haven: {
+    response: "ARCHIVE RESPONSE: HAVEN BAY — after the Event, the city exists in two states simultaneously. The before-world and the flooded after-world run parallel in Kai's consciousness. The water is real. The buildings are real. Both are real. The archive does not resolve this contradiction.",
+    clue: 'haven'
+  },
+  interior: {
+    response: "ARCHIVE RESPONSE: The Interior is not underground. It is beneath the managed surface — the space where the original frequency still runs unedited. Lira's origins are tied to it. She did not come from the surface world first.",
+    clue: 'interior'
+  },
+  restore: {
+    response: "ARCHIVE RESPONSE: Restoration does not mean return. The new world being built by the triad's alignment is not the old world recovered — it is something the grid has never processed before. Messy. Uncertain. Alive.",
+    clue: 'restore'
+  }
+};
+
+function setCodename() {
+  const input = document.getElementById('codenameInput');
+  const name = input.value.trim().toUpperCase().replace(/[^A-Z0-9_]/g,'');
+  if (!name) return;
+  codename = name;
+  localStorage.setItem('tarenis_codename',codename);
+  document.getElementById('termPrompt').textContent = codename+'@VARENTHIS:~$';
+  addLine(`CODENAME SET: ${codename}. Welcome to the archive, operator.`,'t-sys');
+  addLine(`Signal fragments recovered: ${cluesFound.length}/${totalClues}`,'t-warn');
+  updateBoard();
+  if(unlocked) showUnlock();
+}
+
+function addLine(text, cls='', delay=0) {
+  const out = document.getElementById('terminalOutput');
+  const div = document.createElement('div');
+  div.className = 't-line '+(cls||'');
+  div.textContent = text;
+  if(delay) div.style.animationDelay = delay+'s';
+  out.appendChild(div);
+  setTimeout(()=>{ out.scrollTop = out.scrollHeight; }, 50);
+}
+
+function updateProgress() {
+  const pct = (cluesFound.length / totalClues) * 100;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = cluesFound.length+' / '+totalClues;
+}
+
+function sendTerminal() {
+  const input = document.getElementById('terminalInput');
+  const raw = input.value.trim();
+  if (!raw) return;
+  const text = raw.toLowerCase().replace(/[^a-z0-9\s]/g,'');
+  input.value = '';
+
+  const prompt = (codename || 'GUEST')+'@VARENTHIS:~$';
+  addLine(prompt+' '+raw,'t-user');
+
+  // check final phrase
+  if (text.includes('the signal opens the gate') || text.includes('signal opens the gate')) {
+    addLine('','');
+    addLine('DECRYPTION SEQUENCE INITIATED...','t-sys');
+    setTimeout(()=>{
+      addLine('████████████████ 100%','t-sys');
+      addLine('⊕ ACCESS GRANTED — THE GATE IS OPEN','t-unlock');
+      addLine('Classified files have been unlocked. You broke into something.','t-warn');
+      unlocked = true;
+      localStorage.setItem('tarenis_unlocked','true');
+      cluesFound = [...new Set([...cluesFound,...Object.keys(lore)])];
+      localStorage.setItem('tarenis_clues',JSON.stringify(cluesFound));
+      updateProgress();
+      updateBoard();
+      setTimeout(showUnlock, 800);
+    },1200);
+    return;
+  }
+
+  // check keywords
+  let found = false;
+  for (const [keyword, data] of Object.entries(lore)) {
+    if (text.includes(keyword)) {
+      found = true;
+      if (!cluesFound.includes(data.clue)) {
+        cluesFound.push(data.clue);
+        localStorage.setItem('tarenis_clues',JSON.stringify(cluesFound));
+        addLine('[ SIGNAL FRAGMENT RECOVERED: '+data.clue.toUpperCase()+' ]','t-warn');
+      }
+      addLine(data.response,'t-lore');
+      updateProgress();
+      updateBoard();
+      break;
     }
   }
-  next();
-}
 
-// COMMENTS
-function sendComment(){
-  let text = document.getElementById("commentInput").value;
-  if(!text) return;
-  db.ref("comments").push({text:text});
-}
-
-db.ref("comments").on("value", snap=>{
-  let data = snap.val();
-  let html="";
-  for(let k in data){
-    html+="<p>"+data[k].text+"</p>";
+  if (!found) {
+    const responses = [
+      'The archive does not recognize that frequency. Try again.',
+      'Signal unclear. The Interior does not respond to noise.',
+      'ORION dampening detected in this query. Rephrase.',
+      'This terminal has been waiting 12,000 years. Be specific.',
+      'No match found. The Codex is not a keyword database. Think like Elias.'
+    ];
+    addLine(responses[Math.floor(Math.random()*responses.length)],'t-sys');
   }
-  document.getElementById("comments").innerHTML=html;
+}
+
+function showUnlock() {
+  document.getElementById('unlockPanel').classList.add('visible');
+  document.getElementById('unlockPanel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// enter key
+document.getElementById('terminalInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter') sendTerminal();
+});
+document.getElementById('codenameInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter') setCodename();
+});
+
+// restore state
+if(codename) {
+  document.getElementById('termPrompt').textContent = codename+'@VARENTHIS:~$';
+  document.getElementById('codenameInput').value = codename;
+}
+updateProgress();
+if(unlocked) {
+  setTimeout(showUnlock, 500);
+}
+
+// ═══════════ SIGNAL BOARD ═══════════
+function updateBoard() {
+  if (!codename) return;
+  const list = document.getElementById('signalBoardList');
+  // check if already in board
+  const existing = list.querySelector('[data-name="'+codename+'"]');
+  if (existing) {
+    existing.querySelector('.board-clues').textContent = cluesFound.length+'/8 fragments';
+    if (unlocked) existing.querySelector('.board-status').textContent = '✓ UNLOCKED';
+    return;
+  }
+  const item = document.createElement('div');
+  item.className = 'board-item';
+  item.setAttribute('data-name',codename);
+  item.innerHTML = `
+    <span class="board-codename">${codename}</span>
+    <span class="board-clues">${cluesFound.length}/8 fragments</span>
+    <span class="board-status ${unlocked?'board-complete':''}">${unlocked?'✓ UNLOCKED':'IN PROGRESS'}</span>
+  `;
+  list.prepend(item);
+}
+
+function sendTransmission() {
+  const input = document.getElementById('transmissionInput');
+  const text = input.value.trim();
+  if (!text || !codename) {
+    if (!codename) { addLine('Set your codename before transmitting.','t-err'); return; }
+    return;
+  }
+  input.value = '';
+  const feed = document.getElementById('transmissionFeed');
+  const item = document.createElement('div');
+  item.className = 'board-item';
+  item.style.flexDirection='column';item.style.alignItems='flex-start';item.style.gap='0.2rem';
+  item.innerHTML = `
+    <span class="board-codename">${codename}</span>
+    <span style="color:var(--text);font-size:0.68rem">"${text}"</span>
+  `;
+  feed.prepend(item);
+  feed.scrollTop = 0;
+}
+
+// ═══════════ LIGHTBOX ═══════════
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
+
+// ═══════════ SCROLL REVEAL ═══════════
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) {
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.book-card,.char-card,.archive-card,.board-panel,.orion-inner,.music-inner').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(30px)';
+  el.style.transition='opacity 0.7s ease, transform 0.7s ease';
+  observer.observe(el);
 });
 </script>
-
 </body>
+</html>
 </html>
