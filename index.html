@@ -1057,6 +1057,20 @@ document.querySelectorAll('.book-card,.char-card,.archive-card,.board-panel,.ori
   el.style.transition='opacity 0.7s ease, transform 0.7s ease';
   observer.observe(el);
 });
+
+// --- NEW AUDIO TOGGLE CODE ---
+  const audioToggle = document.getElementById('audioToggle');
+  const allVideos = document.querySelectorAll('video');
+  let isMuted = true;
+
+  if(audioToggle) {
+    audioToggle.addEventListener('click', () => {
+      isMuted = !isMuted;
+      allVideos.forEach(v => { v.muted = isMuted; if (!isMuted) v.play(); });
+      audioToggle.innerText = isMuted ? 'UNMUTE SIGNAL' : 'SIGNAL ACTIVE';
+      audioToggle.classList.toggle('playing', !isMuted);
+    });
+  }
 </script>
 </body>
 </html>
