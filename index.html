@@ -697,10 +697,33 @@ img, video {
   /* This ensures the transition is smooth if you hover over them */
   transition: filter 0.3s ease;
 }
+.audio-control {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00E5C8;
+  color: #00E5C8;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+.audio-control.playing {
+  background: #00E5C8;
+  color: #000;
+  box-shadow: 0 0 15px #00E5C8;
+}
 </style>
 </head>
 <body>
 
+<div class="audio-control" id="audioToggle">UNMUTE SIGNAL</div>
+  
 <!-- CURSOR -->
 <div class="custom-cursor" id="cursor"></div>
 <div class="custom-cursor-dot" id="cursorDot"></div>
@@ -1067,6 +1090,22 @@ document.querySelectorAll('.book-card,.char-card,.archive-card,.board-panel,.ori
     audioToggle.addEventListener('click', () => {
       isMuted = !isMuted;
       allVideos.forEach(v => { v.muted = isMuted; if (!isMuted) v.play(); });
+      audioToggle.innerText = isMuted ? 'UNMUTE SIGNAL' : 'SIGNAL ACTIVE';
+      audioToggle.classList.toggle('playing', !isMuted);
+    });
+  }
+
+const audioToggle = document.getElementById('audioToggle');
+  const allVideos = document.querySelectorAll('video');
+  let isMuted = true;
+
+  if (audioToggle) {
+    audioToggle.addEventListener('click', () => {
+      isMuted = !isMuted;
+      allVideos.forEach(v => { 
+        v.muted = isMuted; 
+        if (!isMuted) v.play(); 
+      });
       audioToggle.innerText = isMuted ? 'UNMUTE SIGNAL' : 'SIGNAL ACTIVE';
       audioToggle.classList.toggle('playing', !isMuted);
     });
