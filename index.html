@@ -159,10 +159,17 @@ nav{
   background: var(--dark);
 }
 #hero-video video {
-  width: 100%;
+  /* This is the key: Don't let it touch the edges */
+  width: 90%;            
+  max-width: 1200px;     /* Prevents it from getting too huge on big monitors */
+  height: auto;
   display: block;
-  max-height: 70vh;  /* ← controls the size */
-  object-fit: cover;
+  object-fit: contain;   /* Keeps the original horizontal shape */
+  
+  /* Adds that professional 'fenced-in' tech look */
+  border-left: 1px solid var(--teal);
+  border-right: 1px solid var(--teal);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
 }
 /* ═══════════════════════════════════════
    SECTION COMMONS
