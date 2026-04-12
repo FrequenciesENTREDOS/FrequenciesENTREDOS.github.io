@@ -756,7 +756,7 @@ img, video {
 
 <!-- ═══════ HERO VIDEO ═══════ -->
 <div id="hero-video">
-  <video autoplay muted loop playsinline>
+  <video id="main-video" autoplay muted loop playsinline>
     <source src="CoverVideo.mp4" type="video/mp4">
   </video>
 </div>
@@ -1083,16 +1083,14 @@ document.querySelectorAll('.book-card,.char-card,.archive-card,.board-panel,.ori
 
   // ═══════════ AUDIO TOGGLE ═══════════
 const audioToggle = document.getElementById('audioToggle');
-const allVideos = document.querySelectorAll('video');
+const mainVideo = document.getElementById('main-video');
 let isMuted = true;
 
 if (audioToggle) {
   audioToggle.addEventListener('click', () => {
     isMuted = !isMuted;
-    allVideos.forEach(v => {
-      v.muted = isMuted;
-      if (!isMuted) v.play();
-    });
+    mainVideo.muted = isMuted;
+    if (!isMuted) mainVideo.play();
     audioToggle.innerText = isMuted ? 'UNMUTE SIGNAL' : 'SIGNAL ACTIVE';
     audioToggle.classList.toggle('playing', !isMuted);
   });
