@@ -124,13 +124,30 @@ nav{
   letter-spacing: 0.2em;
   animation: pulse 3s ease infinite;
 }
-.hero-buttons {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  animation: fadeInUp 1.4s ease 0.6s both;
-  margin-top: 1rem;
+.btn-primary {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: #ffffff !important; /* Forces text to white */
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--teal);
+  background: transparent;
+  transition: all 0.3s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+/* This prevents the "visited" link from turning purple */
+.btn-primary:visited {
+  color: #ffffff !important;
+}
+
+.btn-primary:hover {
+  background: var(--teal);
+  color: var(--dark) !important;
+  border-color: var(--teal);
 }
 
 /* ═══════════════════════════════════════
