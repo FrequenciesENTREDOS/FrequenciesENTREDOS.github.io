@@ -723,28 +723,28 @@ img, video {
   box-shadow: 0 0 15px #00E5C8;
 }
 
-.manga-book-grid {
+.manga-pages {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
-.manga-book-grid img {
+.manga-pages img {
   width: 100%;
-  border-radius: 8px;
-  border: 2px solid rgba(0,229,200,0.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6),
-              0 0 0 1px rgba(0,229,200,0.15) inset;
+  border-radius: 4px;
+  border: 8px solid #111;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.8),
+              0 0 0 1px rgba(0,229,200,0.2) inset;
   transition: all 0.4s ease;
   cursor: pointer;
-  background: #000;
+  background: #0a0a0a;
 }
 
-.manga-book-grid img:hover {
-  transform: scale(1.06) rotate(0.5deg);
-  box-shadow: 0 20px 40px rgba(0,229,200,0.25),
-              0 0 0 2px var(--teal) inset;
+.manga-pages img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 25px 50px rgba(0,229,200,0.3),
+              0 0 0 3px var(--teal) inset;
   border-color: var(--teal);
 }
 </style>
@@ -853,37 +853,37 @@ img, video {
     <div class="section-label">Manga Frequency</div>
     <h2 class="section-title">AI Manga Resonances</h2>
     <div class="section-divider"></div>
-    <p style="max-width:700px; color:var(--text-dim); margin-bottom:2.5rem; font-style:italic;">
-      Step into the pages — Click any image to open in full view ✨
+    <p style="max-width:700px; color:var(--text-dim); margin-bottom:3rem; font-style:italic; text-align:center;">
+      Click any page to enlarge — feel free to scroll like you're reading
     </p>
 
     <!-- Chapter 1 -->
-    <div style="margin-bottom:4rem;">
-      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem; text-align:center;">
-        Chapter 1 — Tarenis
+    <div style="margin-bottom:5rem;">
+      <h3 style="font-family:var(--serif); color:var(--teal); text-align:center; margin-bottom:2rem; letter-spacing:0.1em;">
+        CHAPTER 1 — TARENIS
       </h3>
-      <div class="manga-book-grid">
+      <div class="manga-pages">
         <img src="manga-frequency/Book1Cover.jpeg" alt="Book 1 Cover" onclick="openLightbox(this.src)">
         <img src="manga-frequency/Chapter1Cover.Jpeg" alt="Chapter 1 Cover" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image1Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image2Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image3Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image4Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image1Ch1.jpeg" alt="Page 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image2Ch1.jpeg" alt="Page 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image3Ch1.jpeg" alt="Page 3" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image4Ch1.jpeg" alt="Page 4" onclick="openLightbox(this.src)">
       </div>
     </div>
 
     <!-- Chapter 2 -->
     <div>
-      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem; text-align:center;">
-        Chapter 2 — The Southern Gate
+      <h3 style="font-family:var(--serif); color:var(--teal); text-align:center; margin-bottom:2rem; letter-spacing:0.1em;">
+        CHAPTER 2 — THE SOUTHERN GATE
       </h3>
-      <div class="manga-book-grid">
+      <div class="manga-pages">
         <img src="manga-frequency/Chapter2Cover.jpeg" alt="Chapter 2 Cover" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige1Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige2Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige3Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige4Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige5Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige1Ch2.jpeg" alt="Page 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige2Ch2.jpeg" alt="Page 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige3Ch2.jpeg" alt="Page 3" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige4Ch2.jpeg" alt="Page 4" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige5Ch2.jpeg" alt="Page 5" onclick="openLightbox(this.src)">
       </div>
     </div>
   </div>
