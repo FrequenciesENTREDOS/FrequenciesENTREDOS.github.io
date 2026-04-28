@@ -723,25 +723,28 @@ img, video {
   box-shadow: 0 0 15px #00E5C8;
 }
 
-.manga-grid {
+.manga-book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.2rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.manga-grid img {
+.manga-book-grid img {
   width: 100%;
-  border-radius: 6px;
-  border: 1px solid rgba(0,229,200,0.2);
-  box-shadow: 0 0 25px rgba(0,229,200,0.1);
+  border-radius: 8px;
+  border: 2px solid rgba(0,229,200,0.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6),
+              0 0 0 1px rgba(0,229,200,0.15) inset;
   transition: all 0.4s ease;
   cursor: pointer;
+  background: #000;
 }
 
-.manga-grid img:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 40px rgba(0,229,200,0.3);
+.manga-book-grid img:hover {
+  transform: scale(1.06) rotate(0.5deg);
+  box-shadow: 0 20px 40px rgba(0,229,200,0.25),
+              0 0 0 2px var(--teal) inset;
   border-color: var(--teal);
 }
 </style>
@@ -851,32 +854,36 @@ img, video {
     <h2 class="section-title">AI Manga Resonances</h2>
     <div class="section-divider"></div>
     <p style="max-width:700px; color:var(--text-dim); margin-bottom:2.5rem; font-style:italic;">
-      Manga-style interpretations of the first two chapters. Character consistency is still a struggle with AI, but the vibe is there ✨
+      Step into the pages — Click any image to open in full view ✨
     </p>
 
     <!-- Chapter 1 -->
-    <div style="margin-bottom:3.5rem;">
-      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem;">Chapter 1 — Tarenis</h3>
-      <div class="manga-grid">
+    <div style="margin-bottom:4rem;">
+      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem; text-align:center;">
+        Chapter 1 — Tarenis
+      </h3>
+      <div class="manga-book-grid">
         <img src="manga-frequency/Book1Cover.jpeg" alt="Book 1 Cover" onclick="openLightbox(this.src)">
         <img src="manga-frequency/Chapter1Cover.Jpeg" alt="Chapter 1 Cover" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image1Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image2Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image3Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Image4Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image1Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image2Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image3Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image4Ch1.jpeg" alt="Chapter 1" onclick="openLightbox(this.src)">
       </div>
     </div>
 
     <!-- Chapter 2 -->
     <div>
-      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem;">Chapter 2 — The Southern Gate</h3>
-      <div class="manga-grid">
+      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem; text-align:center;">
+        Chapter 2 — The Southern Gate
+      </h3>
+      <div class="manga-book-grid">
         <img src="manga-frequency/Chapter2Cover.jpeg" alt="Chapter 2 Cover" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige1Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige2Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige3Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige4Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
-        <img src="manga-frequency/Paige5Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige1Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige2Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige3Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige4Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige5Ch2.jpeg" alt="Chapter 2" onclick="openLightbox(this.src)">
       </div>
     </div>
   </div>
