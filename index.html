@@ -28,6 +28,10 @@ body{
   padding-top: 80px;
 }
 
+#manga {
+  scroll-margin-top: 90px;
+}
+  
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--dark)}
@@ -718,6 +722,28 @@ img, video {
   color: #000;
   box-shadow: 0 0 15px #00E5C8;
 }
+
+.manga-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.manga-grid img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0,229,200,0.2);
+  box-shadow: 0 0 25px rgba(0,229,200,0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.manga-grid img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 40px rgba(0,229,200,0.3);
+  border-color: var(--teal);
+}
 </style>
 </head>
 <body>
@@ -733,6 +759,7 @@ img, video {
   <div class="nav-logo">Entre Dos</div>
   <ul class="nav-links">
     <li><a href="#books">Books</a></li>
+    <li><a href="#manga">Manga</a></li>
     <li><a href="#characters">Triad</a></li>
     <li><a href="#orion">ORION</a></li>
     <li><a href="#music">Music</a></li>
@@ -817,6 +844,43 @@ img, video {
   </div>
 </section>
 
+<!-- ═══════ MANGA FREQUENCY ═══════ -->
+<section id="manga">
+  <div class="section-inner">
+    <div class="section-label">Manga Frequency</div>
+    <h2 class="section-title">AI Manga Resonances</h2>
+    <div class="section-divider"></div>
+    <p style="max-width:700px; color:var(--text-dim); margin-bottom:2.5rem; font-style:italic;">
+      Manga-style interpretations of the first two chapters. Character consistency is still a struggle with AI, but the vibe is there ✨
+    </p>
+
+    <!-- Chapter 1 -->
+    <div style="margin-bottom:3.5rem;">
+      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem;">Chapter 1 — Tarenis</h3>
+      <div class="manga-grid">
+        <img src="manga-frequency/Book1Cover.jpeg" alt="Book 1 Cover" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Chapter1Cover.Jpeg" alt="Chapter 1 Cover" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image1Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image2Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image3Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Image4Ch1.jpeg" alt="Chapter 1 Scene" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <!-- Chapter 2 -->
+    <div>
+      <h3 style="font-family:var(--serif); color:var(--teal); margin-bottom:1.2rem;">Chapter 2 — The Southern Gate</h3>
+      <div class="manga-grid">
+        <img src="manga-frequency/Chapter2Cover.jpeg" alt="Chapter 2 Cover" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige1Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige2Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige3Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige4Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+        <img src="manga-frequency/Paige5Ch2.jpeg" alt="Chapter 2 Scene" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ═══════ WORLD ═══════ -->
 <section id="world">
   <div class="section-inner">
