@@ -1,0 +1,1 @@
+Manga Frequency images folder
